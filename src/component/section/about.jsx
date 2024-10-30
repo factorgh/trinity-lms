@@ -1,3 +1,5 @@
+import myImage from "../../assets/images/final.png";
+
 const subTitle = "About Our Edukon";
 const title = "Good Qualification Services And Better Skills";
 const desc =
@@ -56,7 +58,7 @@ const About = () => {
           <div className="col">
             <div className="about-left">
               <div className="about-thumb">
-                <img src="assets/images/about/01.png" alt="about" />
+                <img src={myImage} alt="about" />
               </div>
             </div>
           </div>
