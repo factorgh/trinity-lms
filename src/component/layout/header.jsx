@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import logoImg from "../../assets/images/logofinal.jpeg";
 
 const phoneNumber = "+800-123-4567 6587";
 const address = "Beverley, New York 224 USA";
@@ -79,7 +80,7 @@ const Header = () => {
           <div className="header-wrapper">
             <div className="logo">
               <Link to="/">
-                <img src="assets/images/logo/01.png" alt="logo" />
+                <img width={60} height={60} src={logoImg} alt="logo" />
               </Link>
             </div>
             <div className="menu-area">
@@ -91,6 +92,9 @@ const Header = () => {
                     </a>
                     <ul className="lab-ul dropdown-menu">
                       {/* Add NavLink items here */}
+                      <li>
+                        <NavLink to="/instructor">Course</NavLink>
+                      </li>
                     </ul>
                   </li>
                   <li className="menu-item-has-children">
