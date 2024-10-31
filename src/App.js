@@ -16,8 +16,12 @@ import CourseView from "./page/course-view";
 import ForgetPass from "./page/forgetpass";
 import Home from "./page/home";
 
+import { useContext } from "react";
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "./common/context/auth";
+import AddNewCoursePage from "./common/common-pages/add-new-course-page";
+import InstructorDashboardpage from "./common/common-pages/instructor-dashboard-page";
+import RouteGuard from "./common/components/route-guard";
+import AuthProvider, { AuthContext } from "./common/context/auth-context";
 import InstructorPage from "./page/instructor";
 import LoginPage from "./page/login";
 import SearchNone from "./page/search-none";
@@ -29,6 +33,8 @@ import TeamPage from "./page/team";
 import TeamSingle from "./page/team-single";
 
 function App() {
+  // const { auth } = useContext(AuthContext);
+  const auth = useContext(AuthContext);
   return (
     <BrowserRouter>
       <Toaster
@@ -65,6 +71,39 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignupPage />} />
           <Route path="forgetpass" element={<ForgetPass />} />
+
+          {/* Intsructor Protected Routes  */}
+          <Route
+            path="/instructor"
+            element={
+              <RouteGuard
+                element={<InstructorDashboardpage />}
+                authenticated={auth?.authenticate}
+                user={auth?.user}
+              />
+            }
+          />
+          <Route
+            path="/instructor/create-new-course"
+            element={
+              <RouteGuard
+                element={<AddNewCoursePage />}
+                authenticated={auth?.authenticate}
+                user={auth?.user}
+              />
+            }
+          />
+          <Route
+            path="/instructor/edit-course/:courseId"
+            element={
+              <RouteGuard
+                element={<AddNewCoursePage />}
+                authenticated={auth?.authenticate}
+                user={auth?.user}
+              />
+            }
+          />
+
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AuthProvider>

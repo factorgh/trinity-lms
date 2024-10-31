@@ -1,8 +1,7 @@
-import axios from "axios";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useAuth } from "../common/context/auth";
+import { AuthContext } from "../common/context/auth-context";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
 import PageHeader from "../component/layout/pageheader";
@@ -42,36 +41,24 @@ const socialList = [
 const LoginPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [auth, setAuth] = useAuth();
+
+  const { handleLoginUser } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     console.log("Username:", userEmail, "Password:", password);
 
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/login`,
-        {
-          userEmail,
-          password,
-        }
-      );
-
-      // Store data in local storage
-      localStorage.setItem("auth", JSON.stringify(data));
-
-      // Store data in context
-      setAuth({
-        ...auth,
-        user: data?.user,
-        token: data?.accessToken,
+      await handleLoginUser({
+        userEmail,
+        password,
       });
 
       // Show success message
-      toast.success(data?.message);
+      toast.success("Login successful!");
     } catch (error) {
-      console.log(error.response?.data); // Log error response for debugging
-      toast.error(error.response?.data.message);
+      console.log(error.response?.data);
+      toast.error("Failed to login");
     }
   };
 

@@ -1,8 +1,8 @@
-import axios from "axios";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { useAuth } from "../common/context/auth";
+
+import { AuthContext } from "../common/context/auth-context";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
 import PageHeader from "../component/layout/pageheader";
@@ -23,7 +23,7 @@ const SignupPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
-  const [auth, setAuth] = useAuth();
+  const { handleRegisterUser } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,24 +38,14 @@ const SignupPage = () => {
     );
 
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/auth/register`,
-        { userEmail, password, userName, role: "1" }
-      );
-
-      console.log(data);
-      // Store data in local storage
-      localStorage.setItem("auth", JSON.stringify(data));
-
-      // Store data in context
-      setAuth({
-        ...auth,
-        user: data?.user,
-        token: data?.accessToken,
+      await handleRegisterUser({
+        userName,
+        userEmail,
+        password,
       });
 
       // Show success message
-      toast.success(data?.message || "Registration successful");
+      toast.success("Registration successful");
     } catch (error) {
       console.log(error); // Log error response for debugging
       toast.error(error.response?.data?.message || "Failed to register");

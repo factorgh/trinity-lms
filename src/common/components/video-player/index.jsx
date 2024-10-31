@@ -1,7 +1,7 @@
+import { Button, Slider } from "antd"; // import Ant Design Slider and Button
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
-import { Slider } from "../ui/slider";
-import { Button } from "../ui/button";
+
 import {
   Maximize,
   Minimize,
@@ -152,13 +152,15 @@ function VideoPlayer({
           }`}
         >
           <Slider
-            value={[played * 100]}
+            value={played * 100}
             max={100}
-            step={0.1}
-            onValueChange={(value) => handleSeekChange([value[0] / 100])}
-            onValueCommit={handleSeekMouseUp}
-            className="w-full mb-4"
+            onChange={(value) => handleSeekChange([value / 100])}
+            onAfterChange={handleSeekMouseUp}
           />
+          <Button onClick={handlePlayAndPause}>
+            {playing ? <Pause /> : <Play />}
+          </Button>
+
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Button

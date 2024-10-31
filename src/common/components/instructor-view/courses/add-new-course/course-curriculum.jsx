@@ -1,19 +1,16 @@
-import MediaProgressbar from "@/components/media-progress-bar";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import VideoPlayer from "@/components/video-player";
-import { courseCurriculumInitialFormData } from "@/config";
-import { InstructorContext } from "@/context/instructor-context";
+import { Button, Card, Input, Switch } from "antd";
+import { InstructorContext } from "../../../../context/instructor-context";
+import { courseCurriculumInitialFormData } from "../../../config";
+import VideoPlayer from "../../../video-player";
+
+import { Upload } from "lucide-react";
+import { useContext, useRef } from "react";
 import {
   mediaBulkUploadService,
   mediaDeleteService,
   mediaUploadService,
-} from "@/services";
-import { Upload } from "lucide-react";
-import { useContext, useRef } from "react";
+} from "../../../../services";
+import MediaProgressbar from "../../../media-progress-bar";
 
 function CourseCurriculum() {
   const {
@@ -188,8 +185,8 @@ function CourseCurriculum() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row justify-between">
-        <CardTitle>Create Course Curriculum</CardTitle>
+      <Card.Header className="flex flex-row justify-between">
+        <h2>Create Course Curriculum</h2>
         <div>
           <Input
             type="file"
@@ -211,23 +208,23 @@ function CourseCurriculum() {
             Bulk Upload
           </Button>
         </div>
-      </CardHeader>
-      <CardContent>
+      </Card.Header>
+      <Card.Content>
         <Button
           disabled={!isCourseCurriculumFormDataValid() || mediaUploadProgress}
           onClick={handleNewLecture}
         >
           Add Lecture
         </Button>
-        {mediaUploadProgress ? (
+        {mediaUploadProgress && (
           <MediaProgressbar
             isMediaUploading={mediaUploadProgress}
             progress={mediaUploadProgressPercentage}
           />
-        ) : null}
+        )}
         <div className="mt-4 space-y-4">
           {courseCurriculumFormData.map((curriculumItem, index) => (
-            <div className="border p-5 rounded-md">
+            <Card key={index} className="border p-5 rounded-md">
               <div className="flex gap-5 items-center">
                 <h3 className="font-semibold">Lecture {index + 1}</h3>
                 <Input
@@ -245,9 +242,9 @@ function CourseCurriculum() {
                     checked={courseCurriculumFormData[index]?.freePreview}
                     id={`freePreview-${index + 1}`}
                   />
-                  <Label htmlFor={`freePreview-${index + 1}`}>
+                  <label htmlFor={`freePreview-${index + 1}`}>
                     Free Preview
-                  </Label>
+                  </label>
                 </div>
               </div>
               <div className="mt-6">
@@ -279,12 +276,11 @@ function CourseCurriculum() {
                   />
                 )}
               </div>
-            </div>
+            </Card>
           ))}
         </div>
-      </CardContent>
+      </Card.Content>
     </Card>
   );
 }
-
 export default CourseCurriculum;

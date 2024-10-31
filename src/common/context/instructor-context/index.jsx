@@ -1,8 +1,8 @@
+import { createContext, useState } from "react";
 import {
   courseCurriculumInitialFormData,
   courseLandingInitialFormData,
-} from "@/config";
-import { createContext, useState } from "react";
+} from "../../config";
 
 export const InstructorContext = createContext(null);
 

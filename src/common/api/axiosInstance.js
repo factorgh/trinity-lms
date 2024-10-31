@@ -4,17 +4,17 @@ const axiosInstance = axios.create({
   baseURL: "http://localhost:5000",
 });
 
-// axiosInstance.interceptors.request.use(
-//   (config) => {
-//     const accessToken = JSON.parse(localStorage.getItem("auth")) || "";
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const accessToken = JSON.parse(localStorage.getItem("auth")) || "";
 
-//     if (accessToken) {
-//       config.headers.Authorization = `Bearer ${accessToken?.token}`;
-//     }
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken?.token}`;
+    }
 
-//     return config;
-//   },
-//   (err) => Promise.reject(err)
-// );
+    return config;
+  },
+  (err) => Promise.reject(err)
+);
 
 export default axiosInstance;
