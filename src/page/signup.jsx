@@ -1,8 +1,8 @@
 import { Fragment, useContext, useState } from "react";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import { AuthContext } from "../common/context/auth-context";
+import { registerService } from "../common/services";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
 import PageHeader from "../component/layout/pageheader";
@@ -23,34 +23,34 @@ const SignupPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
-  const { handleRegisterUser } = useContext(AuthContext);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const { setAuth } = useContext(AuthContext);
 
-    console.log(
-      "Email:",
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const data = await registerService({
+      userName,
       userEmail,
-      "Password:",
       password,
-      "Username:",
-      userName
-    );
+    });
+    console.log(data, "datadatadatadatadata");
 
-    try {
-      await handleRegisterUser({
-        userName,
-        userEmail,
-        password,
+    if (data.success) {
+      sessionStorage.setItem(
+        "accessToken",
+        JSON.stringify(data.data.accessToken)
+      );
+      setAuth({
+        authenticate: true,
+        user: data.data.user,
       });
-
-      // Show success message
-      toast.success("Registration successful");
-    } catch (error) {
-      console.log(error); // Log error response for debugging
-      toast.error(error.response?.data?.message || "Failed to register");
+    } else {
+      setAuth({
+        authenticate: false,
+        user: null,
+      });
     }
-  };
+  }
 
   return (
     <Fragment>

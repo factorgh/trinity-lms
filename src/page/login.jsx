@@ -2,6 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../common/context/auth-context";
+import { loginService } from "../common/services";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
 import PageHeader from "../component/layout/pageheader";
@@ -11,54 +12,48 @@ const socialTitle = "Login With Social Media";
 const btnText = "Submit Now";
 
 const socialList = [
-  {
-    link: "#",
-    iconName: "icofont-facebook",
-    className: "facebook",
-  },
-  {
-    link: "#",
-    iconName: "icofont-twitter",
-    className: "twitter",
-  },
-  {
-    link: "#",
-    iconName: "icofont-linkedin",
-    className: "linkedin",
-  },
-  {
-    link: "#",
-    iconName: "icofont-instagram",
-    className: "instagram",
-  },
-  {
-    link: "#",
-    iconName: "icofont-pinterest",
-    className: "pinterest",
-  },
+  { link: "#", iconName: "icofont-facebook", className: "facebook" },
+  { link: "#", iconName: "icofont-twitter", className: "twitter" },
+  { link: "#", iconName: "icofont-linkedin", className: "linkedin" },
+  { link: "#", iconName: "icofont-instagram", className: "instagram" },
+  { link: "#", iconName: "icofont-pinterest", className: "pinterest" },
 ];
 
 const LoginPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setAuth } = useContext(AuthContext); // Make sure to get setAuth
 
-  const { handleLoginUser } = useContext(AuthContext);
-
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Username:", userEmail, "Password:", password);
 
     try {
-      await handleLoginUser({
+      const data = await loginService({
         userEmail,
         password,
       });
+      console.log(data, "datadatadatadatadata");
 
-      // Show success message
-      toast.success("Login successful!");
+      if (data.success) {
+        sessionStorage.setItem(
+          "accessToken",
+          JSON.stringify(data.data.accessToken)
+        );
+        setAuth({
+          authenticate: true,
+          user: data.data.user,
+        });
+        toast.success("Login successful"); // Add success toast
+      } else {
+        setAuth({
+          authenticate: false,
+          user: null,
+        });
+        toast.error("Login failed"); // Add error toast
+      }
     } catch (error) {
-      console.log(error.response?.data);
-      toast.error("Failed to login");
+      console.log(error);
+      toast.error("An error occurred while logging in");
     }
   };
 
@@ -70,7 +65,7 @@ const LoginPage = () => {
         <div className="container">
           <div className="account-wrapper">
             <h3 className="title">{title}</h3>
-            <form className="account-form" onSubmit={handleLogin}>
+            <form className="account-form" onSubmit={handleSubmit}>
               <div className="form-group">
                 <input
                   type="text"
