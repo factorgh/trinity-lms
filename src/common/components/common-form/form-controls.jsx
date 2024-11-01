@@ -1,8 +1,6 @@
-import { Input, Select, Typography } from "antd";
+import { Input, Select } from "antd";
+import TextArea from "antd/es/input/TextArea";
 import React from "react";
-
-const { TextArea } = Input;
-const { Label } = Typography;
 
 function FormControls({ formControls = [], formData, setFormData }) {
   function renderComponentByType(controlItem) {
@@ -85,7 +83,7 @@ function FormControls({ formControls = [], formData, setFormData }) {
     <div className="flex flex-col gap-3">
       {formControls.map((controlItem) => (
         <div key={controlItem.name}>
-          <Label htmlFor={controlItem.name}>{controlItem.label}</Label>
+          <label htmlFor={controlItem.name}>{controlItem.label}</label>
           {renderComponentByType(controlItem)}
         </div>
       ))}

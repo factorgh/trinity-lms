@@ -1,74 +1,57 @@
-import { createContext, useEffect, useState } from "react";
-import { initialSignInFormData, initialSignUpFormData } from "../../config";
-import { checkAuthService } from "../../services";
+import { createContext, useState } from "react";
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const [signInFormData, setSignInFormData] = useState(initialSignInFormData);
-  const [signUpFormData, setSignUpFormData] = useState(initialSignUpFormData);
   const [auth, setAuth] = useState({
     authenticate: false,
     user: null,
   });
-  const [loading, setLoading] = useState(true);
 
+  console.log("-------------------auth1--------", auth);
   //check auth user
 
-  async function checkAuthUser() {
-    try {
-      const data = await checkAuthService();
-      if (data.success) {
-        setAuth({
-          authenticate: true,
-          user: data.data.user,
-        });
-        setLoading(false);
-      } else {
-        setAuth({
-          authenticate: false,
-          user: null,
-        });
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      if (!error?.response?.data?.success) {
-        setAuth({
-          authenticate: false,
-          user: null,
-        });
-        setLoading(false);
-      }
-    }
-  }
+  // async function checkAuthUser() {
+  //   try {
+  //     const data = await checkAuthService();
+  //     if (data.success) {
+  //       setAuth({
+  //         authenticate: true,
+  //         user: data.data.user,
+  //       });
+  //     } else {
+  //       setAuth({
+  //         authenticate: false,
+  //         user: null,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     if (!error?.response?.data?.success) {
+  //       setAuth({
+  //         authenticate: false,
+  //         user: null,
+  //       });
+  //     }
+  //   }
+  // }
 
-  function resetCredentials() {
-    setAuth({
-      authenticate: false,
-      user: null,
-    });
-  }
+  // function resetCredentials() {
+  //   setAuth({
+  //     authenticate: false,
+  //     user: null,
+  //   });
+  // }
 
-  useEffect(() => {
-    checkAuthUser();
-  }, []);
+  // useEffect(() => {
+  //   checkAuthUser();
+  // }, []);
 
   console.log(auth, "gf");
 
   return (
-    <AuthContext.Provider
-      value={{
-        signInFormData,
-        setSignInFormData,
-        signUpFormData,
-        setSignUpFormData,
-        setAuth,
-        auth: null,
-        resetCredentials,
-      }}
-    >
-      {loading ? <div>Loading</div> : children}
+    <AuthContext.Provider value={{ setAuth, auth }}>
+      {children}
     </AuthContext.Provider>
   );
 }

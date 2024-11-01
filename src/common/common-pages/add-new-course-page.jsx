@@ -1,9 +1,6 @@
 import { Button, Card, Tabs } from "antd";
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CourseCurriculum from "../components/instructor-view/courses/add-new-course/course-curriculum";
-import CourseLanding from "../components/instructor-view/courses/add-new-course/course-landing";
-import CourseSettings from "../components/instructor-view/courses/add-new-course/course-settings";
 import {
   courseCurriculumInitialFormData,
   courseLandingInitialFormData,
@@ -16,6 +13,9 @@ import {
   updateCourseByIdService,
 } from "../services";
 
+import CourseCurriculum from "../components/instructor-view/courses/add-new-course/course-curriculum";
+import CourseLanding from "../components/instructor-view/courses/add-new-course/course-landing";
+import CourseSettings from "../components/instructor-view/courses/add-new-course/course-settings";
 const { TabPane } = Tabs;
 
 function AddNewCoursePage() {
@@ -33,7 +33,7 @@ function AddNewCoursePage() {
 
   useEffect(() => {
     if (params?.courseId) setCurrentEditedCourseId(params.courseId);
-  }, [params?.courseId]);
+  }, [params.courseId]);
 
   useEffect(() => {
     if (currentEditedCourseId !== null) fetchCurrentCourseDetails();
@@ -57,12 +57,22 @@ function AddNewCoursePage() {
       ? value.length === 0
       : value === "" || value === null || value === undefined;
   }
-
   function validateFormData() {
-    return (
-      Object.values(courseLandingFormData).every((field) => !isEmpty(field)) &&
-      courseCurriculumFormData.some((item) => item.freePreview)
+    // Always return true if in edit mode
+    if (currentEditedCourseId !== null) {
+      return true;
+    }
+
+    // Existing validation logic for new course creation
+    const isLandingFormValid = Object.values(courseLandingFormData).every(
+      (field) => !isEmpty(field)
     );
+
+    const hasAtLeastOneFreePreview = courseCurriculumFormData.some(
+      (item) => item.freePreview
+    );
+
+    return isLandingFormValid && hasAtLeastOneFreePreview;
   }
 
   async function handleCreateCourse() {

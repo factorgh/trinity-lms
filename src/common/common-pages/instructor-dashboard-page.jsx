@@ -1,8 +1,8 @@
 import { Button, Tabs } from "antd";
-import { BarChart, LogOut } from "lucide-react";
+import { BarChart, Book, LogOut } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
+import InstructorCourses from "../components/instructor-view/courses";
 import InstructorDashboard from "../components/instructor-view/dashboard";
-import { AuthContext } from "../context/auth-context";
 import { InstructorContext } from "../context/instructor-context";
 import { fetchInstructorCourseListService } from "../services";
 
@@ -10,7 +10,7 @@ const { TabPane } = Tabs;
 
 function InstructorDashboardpage() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const { resetCredentials } = useContext(AuthContext);
+
   const { instructorCoursesList, setInstructorCoursesList } =
     useContext(InstructorContext);
 
@@ -30,12 +30,12 @@ function InstructorDashboardpage() {
       value: "dashboard",
       component: <InstructorDashboard listOfCourses={instructorCoursesList} />,
     },
-    // {
-    //   icon: Book,
-    //   label: "Courses",
-    //   value: "courses",
-    //   component: <InstructorCourses listOfCourses={instructorCoursesList} />,
-    // },
+    {
+      icon: Book,
+      label: "Courses",
+      value: "courses",
+      component: <InstructorCourses listOfCourses={instructorCoursesList} />,
+    },
     {
       icon: LogOut,
       label: "Logout",
@@ -45,8 +45,8 @@ function InstructorDashboardpage() {
   ];
 
   function handleLogout() {
-    resetCredentials();
     sessionStorage.clear();
+    window.location.href = "/";
   }
 
   return (
@@ -77,7 +77,7 @@ function InstructorDashboardpage() {
         <div className="max-w-7xl mx-auto">
           <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
           <Tabs activeKey={activeTab} onChange={setActiveTab}>
-            {menuItems.map((menuItem) => (
+            {menuItems.slice(0, -1).map((menuItem) => (
               <TabPane tab={menuItem.label} key={menuItem.value}>
                 {menuItem.component}
               </TabPane>

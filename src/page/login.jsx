@@ -22,7 +22,7 @@ const socialList = [
 const LoginPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setAuth } = useContext(AuthContext); // Make sure to get setAuth
+  const { setAuth, auth } = useContext(AuthContext); // Make sure to get setAuth
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +57,7 @@ const LoginPage = () => {
     }
   };
 
+  console.log(auth.authenticate, "auth.authenticate");
   return (
     <Fragment>
       <Header />

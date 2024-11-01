@@ -47,7 +47,7 @@ function CourseSettings() {
           />
         ) : null}
       </div>
-      <Card.Content>
+      <Card>
         {courseLandingFormData?.image ? (
           <Image src={courseLandingFormData.image} alt="Course" />
         ) : (
@@ -64,7 +64,7 @@ function CourseSettings() {
             </Upload>
           </div>
         )}
-      </Card.Content>
+      </Card>
     </Card>
   );
 }

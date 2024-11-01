@@ -12,7 +12,7 @@ import {
 } from "../../../../services";
 import MediaProgressbar from "../../../media-progress-bar";
 
-function CourseCurriculum() {
+export default function CourseCurriculum() {
   const {
     courseCurriculumFormData,
     setCourseCurriculumFormData,
@@ -102,6 +102,7 @@ function CourseCurriculum() {
     }
   }
 
+  console.log(courseCurriculumFormData, "courseCurriculumFormData");
   function isCourseCurriculumFormDataValid() {
     return courseCurriculumFormData.every((item) => {
       return (
@@ -113,10 +114,21 @@ function CourseCurriculum() {
     });
   }
 
-  function handleOpenBulkUploadDialog() {
-    bulkUploadInputRef.current?.click();
-  }
+  // function handleOpenBulkUploadDialog() {
+  //   if (bulkUploadInputRef.current) {
+  //     console.log("Ref current:", bulkUploadInputRef.current); // Check what this logs
+  //     bulkUploadInputRef.current.click();
+  //   } else {
+  //     console.error("bulkUploadInputRef is null or undefined");
+  //   }
+  // }
 
+  function handleOpenBulkUploadDialog() {
+    const inputElement = document.getElementById("bulk-media-upload");
+    if (inputElement) {
+      inputElement.click();
+    }
+  }
   function areAllCourseCurriculumFormDataObjectsEmpty(arr) {
     return arr.every((obj) => {
       return Object.entries(obj).every(([key, value]) => {
@@ -185,7 +197,7 @@ function CourseCurriculum() {
 
   return (
     <Card>
-      <Card.Header className="flex flex-row justify-between">
+      <div className="mb-4 flex justify-between items-center">
         <h2>Create Course Curriculum</h2>
         <div>
           <Input
@@ -198,8 +210,6 @@ function CourseCurriculum() {
             onChange={handleMediaBulkUpload}
           />
           <Button
-            as="label"
-            htmlFor="bulk-media-upload"
             variant="outline"
             className="cursor-pointer"
             onClick={handleOpenBulkUploadDialog}
@@ -208,8 +218,9 @@ function CourseCurriculum() {
             Bulk Upload
           </Button>
         </div>
-      </Card.Header>
-      <Card.Content>
+      </div>
+
+      <Card>
         <Button
           disabled={!isCourseCurriculumFormDataValid() || mediaUploadProgress}
           onClick={handleNewLecture}
@@ -236,12 +247,11 @@ function CourseCurriculum() {
                 />
                 <div className="flex items-center space-x-2">
                   <Switch
-                    onCheckedChange={(value) =>
-                      handleFreePreviewChange(value, index)
-                    }
+                    onChange={(value) => handleFreePreviewChange(value, index)}
                     checked={courseCurriculumFormData[index]?.freePreview}
                     id={`freePreview-${index + 1}`}
                   />
+
                   <label htmlFor={`freePreview-${index + 1}`}>
                     Free Preview
                   </label>
@@ -258,10 +268,7 @@ function CourseCurriculum() {
                     <Button onClick={() => handleReplaceVideo(index)}>
                       Replace Video
                     </Button>
-                    <Button
-                      onClick={() => handleDeleteLecture(index)}
-                      className="bg-red-900"
-                    >
+                    <Button onClick={() => handleDeleteLecture(index)}>
                       Delete Lecture
                     </Button>
                   </div>
@@ -279,8 +286,7 @@ function CourseCurriculum() {
             </Card>
           ))}
         </div>
-      </Card.Content>
+      </Card>
     </Card>
   );
 }
-export default CourseCurriculum;
