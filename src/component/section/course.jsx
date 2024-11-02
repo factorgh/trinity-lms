@@ -63,7 +63,7 @@ const Course = () => {
                         <div className="course-price"></div>
                         <div className="course-category">
                           <div className="bg-yellow-300 rounded-md p-1 mr-3">
-                            <a href="#">{val.category}</a>
+                            <a href="/">{val.category}</a>
                           </div>
                           <div className="course-reiew">
                             <Rating />
