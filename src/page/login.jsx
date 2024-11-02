@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import { Fragment, useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../common/context/auth-context";
 import { loginService } from "../common/services";
 import Footer from "../component/layout/footer";
@@ -25,6 +25,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); // Loading state
   const { setAuth, auth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +42,7 @@ const LoginPage = () => {
         );
         setAuth({ authenticate: true, user: data.data.user });
         toast.success("Login successful");
+        navigate("/");
       } else {
         setAuth({ authenticate: false, user: null });
         toast.error("Login failed");
@@ -49,7 +51,7 @@ const LoginPage = () => {
       console.log(error);
       toast.error("An error occurred while logging in");
     } finally {
-      setLoading(false); // Set loading back to false
+      setLoading(false);
     }
   };
 

@@ -1,6 +1,7 @@
 import { Spin } from "antd";
 import { Fragment, useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../common/context/auth-context";
 import { registerService } from "../common/services";
 import Footer from "../component/layout/footer";
@@ -26,6 +27,7 @@ const SignupPage = () => {
   const [loading, setLoading] = useState(false); // Loading state
 
   const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -48,6 +50,8 @@ const SignupPage = () => {
           authenticate: true,
           user: data.data.user,
         });
+        toast.success("Registration successful");
+        navigate("/login");
       } else {
         setAuth({
           authenticate: false,
@@ -56,7 +60,7 @@ const SignupPage = () => {
       }
     } catch (error) {
       console.error(error);
-      // Handle error case if needed
+      toast.error("Registration Failed");
     } finally {
       setLoading(false); // Set loading back to false
     }

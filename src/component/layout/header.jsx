@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logoImg from "../../assets/images/logofinal.jpeg";
 
-const phoneNumber = "+800-123-4567 6587";
-const address = "Beverley, New York 224 USA";
+const phoneNumber = "+233 20 957 4338";
+const address = " No.5 Spintex RoadNext to Cassa";
 
 const socialList = [
   {
@@ -98,10 +98,10 @@ const Header = () => {
                     </ul>
                   </li>
                   <li className="menu-item-has-children">
-                    <a href="#" role="button">
+                    <a href="/course" role="button">
                       Courses
                     </a>
-                    <ul className="lab-ul dropdown-menu">
+                    {/* <ul className="lab-ul dropdown-menu">
                       <li>
                         <NavLink to="/course">Course</NavLink>
                       </li>
@@ -111,7 +111,7 @@ const Header = () => {
                       <li>
                         <NavLink to="/course-view">Course View</NavLink>
                       </li>
-                    </ul>
+                    </ul> */}
                   </li>
                   {/* <li className="menu-item-has-children">
                     <a href="#" role="button">

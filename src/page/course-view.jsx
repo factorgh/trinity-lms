@@ -1,5 +1,5 @@
 import { Spin } from "antd"; // Import Ant Design's Spin component
-import { Play } from "lucide-react";
+import { CheckCircle, Play } from "lucide-react"; // Import different icons from lucide-react
 import React, { Fragment, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import VideoPlayer from "../common/components/video-player";
@@ -15,53 +15,19 @@ const CourseView = () => {
   const course = state?.courseDetails;
 
   const [currentLecture, setCurrentLecture] = useState(null);
-  const [loading, setLoading] = useState(false); // New loading state
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (showConfetti) setTimeout(() => setShowConfetti(false), 15000);
   }, [showConfetti]);
 
-  //   async function fetchCurrentCourseProgress() {
-  //     const response = await getCurrentCourseProgressService(
-  //       auth?.user?._id,
-  //       course.id
-  //     );
-  //     if (response?.success) {
-  //       if (response?.data?.completed) {
-  //         setCurrentLecture(response?.data?.courseDetails?.curriculum[0]);
-  //         setShowConfetti(true);
-  //         return;
-  //       }
-
-  //       if (response?.data?.progress?.length === 0) {
-  //         setCurrentLecture(response?.data?.courseDetails?.curriculum[0]);
-  //       } else {
-  //         const lastIndexOfViewedAsTrue = response?.data?.progress.reduceRight(
-  //           (acc, obj, index) => {
-  //             return acc === -1 && obj.viewed ? index : acc;
-  //           },
-  //           -1
-  //         );
-
-  //         setCurrentLecture(
-  //           response?.data?.courseDetails?.curriculum[lastIndexOfViewedAsTrue + 1]
-  //         );
-  //       }
-  //     }
-  //   }
-
-  //   useEffect(() => {
-  //     fetchCurrentCourseProgress();
-  //   }, [course?.id]);
-
   const handleLectureChange = (item) => {
-    setLoading(true); // Set loading state to true
-    setCurrentLecture(item); // Update the current lecture
+    setLoading(true);
+    setCurrentLecture(item);
 
-    // Simulate a delay (e.g., for fetching video URL) and then reset loading state
     setTimeout(() => {
-      setLoading(false); // Reset loading state after video is ready
-    }, 1000); // Adjust delay as necessary
+      setLoading(false);
+    }, 1000);
   };
 
   return (
@@ -81,7 +47,7 @@ const CourseView = () => {
                       </div>
                       <div className="vp-video mb-4">
                         {loading ? (
-                          <Spin size="large" /> // Show loading spinner while loading
+                          <Spin size="large" />
                         ) : (
                           <VideoPlayer
                             width="100%"
@@ -113,16 +79,23 @@ const CourseView = () => {
                         <div className="h-96 w-full px-3 overflow-auto">
                           {course?.curriculum.map((item) => (
                             <div
-                              className="flex items-center space-x-2 text-sm text-black font-bold cursor-pointer"
                               key={item._id}
+                              onClick={() => handleLectureChange(item)}
+                              className={`flex items-center space-x-2 text-sm font-bold cursor-pointer p-2 m-1 w-full gap-5
+                                ${
+                                  currentLecture?._id === item._id
+                                    ? "bg-green-500 text-white"
+                                    : "bg-gray-200 text-black"
+                                }
+                              `}
                             >
-                              <div
-                                onClick={() => handleLectureChange(item)} // Use the new handler
-                                className="flex p-2 bg-green-400 m-1 w-full text-white gap-5 items-center"
-                              >
-                                <Play className="h-4 w-4 " />
-                                <h3 className="text-white">{item?.title}</h3>
-                              </div>
+                              {/* Conditionally render the icon */}
+                              {currentLecture?._id === item._id ? (
+                                <CheckCircle className="h-4 w-4" />
+                              ) : (
+                                <Play className="h-4 w-4" />
+                              )}
+                              <h3>{item?.title}</h3>
                             </div>
                           ))}
                         </div>
