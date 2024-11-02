@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import { Fragment, useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -22,16 +23,15 @@ const socialList = [
 const LoginPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setAuth, auth } = useContext(AuthContext); // Make sure to get setAuth
+  const [loading, setLoading] = useState(false); // Loading state
+  const { setAuth, auth } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true
 
     try {
-      const data = await loginService({
-        userEmail,
-        password,
-      });
+      const data = await loginService({ userEmail, password });
       console.log(data, "datadatadatadatadata");
 
       if (data.success) {
@@ -39,25 +39,22 @@ const LoginPage = () => {
           "accessToken",
           JSON.stringify(data.data.accessToken)
         );
-        setAuth({
-          authenticate: true,
-          user: data.data.user,
-        });
-        toast.success("Login successful"); // Add success toast
+        setAuth({ authenticate: true, user: data.data.user });
+        toast.success("Login successful");
       } else {
-        setAuth({
-          authenticate: false,
-          user: null,
-        });
-        toast.error("Login failed"); // Add error toast
+        setAuth({ authenticate: false, user: null });
+        toast.error("Login failed");
       }
     } catch (error) {
       console.log(error);
       toast.error("An error occurred while logging in");
+    } finally {
+      setLoading(false); // Set loading back to false
     }
   };
 
   console.log(auth.authenticate, "auth.authenticate");
+
   return (
     <Fragment>
       <Header />
@@ -95,9 +92,17 @@ const LoginPage = () => {
                 </div>
               </div>
               <div className="form-group text-center">
-                <button type="submit" className="d-block lab-btn">
-                  <span>{btnText}</span>
-                </button>
+                {loading ? (
+                  <Spin />
+                ) : (
+                  <button
+                    type="submit"
+                    className="d-block lab-btn"
+                    disabled={loading}
+                  >
+                    <span>{btnText}</span>
+                  </button>
+                )}
               </div>
             </form>
             <div className="account-bottom">

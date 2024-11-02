@@ -1,6 +1,6 @@
+import { Spin } from "antd";
 import { Fragment, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { AuthContext } from "../common/context/auth-context";
 import { registerService } from "../common/services";
 import Footer from "../component/layout/footer";
@@ -23,32 +23,42 @@ const SignupPage = () => {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
 
   const { setAuth } = useContext(AuthContext);
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const data = await registerService({
-      userName,
-      userEmail,
-      password,
-    });
-    console.log(data, "datadatadatadatadata");
+    setLoading(true); // Set loading to true
 
-    if (data.success) {
-      sessionStorage.setItem(
-        "accessToken",
-        JSON.stringify(data.data.accessToken)
-      );
-      setAuth({
-        authenticate: true,
-        user: data.data.user,
+    try {
+      const data = await registerService({
+        userName,
+        userEmail,
+        password,
       });
-    } else {
-      setAuth({
-        authenticate: false,
-        user: null,
-      });
+      console.log(data, "datadatadatadatadata");
+
+      if (data.success) {
+        sessionStorage.setItem(
+          "accessToken",
+          JSON.stringify(data.data.accessToken)
+        );
+        setAuth({
+          authenticate: true,
+          user: data.data.user,
+        });
+      } else {
+        setAuth({
+          authenticate: false,
+          user: null,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle error case if needed
+    } finally {
+      setLoading(false); // Set loading back to false
     }
   }
 
@@ -89,9 +99,19 @@ const SignupPage = () => {
                 />
               </div>
               <div className="form-group">
-                <button className="lab-btn">
-                  <span>{btnText}</span>
-                </button>
+                <div className="form-group text-center">
+                  {loading ? (
+                    <Spin />
+                  ) : (
+                    <button
+                      type="submit"
+                      className="d-block lab-btn"
+                      disabled={loading}
+                    >
+                      <span>{btnText}</span>
+                    </button>
+                  )}
+                </div>
               </div>
             </form>
             <div className="account-bottom">

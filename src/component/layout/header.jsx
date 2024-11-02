@@ -134,7 +134,7 @@ const Header = () => {
                   </li>
                   <li className="menu-item-has-children">
                     <a href="#" role="button">
-                      Pages
+                      Who we are
                     </a>
                     <ul className="lab-ul dropdown-menu">
                       <li>
@@ -146,21 +146,21 @@ const Header = () => {
                       <li>
                         <NavLink to="/instructor">Instructor</NavLink>
                       </li>
-                      <li>
+                      {/* <li>
                         <NavLink to="/shop">Shop Page</NavLink>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                         <NavLink to="/shop-single">Shop Details Page</NavLink>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                         <NavLink to="/cart-page">Shop Cart Page</NavLink>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                         <NavLink to="/search-page">Search Page</NavLink>
-                      </li>
-                      <li>
+                      </li> */}
+                      {/* <li>
                         <NavLink to="/search-none">Search None</NavLink>
-                      </li>
+                      </li> */}
                       <li>
                         <NavLink to="/404">404</NavLink>
                       </li>
