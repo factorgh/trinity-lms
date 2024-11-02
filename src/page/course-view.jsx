@@ -87,7 +87,7 @@ const CourseView = () => {
                                 />
                               </div>
                               <div className="vpa-contnet">
-                                <h6 className="mb-2">Rajib Raj</h6>
+                                <h6 className="mb-2">Kingsley Boabeng</h6>
                                 <p className="mb-4">{course?.objectives}</p>
                                 <ul className="lab-ul social-icons">
                                   {socialList.map((val, i) => (
@@ -116,6 +116,7 @@ const CourseView = () => {
                           <div className="csa-title mb-4">
                             <h5>Course Outline</h5>
                           </div>
+                          {/* End of course outline */}
                           <div className="csa-body">
                             <ul className="lab-ul">
                               <li>
@@ -775,6 +776,8 @@ const CourseView = () => {
                               </li>
                             </ul>
                           </div>
+
+                          {/* End of course outline */}
                         </div>
                       </div>
                     </div>
@@ -979,7 +982,7 @@ const CourseView = () => {
                                     />
                                   </div>
                                   <div className="ap-content">
-                                    <h5>Rajib Raj</h5>
+                                    <h5>Kingsley Boabeng</h5>
                                     <p>
                                       Posted an Announcement{" "}
                                       <span>24 days ago</span>

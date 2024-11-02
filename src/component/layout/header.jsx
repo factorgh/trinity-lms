@@ -93,7 +93,7 @@ const Header = () => {
                     <ul className="lab-ul dropdown-menu">
                       {/* Add NavLink items here */}
                       <li>
-                        <NavLink to="/instructor-dashboard">Course</NavLink>
+                        <NavLink to="/instructor-dashboard">Admin</NavLink>
                       </li>
                     </ul>
                   </li>
