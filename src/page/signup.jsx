@@ -77,6 +77,7 @@ const SignupPage = () => {
             <form onSubmit={handleSubmit} className="account-form">
               <div className="form-group">
                 <input
+                  className="p-2"
                   type="text"
                   name="userName"
                   placeholder="User Name"
@@ -86,6 +87,7 @@ const SignupPage = () => {
               </div>
               <div className="form-group">
                 <input
+                  className="p-2"
                   type="email"
                   name="userEmail"
                   placeholder="Email"
@@ -95,6 +97,7 @@ const SignupPage = () => {
               </div>
               <div className="form-group">
                 <input
+                  className="p-2"
                   type="password"
                   name="password"
                   placeholder="Password"
@@ -108,11 +111,12 @@ const SignupPage = () => {
                     <Spin />
                   ) : (
                     <button
+                      style={{ backgroundColor: "#26C976" }}
                       type="submit"
                       className="d-block lab-btn"
                       disabled={loading}
                     >
-                      <span>{btnText}</span>
+                      <span className="text-white">{btnText}</span>
                     </button>
                   )}
                 </div>
@@ -122,7 +126,7 @@ const SignupPage = () => {
               <span className="d-block cate pt-10">
                 Are you a member? <Link to="/login">Login</Link>
               </span>
-              <span className="or">
+              <span style={{ backgroundColor: "#26C976" }} className="or">
                 <span>or</span>
               </span>
               <h5 className="subtitle">{socialTitle}</h5>

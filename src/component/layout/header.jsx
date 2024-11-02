@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/logofinal.jpeg";
+import { AuthContext } from "../../common/context/auth-context";
 
 const phoneNumber = "+233 20 957 4338";
 const address = " No.5 Spintex RoadNext to Cassa";
@@ -33,6 +34,10 @@ const Header = () => {
   const [menuToggle, setMenuToggle] = useState(false);
   const [socialToggle, setSocialToggle] = useState(false);
   const [headerFixed, setHeaderFixed] = useState(false);
+  const { auth, setAuth } = useContext(AuthContext);
+  console.log("----------------------header--------------------");
+  console.log(auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +49,15 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth, // Spread the existing auth state
+      user: null, // Set user to null
+      authenticate: false, // Set authenticate to false
+    });
+    navigate("/login");
+  };
 
   return (
     <header
@@ -66,8 +80,13 @@ const Header = () => {
               </li>
               {socialList.map((val, i) => (
                 <li key={i}>
-                  <a href={val.siteLink}>
-                    <i className={val.iconName}></i>
+                  <a className="text-emerald-500" href={val.siteLink}>
+                    {" "}
+                    {/* Use an appropriate Tailwind color */}
+                    <i
+                      style={{ color: "#26C976" }}
+                      className={val.iconName}
+                    ></i>
                   </a>
                 </li>
               ))}
@@ -90,12 +109,23 @@ const Header = () => {
                     <a href="/" role="button">
                       Home
                     </a>
-                    <ul className="lab-ul dropdown-menu">
-                      {/* Add NavLink items here */}
-                      <li>
-                        <NavLink to="/instructor-dashboard">Admin</NavLink>
-                      </li>
-                    </ul>
+                    {auth.user?.role === "instructor" && (
+                      <ul
+                        style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                        className="lab-ul dropdown-menu "
+                      >
+                        {/* Add NavLink items here */}
+
+                        <li>
+                          <NavLink
+                            className="text-white"
+                            to="/instructor-dashboard"
+                          >
+                            Admin
+                          </NavLink>
+                        </li>
+                      </ul>
+                    )}
                   </li>
                   <li className="menu-item-has-children">
                     <a href="/course" role="button">
@@ -136,15 +166,24 @@ const Header = () => {
                     <a href="#" role="button">
                       Who we are
                     </a>
-                    <ul className="lab-ul dropdown-menu">
+                    <ul
+                      style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                      className="lab-ul dropdown-menu"
+                    >
                       <li>
-                        <NavLink to="/about">About</NavLink>
+                        <NavLink className="text-white" to="/about">
+                          About
+                        </NavLink>
                       </li>
                       <li>
-                        <NavLink to="/team">Team</NavLink>
+                        <NavLink className="text-white" to="/team">
+                          Team
+                        </NavLink>
                       </li>
                       <li>
-                        <NavLink to="/instructor">Instructor</NavLink>
+                        <NavLink className="text-white" to="/instructor">
+                          Instructor
+                        </NavLink>
                       </li>
                       {/* <li>
                         <NavLink to="/shop">Shop Page</NavLink>
@@ -171,12 +210,34 @@ const Header = () => {
                   </li>
                 </ul>
               </div>
-              <Link to="/login" className="login">
-                <i className="icofont-user"></i> <span>LOG IN</span>
-              </Link>
-              <Link to="/signup" className="signup">
-                <i className="icofont-users"></i> <span>SIGN UP</span>
-              </Link>
+              {auth?.authenticate === true ? (
+                <Link
+                  style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                  onClick={handleLogout}
+                  to="/login"
+                  className="signup"
+                >
+                  <i className="icofont-user"></i>{" "}
+                  <span style={{ color: "white" }}>LOG OUT</span>
+                </Link>
+              ) : (
+                <>
+                  <Link to="/login" className="login">
+                    <i
+                      style={{ color: "#26C976" }}
+                      className="icofont-user"
+                    ></i>{" "}
+                    <span style={{ color: "#26C976" }}>LOG IN</span>
+                  </Link>
+                  <Link
+                    style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                    to="/signup"
+                    className="signup"
+                  >
+                    <i className="icofont-users"></i> <span>SIGN UP</span>
+                  </Link>
+                </>
+              )}
               <div
                 className={`header-bar d-lg-none ${menuToggle ? "active" : ""}`}
                 onClick={() => setMenuToggle(!menuToggle)}

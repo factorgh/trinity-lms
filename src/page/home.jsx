@@ -3,7 +3,6 @@ import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
 import About from "../component/section/about";
 import Achievement from "../component/section/achievement";
-import Blog from "../component/section/blog";
 import Category from "../component/section/category";
 import Course from "../component/section/course";
 import Instructor from "../component/section/instructor";
@@ -23,7 +22,7 @@ const Home = () => {
       <About />
       <Instructor />
       <Student />
-      <Blog />
+      {/* <Blog /> */}
       <Achievement />
       <Footer />
     </Fragment>

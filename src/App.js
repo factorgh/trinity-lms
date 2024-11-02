@@ -83,23 +83,11 @@ function App() {
         />
         <Route
           path="/instructor/create-new-course"
-          element={
-            <RouteGuard
-              element={<AddNewCoursePage />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
+          element={<AddNewCoursePage />}
         />
         <Route
           path="/instructor/edit-course/:courseId"
-          element={
-            <RouteGuard
-              element={<AddNewCoursePage />}
-              authenticated={auth?.authenticate}
-              user={auth?.user}
-            />
-          }
+          element={<AddNewCoursePage />}
         />
 
         <Route path="*" element={<ErrorPage />} />

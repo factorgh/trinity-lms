@@ -34,7 +34,9 @@ const About = () => {
           <div className="col">
             <div className="about-right padding-tb">
               <div className="section-header">
-                <span className="subtitle">{subTitle}</span>
+                <span style={{ color: "#26C976" }} className="subtitle">
+                  {subTitle}
+                </span>
                 <h2 className="title">{title}</h2>
                 <p>{desc}</p>
               </div>

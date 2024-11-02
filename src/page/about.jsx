@@ -3,12 +3,12 @@ import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
 import PageHeader from "../component/layout/pageheader";
 import AchievementTwo from "../component/section/achievement-2";
-import Blog from "../component/section/blog";
 import Instructor from "../component/section/instructor";
 import Skill from "../component/section/skill";
 import Student from "../component/section/student";
 
 import intstructorImg from "../../src/assets/images/instructor.jpeg";
+import instImg from "../../src/assets/images/student3.jpeg";
 
 const subTitle = "About Our Edukon";
 const title = "Good Qualification Services And Better Skills";
@@ -57,9 +57,12 @@ const AboutPage = () => {
                   />
                 </div>
                 <div className="abs-thumb">
-                  <img src="assets/images/about/02.jpg" alt="about" />
+                  <img src={instImg} alt="about" />
                 </div>
-                <div className="about-left-content">
+                <div
+                  style={{ backgroundColor: "#26C976" }}
+                  className="about-left-content"
+                >
                   <h3>{year}</h3>
                   <p>{expareance}</p>
                 </div>
@@ -96,7 +99,7 @@ const AboutPage = () => {
       <Instructor />
       <Skill />
       <AchievementTwo />
-      <Blog />
+      {/* <Blog /> */}
       <Footer />
     </Fragment>
   );

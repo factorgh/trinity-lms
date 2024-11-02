@@ -116,14 +116,14 @@ function VideoPlayer({
     };
   }, []);
 
-  useEffect(() => {
-    if (played === 1) {
-      onProgressUpdate({
-        ...progressData,
-        progressValue: played,
-      });
-    }
-  }, [played]);
+  // useEffect(() => {
+  //   if (played === 1) {
+  //     onProgressUpdate({
+  //       ...progressData,
+  //       progressValue: played,
+  //     });
+  //   }
+  // }, [played]);
 
   return (
     <div

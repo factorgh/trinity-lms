@@ -16,7 +16,7 @@ const instructorList = [
     degi: "Master of Education Degree",
     courseCount: "08 courses",
     studentAnroll: "30 students",
-    skills: ["JavaScript", "React", "Node.js"], // Technical info
+    skills: ["JavaScript", "React", "Node.js"],
   },
   {
     imgUrl: instructorImg2,
@@ -25,7 +25,7 @@ const instructorList = [
     degi: "Master of Education Degree",
     courseCount: "08 courses",
     studentAnroll: "30 students",
-    skills: ["Python", "Django", "Machine Learning"], // Technical info
+    skills: ["Python", "Django", "Machine Learning"],
   },
   {
     imgUrl: instructorImg3,
@@ -34,7 +34,7 @@ const instructorList = [
     degi: "Master of Education Degree",
     courseCount: "08 courses",
     studentAnroll: "30 students",
-    skills: ["UI/UX Design", "Photoshop", "Figma"], // Technical info
+    skills: ["UI/UX Design", "Photoshop", "Figma"],
   },
   {
     imgUrl: instructorImg4,
@@ -49,10 +49,15 @@ const instructorList = [
 
 const Instructor = () => {
   return (
-    <div className="instructor-section padding-tb section-bg">
+    <div
+      style={{ marginTop: "20px" }}
+      className="instructor-section padding-tb section-bg"
+    >
       <div className="container">
         <div className="section-header text-center">
-          <span className="subtitle">{subTitle}</span>
+          <span style={{ color: "#26C976" }} className="subtitle">
+            {subTitle}
+          </span>
           <h2 className="title">{title}</h2>
         </div>
         <div className="section-wrapper">
@@ -97,7 +102,9 @@ const Instructor = () => {
           <div className="text-center footer-btn">
             <p>
               Want to help people learn, grow and achieve more in life?
-              <Link to="/team">Become an instructor</Link>
+              <Link style={{ color: "#26C976" }} to="/team">
+                Become an instructor
+              </Link>
             </p>
           </div>
         </div>

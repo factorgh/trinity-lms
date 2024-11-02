@@ -80,10 +80,18 @@ const CoursePage = () => {
                             <img src={`${val.image}`} alt={`${val.category}`} />
                           </div>
                           <div className="course-content">
-                            <div className="course-price text-sm"></div>
+                            <div
+                              style={{ backgroundColor: "#26C976" }}
+                              className="course-price text-sm"
+                            ></div>
                             <div className="course-category">
-                              <div className="bg-yellow-300 rounded-md p-1 mr-3">
-                                <a href="/">{val.category}</a>
+                              <div
+                                style={{ backgroundColor: "#26C976" }}
+                                className=" rounded-md p-1 mr-3"
+                              >
+                                <a className="text-white" href="/">
+                                  {val.category}
+                                </a>
                               </div>
                               <div className="course-review">
                                 <Rating />
@@ -118,7 +126,10 @@ const CoursePage = () => {
                                   className="lab-btn-text"
                                 >
                                   {val.btnText}{" "}
-                                  <i className="icofont-external-link"></i>
+                                  <i
+                                    style={{ color: "#26C976" }}
+                                    className="icofont-external-link"
+                                  ></i>
                                 </Link>
                               </div>
                             </div>

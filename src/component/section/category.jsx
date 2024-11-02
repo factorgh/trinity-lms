@@ -48,7 +48,9 @@ const Category = () => {
     <div className="category-section padding-tb">
       <div className="container">
         <div className="section-header text-center">
-          <span className="subtitle">{subTitle}</span>
+          <span style={{ color: "#26C976" }} className="subtitle">
+            {subTitle}
+          </span>
           <h2 className="title">{title}</h2>
         </div>
         <div className="section-wrapper">
@@ -72,7 +74,11 @@ const Category = () => {
             ))}
           </div>
           <div className="text-center mt-5">
-            <Link to="/course" className="lab-btn">
+            <Link
+              style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+              to="/course"
+              className="lab-btn"
+            >
               <span>{btnText}</span>
             </Link>
           </div>

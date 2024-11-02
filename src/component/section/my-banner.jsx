@@ -79,7 +79,13 @@ const MyBanner = () => {
                     <i className="icofont-search"></i>
                   </div>
                   <input type="text" placeholder="Keywords of your course" />
-                  <button type="submit">Search Course</button>
+                  <button
+                    className="text-white p-2"
+                    style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                    type="submit"
+                  >
+                    Search Course
+                  </button>
                 </form>
               </div>
             </div>

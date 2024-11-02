@@ -1,6 +1,6 @@
 const SelectCatagory = ({ select }) => {
   return (
-    <select defaultValue={select}>
+    <select className="p-2" defaultValue={select}>
       <option value="all">All Categories</option>
       <option value="web-development">Web Development</option>
       <option value="backend-development">Backend Development</option>

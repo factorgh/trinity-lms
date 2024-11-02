@@ -36,7 +36,9 @@ const Course = () => {
     <div className="course-section padding-tb section-bg">
       <div className="container">
         <div className="section-header text-center">
-          <span className="subtitle">{subTitle}</span>
+          <span style={{ color: "#26C976" }} className="subtitle">
+            {subTitle}
+          </span>
           <h2 className="title">{title}</h2>
         </div>
 
@@ -60,10 +62,24 @@ const Course = () => {
                         <img src={`${val.image}`} alt={`${val.category}`} />
                       </div>
                       <div className="course-content">
-                        <div className="course-price"></div>
+                        <div
+                          style={{
+                            backgroundColor: "#26C976",
+                            color: "#FFFFFF",
+                          }}
+                          className="course-price"
+                        ></div>
                         <div className="course-category">
-                          <div className="bg-yellow-300 rounded-md p-1 mr-3">
-                            <a href="/">{val.category}</a>
+                          <div
+                            style={{
+                              backgroundColor: "#26C976",
+                              color: "#FFFFFF",
+                            }}
+                            className=" text-white rounded-md p-1 mr-3"
+                          >
+                            <a className="text-white" href="/">
+                              {val.category}
+                            </a>
                           </div>
                           <div className="course-reiew">
                             <Rating />
@@ -81,7 +97,11 @@ const Course = () => {
                             {val.totalLeson}
                           </div>
                           <div className="couse-topic">
-                            <i className="icofont-signal"></i> {val.schdule}
+                            <i
+                              style={{ color: "#26C976" }}
+                              className="icofont-signal"
+                            ></i>{" "}
+                            {val.schdule}
                           </div>
                         </div>
                         <div className="course-footer">
@@ -97,7 +117,10 @@ const Course = () => {
                               className="lab-btn-text"
                             >
                               {val.btnText}{" "}
-                              <i className="icofont-external-link"></i>
+                              <i
+                                style={{ color: "#26C976" }}
+                                className="icofont-external-link"
+                              ></i>
                             </Link>
                           </div>
                         </div>

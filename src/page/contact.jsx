@@ -47,7 +47,9 @@ const ContactPage = () => {
       <div className="map-address-section padding-tb section-bg">
         <div className="container">
           <div className="section-header text-center">
-            <span className="subtitle">{subTitle}</span>
+            <span style={{ color: "#26C976" }} className="subtitle">
+              {subTitle}
+            </span>
             <h2 className="title">{title}</h2>
           </div>
           <div className="section-wrapper">
@@ -110,8 +112,11 @@ const ContactPage = () => {
                 ></textarea>
               </div>
               <div className="form-group w-100 text-center">
-                <button className="lab-btn">
-                  <span>{btnText}</span>
+                <button
+                  style={{ backgroundColor: "#26C976" }}
+                  className="lab-btn"
+                >
+                  <span style={{ color: "white" }}>{btnText}</span>
                 </button>
               </div>
             </form>
