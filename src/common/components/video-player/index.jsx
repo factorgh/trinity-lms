@@ -1,4 +1,4 @@
-import { Button, Slider } from "antd"; // import Ant Design Slider and Button
+import { Button, Slider, Spin } from "antd"; // Import Ant Design's Spin component
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
@@ -27,52 +27,53 @@ function VideoPlayer({
   const [seeking, setSeeking] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [loading, setLoading] = useState(true); // New loading state
 
   const playerRef = useRef(null);
   const playerContainerRef = useRef(null);
   const controlsTimeoutRef = useRef(null);
 
-  function handlePlayAndPause() {
+  const handlePlayAndPause = () => {
     setPlaying(!playing);
-  }
+  };
 
-  function handleProgress(state) {
+  const handleProgress = (state) => {
     if (!seeking) {
       setPlayed(state.played);
     }
-  }
+  };
 
-  function handleRewind() {
+  const handleRewind = () => {
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() - 5);
-  }
+  };
 
-  function handleForward() {
+  const handleForward = () => {
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() + 5);
-  }
+  };
 
-  function handleToggleMute() {
+  const handleToggleMute = () => {
     setMuted(!muted);
-  }
+  };
 
-  function handleSeekChange(newValue) {
+  const handleSeekChange = (newValue) => {
     setPlayed(newValue[0]);
     setSeeking(true);
-  }
+  };
 
-  function handleSeekMouseUp() {
+  const handleSeekMouseUp = () => {
     setSeeking(false);
     playerRef.current?.seekTo(played);
-  }
+  };
 
-  function handleVolumeChange(newValue) {
+  const handleVolumeChange = (newValue) => {
     setVolume(newValue[0]);
-  }
+  };
 
-  function pad(string) {
+  const pad = (string) => {
     return ("0" + string).slice(-2);
-  }
+  };
 
-  function formatTime(seconds) {
+  const formatTime = (seconds) => {
     const date = new Date(seconds * 1000);
     const hh = date.getUTCHours();
     const mm = date.getUTCMinutes();
@@ -83,7 +84,7 @@ function VideoPlayer({
     }
 
     return `${mm}:${ss}`;
-  }
+  };
 
   const handleFullScreen = useCallback(() => {
     if (!isFullScreen) {
@@ -97,11 +98,11 @@ function VideoPlayer({
     }
   }, [isFullScreen]);
 
-  function handleMouseMove() {
+  const handleMouseMove = () => {
     setShowControls(true);
     clearTimeout(controlsTimeoutRef.current);
     controlsTimeoutRef.current = setTimeout(() => setShowControls(false), 3000);
-  }
+  };
 
   useEffect(() => {
     const handleFullScreenChange = () => {
@@ -134,6 +135,11 @@ function VideoPlayer({
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setShowControls(false)}
     >
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+          <Spin size="large" />
+        </div>
+      )}
       <ReactPlayer
         ref={playerRef}
         className="absolute top-0 left-0"
@@ -144,6 +150,9 @@ function VideoPlayer({
         volume={volume}
         muted={muted}
         onProgress={handleProgress}
+        onReady={() => setLoading(false)} // Hide loading when player is ready
+        onBuffer={() => setLoading(true)} // Show loading during buffering
+        onBufferEnd={() => setLoading(false)} // Hide loading when buffering ends
       />
       {showControls && (
         <div

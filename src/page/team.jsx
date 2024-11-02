@@ -1,157 +1,148 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import instructorImg1 from "../../src/assets/images/instructor1.png";
+import instructorImg2 from "../../src/assets/images/instructor2.jpg";
+import instructorImg3 from "../../src/assets/images/instructor3.png";
+import instructorImg4 from "../../src/assets/images/instructor4.jpg";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
 import PageHeader from "../component/layout/pageheader";
 import Rating from "../component/sidebar/rating";
 
 const instructorList = [
-    {
-        imgUrl: 'assets/images/instructor/01.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Emilee Logan',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-    {
-        imgUrl: 'assets/images/instructor/02.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Donald Logan',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-    {
-        imgUrl: 'assets/images/instructor/03.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Oliver Porter',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-    {
-        imgUrl: 'assets/images/instructor/04.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Nahla Jones',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-    {
-        imgUrl: 'assets/images/instructor/05.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Tomi Hensley',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-    {
-        imgUrl: 'assets/images/instructor/06.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Foley Patrik',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-    {
-        imgUrl: 'assets/images/instructor/07.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Lily Forster',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-    {
-        imgUrl: 'assets/images/instructor/08.jpg',
-        imgAlt: 'instructor rajibraj91 rajibraj',
-        name: 'Alex Itzel',
-        degi: 'Master of Education Degree',
-        courseCount: '08 courses',
-        studentAnroll: '30 students',
-    },
-]
+  {
+    imgUrl: instructorImg1,
+    imgAlt: "instructor Emilee Logan",
+    name: "Emilee Logan",
+    degi: "Master of Computer Science",
+    courseCount: "08 courses",
+    studentAnroll: "30 students",
+    skills: ["JavaScript", "React", "Node.js"], // Technical info
+  },
+  {
+    imgUrl: instructorImg2,
+    imgAlt: "instructor Donald Logan",
+    name: "Donald Logan",
+    degi: "Master of Data Systems",
+    courseCount: "08 courses",
+    studentAnroll: "30 students",
+    skills: ["Python", "Django", "Machine Learning"], // Technical info
+  },
+  {
+    imgUrl: instructorImg3,
+    imgAlt: "instructor Oliver Porter",
+    name: "Oliver Porter",
+    degi: "Master of Info Systems",
+    courseCount: "08 courses",
+    studentAnroll: "30 students",
+    skills: ["UI/UX Design", "Photoshop", "Figma"], // Technical info
+  },
+  {
+    imgUrl: instructorImg4,
+    imgAlt: "instructor Nahla Jones",
+    name: "Nahla Jones",
+    degi: "Master of MicroServices",
+    courseCount: "08 courses",
+    studentAnroll: "30 students",
+    skills: ["Java", "Spring Boot", "Microservices"], // Technical info
+  },
+];
 
 const achieveList = [
-    {
-        imgUrl: 'assets/images/achive/01.png',
-        imgAlt: 'achive thumb rajibraj91 rajibraj',
-        title: 'Start Teaching Today',
-        desc: 'Seamlessly engage technically sound coaborative reintermed goal oriented content rather than ethica',
-        btnText: 'Become A Instructor',
-        siteLink: '#',
-    },
-    {
-        imgUrl: 'assets/images/achive/02.png',
-        imgAlt: 'achive thumb rajibraj91 rajibraj',
-        title: 'If You Join Our Course',
-        desc: 'Seamlessly engage technically sound coaborative reintermed goal oriented content rather than ethica',
-        btnText: 'Register For Free',
-        siteLink: '#',
-    },
-]
-
-
+  {
+    imgUrl: instructorImg1,
+    imgAlt: "Achievement: Start Teaching Today",
+    title: "Start Teaching Today",
+    desc: "Seamlessly engage technically sound, collaborative, goal-oriented content rather than ethically.",
+    btnText: "Become An Instructor",
+    siteLink: "#",
+  },
+  {
+    imgUrl: instructorImg2,
+    imgAlt: "Achievement: Join Our Course",
+    title: "If You Join Our Course",
+    desc: "Seamlessly engage technically sound, collaborative, goal-oriented content rather than ethically.",
+    btnText: "Register For Free",
+    siteLink: "#",
+  },
+];
 
 const TeamPage = () => {
-    return (
-        <Fragment>
-            <Header />
-            <PageHeader title={'All Team Members'} curPage={'Team'} />
-            <div className="instructor-section padding-tb section-bg">
-                <div className="container">
-                    <div className="section-wrapper">
-                        <div className="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
-                            {instructorList.map((val, i) => (
-                                <div className="col" key={i}>
-                                    <div className="instructor-item">
-                                        <div className="instructor-inner">
-                                            <div className="instructor-thumb">
-                                                <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
-                                            </div>
-                                            <div className="instructor-content">
-                                                <Link to="/team-single"><h4>{val.name}</h4></Link>
-                                                <p>{val.degi}</p>
-                                                <Rating />
-                                            </div>
-                                        </div>
-                                        <div className="instructor-footer">
-                                            <ul className="lab-ul d-flex flex-wrap justify-content-between align-items-center">
-                                                <li><i className="icofont-book-alt"></i> {val.courseCount}</li>
-                                                <li><i className="icofont-users-alt-3"></i> {val.studentAnroll}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        
-                        <div className="achieve-part mt-5">
-                            <div className="row g-4 row-cols-1 row-cols-lg-2">
-                                {achieveList.map((val, i) => (
-                                    <div className="col" key={i}>
-                                        <div className="achieve-item">
-                                            <div className="achieve-inner">
-                                                <div className="achieve-thumb">
-                                                    <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
-                                                </div>
-                                                <div className="achieve-content">
-                                                    <h4>{val.title}</h4>
-                                                    <p>{val.desc}</p>
-                                                    <a href={val.siteLink} className="lab-btn"><span>{val.btnText}</span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+  return (
+    <Fragment>
+      <Header />
+      <PageHeader title={"All Team Members"} curPage={"Team"} />
+      <div className="instructor-section padding-tb section-bg">
+        <div className="container">
+          <div className="section-wrapper">
+            <div className="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+              {instructorList.map((instructor) => (
+                <div className="col" key={instructor.id}>
+                  <div className="instructor-item">
+                    <div className="instructor-inner">
+                      <div className="instructor-thumb">
+                        <img src={instructor.imgUrl} alt={instructor.imgAlt} />
+                      </div>
+                      <div className="instructor-content">
+                        <Link to={`/team-single/${instructor.id}`}>
+                          <h4>{instructor.name}</h4>
+                        </Link>
+                        <p>{instructor.degi}</p>
+                        <Rating />
+                      </div>
                     </div>
+                    <div className="instructor-footer">
+                      <ul className="lab-ul d-flex flex-wrap justify-content-between align-items-center">
+                        <li>
+                          <span className="icon">
+                            <i className="icofont-book-alt"></i>
+                          </span>
+                          {instructor.courseCount}
+                        </li>
+                        <li>
+                          <span className="icon">
+                            <i className="icofont-users-alt-3"></i>
+                          </span>
+                          {instructor.studentAnroll}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
+              ))}
             </div>
-            <Footer />
-        </Fragment>
-    );
-}
- 
+
+            <div className="achieve-part mt-5">
+              <div className="row g-4 row-cols-1 row-cols-lg-2">
+                {achieveList.map((achievement, index) => (
+                  <div className="col" key={index}>
+                    <div className="achieve-item">
+                      <div className="achieve-inner">
+                        <div className="w-40 h-40 rounded-full">
+                          <img
+                            src={achievement.imgUrl}
+                            alt={achievement.imgAlt}
+                          />
+                        </div>
+                        <div className="achieve-content">
+                          <h4>{achievement.title}</h4>
+                          <p>{achievement.desc}</p>
+                          <a href={achievement.siteLink} className="lab-btn">
+                            <span>{achievement.btnText}</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </Fragment>
+  );
+};
+
 export default TeamPage;
