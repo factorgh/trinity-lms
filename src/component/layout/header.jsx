@@ -113,7 +113,7 @@ const Header = () => {
                       </li>
                     </ul>
                   </li>
-                  <li className="menu-item-has-children">
+                  {/* <li className="menu-item-has-children">
                     <a href="#" role="button">
                       Blog
                     </a>
@@ -131,7 +131,7 @@ const Header = () => {
                         <NavLink to="/blog-single">Blog Single</NavLink>
                       </li>
                     </ul>
-                  </li>
+                  </li> */}
                   <li className="menu-item-has-children">
                     <a href="#" role="button">
                       Who we are
@@ -161,9 +161,9 @@ const Header = () => {
                       {/* <li>
                         <NavLink to="/search-none">Search None</NavLink>
                       </li> */}
-                      <li>
+                      {/* <li>
                         <NavLink to="/404">404</NavLink>
-                      </li>
+                      </li> */}
                     </ul>
                   </li>
                   <li>

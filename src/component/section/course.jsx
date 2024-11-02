@@ -130,10 +130,10 @@ const Course = () => {
                       <img src={`${val.image}`} alt={`${val.category}`} />
                     </div>
                     <div className="course-content">
-                      <div className="course-price">{val.pricing}</div>
+                      <div className="course-price"></div>
                       <div className="course-category">
-                        <div className="course-cate">
-                          <a href="#">{val.cate}</a>
+                        <div className="bg-yellow-300 rounded-md p-1 mr-3">
+                          <a href="#">{val.category}</a>
                         </div>
                         <div className="course-reiew">
                           <Rating />
@@ -156,12 +156,8 @@ const Course = () => {
                       </div>
                       <div className="course-footer">
                         <div className="course-author">
-                          <img
-                            src={`${val.authorImgUrl}`}
-                            alt={`${val.authorImgAlt}`}
-                          />
                           <Link to="/team-single" className="ca-name">
-                            {val.authorName}
+                            <h3> Free</h3>
                           </Link>
                         </div>
                         <div className="course-btn">
