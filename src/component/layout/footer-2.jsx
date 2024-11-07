@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 const desc =
   "Eduaid  number one world class e-learning platform in the world .There are student are studing always within this platform for all time.";
 const courseTitle = "Courses";
-const quickTitle = "Quick Links";
 
 const addressList = [
   {
@@ -79,33 +78,6 @@ const courseList = [
   },
 ];
 
-const quickList = [
-  {
-    text: "Summer Sessions",
-    link: "#",
-  },
-  {
-    text: "Events",
-    link: "#",
-  },
-  {
-    text: "Gallery",
-    link: "#",
-  },
-  {
-    text: "Forums",
-    link: "#",
-  },
-  {
-    text: "Privacy Policy",
-    link: "#",
-  },
-  {
-    text: "Terms of Use",
-    link: "#",
-  },
-];
-
 const footerbottomList = [
   {
     text: "Faculty",
@@ -170,26 +142,6 @@ const FooterTwo = () => {
                     <div className="content">
                       <ul className="lab-ul">
                         {courseList.map((val, i) => (
-                          <li key={i}>
-                            <a href={val.link}>{val.text}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="footer-item">
-                <div className="footer-inner">
-                  <div className="footer-content">
-                    <div className="title">
-                      <h4>{quickTitle}</h4>
-                    </div>
-                    <div className="content">
-                      <ul className="lab-ul">
-                        {quickList.map((val, i) => (
                           <li key={i}>
                             <a href={val.link}>{val.text}</a>
                           </li>
