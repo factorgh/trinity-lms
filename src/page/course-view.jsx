@@ -5,7 +5,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import HeroSection from "../common/components/ui/hero-section";
 import VideoPlayer from "../common/components/video-player";
-import Footer from "../component/layout/footer";
+import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
 
 const { Panel } = Collapse;
@@ -219,7 +219,7 @@ const CourseView = () => {
         </div>
       </div>
 
-      <Footer />
+      <Footer2 />
     </Fragment>
   );
 };
