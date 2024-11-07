@@ -1,4 +1,4 @@
-import { Collapse, Divider } from "antd";
+import { Collapse, Divider, Spin } from "antd"; // Import Spin from Ant Design
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CourseCard from "../common/components/ui/course-card";
@@ -15,7 +15,7 @@ const { Panel } = Collapse; // Import Collapse Panel from Ant Design
 const CoursePage = () => {
   const { studentViewCoursesList, setStudentViewCoursesList } =
     useContext(StudentContext);
-  const [setLoading] = useState(true); // Step 1: Loading state for async operations
+  const [loading, setLoading] = useState(true); // Step 1: Loading state for async operations
   const navigate = useNavigate();
 
   const handleCourseView = (courseDetails) => {
@@ -78,16 +78,23 @@ const CoursePage = () => {
                 </div>
               </div>
 
-              {/* Grid of Courses */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {studentViewCoursesList.map((val, i) => (
-                  <CourseCard
-                    key={i}
-                    val={val}
-                    handleCourseView={handleCourseView}
-                  />
-                ))}
-              </div>
+              {/* Show the loading spinner while data is being fetched */}
+              {loading ? (
+                <div className="flex justify-center items-center h-40">
+                  <Spin size="large" /> {/* Ant Design Spinner */}
+                </div>
+              ) : (
+                // Grid of Courses: Show once data is loaded
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {studentViewCoursesList.map((val, i) => (
+                    <CourseCard
+                      key={i}
+                      val={val}
+                      handleCourseView={handleCourseView}
+                    />
+                  ))}
+                </div>
+              )}
 
               {/* Divider after Courses */}
               <Divider className="my-12" />
