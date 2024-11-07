@@ -15,7 +15,7 @@ const { Panel } = Collapse; // Import Collapse Panel from Ant Design
 const CoursePage = () => {
   const { studentViewCoursesList, setStudentViewCoursesList } =
     useContext(StudentContext);
-  const [loading, setLoading] = useState(true); // Step 1: Loading state for async operations
+  const [setLoading] = useState(true); // Step 1: Loading state for async operations
   const navigate = useNavigate();
 
   const handleCourseView = (courseDetails) => {

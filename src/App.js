@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "swiper/css";
+
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 import ScrollToTop from "./component/layout/ScrollToTop";
 import ErrorPage from "./page/404";
@@ -11,11 +13,12 @@ import BlogSingle from "./page/blog-single";
 import CartPage from "./page/cart-page";
 import ContactPage from "./page/contact";
 import CoursePage from "./page/course";
-import CourseSingle from "./page/course-single";
+// import CourseSingle from "./page/course-single";
 import CourseView from "./page/course-view";
 import ForgetPass from "./page/forgetpass";
 import Home from "./page/home";
 
+import "bootstrap/dist/css/bootstrap.min.css";
 import { useContext } from "react";
 import { Toaster } from "react-hot-toast";
 import AddNewCoursePage from "./common/common-pages/add-new-course-page";
@@ -50,7 +53,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="course" element={<CoursePage />} />
-        <Route path="course-single" element={<CourseSingle />} />
+        {/* <Route path="course-single" element={<CourseSingle />} /> */}
         <Route path="course-view" element={<CourseView />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="blog-2" element={<BlogPageTwo />} />

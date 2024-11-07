@@ -57,6 +57,7 @@ const Course = () => {
             <Swiper
               spaceBetween={20}
               slidesPerView={1}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
               breakpoints={{
                 320: {
                   slidesPerView: 1, // On small screens, show 1 course at a time
@@ -73,10 +74,10 @@ const Course = () => {
                 clickable: true, // Enable clickable pagination (dots)
                 el: ".swiper-pagination", // Link pagination to a custom element
               }}
-              navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              }} // Enable navigation arrows
+              // navigation={{
+              //   nextEl: ".swiper-button-next",
+              //   prevEl: ".swiper-button-prev",
+              // }} // Enable navigation arrows
               className="mx-10" // Optional: Add custom class for further styling
             >
               {studentViewCoursesList.map((val, i) => (
@@ -93,8 +94,8 @@ const Course = () => {
             {/* Custom Pagination and Navigation Controls */}
             <div className="swiper-pagination mt-4"></div>
             {/* Add navigation buttons */}
-            <div className="swiper-button-next"></div>
-            <div className="swiper-button-prev"></div>
+            {/* <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div> */}
           </div>
         )}
       </div>

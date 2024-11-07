@@ -1,7 +1,7 @@
 import { Card, Collapse, Divider, Spin } from "antd"; // Ant Design components for styling
 import { CheckCircle, Play } from "lucide-react"; // Icons from lucide-react
 import React, { Fragment, useEffect, useState } from "react";
-import Confetti from "react-confetti"; // Import React Confetti
+
 import { useLocation } from "react-router-dom";
 import HeroSection from "../common/components/ui/hero-section";
 import VideoPlayer from "../common/components/video-player";
@@ -12,7 +12,7 @@ const { Panel } = Collapse;
 
 const CourseView = () => {
   const [icon, setIcon] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
+
   const { state } = useLocation();
   const course = state?.courseDetails;
 
@@ -23,8 +23,6 @@ const CourseView = () => {
   useEffect(() => {
     if (course?.curriculum && course?.curriculum.length > 0) {
       setCurrentLecture(course.curriculum[0]);
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000);
     }
   }, [course?.curriculum]);
 
@@ -32,10 +30,9 @@ const CourseView = () => {
   const handleLectureChange = (item) => {
     setLoading(true);
     setCurrentLecture(item);
-    setShowConfetti(true);
+
     setTimeout(() => {
       setLoading(false);
-      setShowConfetti(false);
     }, 1000);
   };
 
@@ -55,7 +52,7 @@ const CourseView = () => {
 
   return (
     <Fragment>
-      {showConfetti && <Confetti />}
+      {/* {showConfetti && <Confetti />} */}
 
       <Header />
       <HeroSection course={course} />
