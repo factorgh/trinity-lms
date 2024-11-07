@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const desc =
-  "Eduaid theme number one world class university in the world There are student are studing always in this university for all time.";
+  "Eduaid  number one world class e-learning platform in the world .There are student are studing always within this platform for all time.";
 const courseTitle = "Courses";
 const quickTitle = "Quick Links";
 
