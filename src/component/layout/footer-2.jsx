@@ -8,15 +8,15 @@ const quickTitle = "Quick Links";
 const addressList = [
   {
     iconName: "icofont-google-map",
-    text: "New Elefent Road, Dhaka.",
+    text: "Trassaco GL-155-6183 Accra, Ghana.",
   },
   {
     iconName: "icofont-phone",
-    text: "+880 123 456 789",
+    text: "+233 20 957 4338",
   },
   {
     iconName: "icofont-envelope",
-    text: "info@Edukon.com",
+    text: "info@creationconsult.com",
   },
 ];
 
