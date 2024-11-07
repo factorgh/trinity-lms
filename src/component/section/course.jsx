@@ -1,9 +1,12 @@
 import { Spin } from "antd";
+import "antd/dist/reset.css";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css"; // Import Swiper styles
+import CourseCard from "../../common/components/ui/course-card";
 import { StudentContext } from "../../common/context/student-context";
 import { fetchStudentViewCourseListService } from "../../common/services";
-import Rating from "../sidebar/rating";
 
 const subTitle = "Featured Courses";
 const title = "Pick A Course To Get Started";
@@ -21,8 +24,6 @@ const Course = () => {
     setLoading(false); // Set loading to false after fetching data
   }
 
-  // Handle course view here
-
   useEffect(() => {
     fetchAllStudentViewCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -33,13 +34,16 @@ const Course = () => {
   };
 
   return (
-    <div className="course-section padding-tb section-bg">
-      <div className="container">
-        <div className="section-header text-center">
-          <span style={{ color: "#26C976" }} className="subtitle">
+    <div className="course-section  section-bg py-20 mb-5">
+      <div className="w-full px-4 mx-auto">
+        <div className="section-header text-center mb-10">
+          <span
+            style={{ color: "#26C976" }}
+            className="subtitle text-lg font-semibold"
+          >
             {subTitle}
           </span>
-          <h2 className="title">{title}</h2>
+          <h2 className="title text-3xl font-bold mt-2">{title}</h2>
         </div>
 
         {/* Centered Loading Spinner */}
@@ -48,88 +52,60 @@ const Course = () => {
             <Spin size="large" />
           </div>
         ) : (
-          <div className="section-wrapper">
-            <div className="row g-4 justify-content-center row-cols-xl-3 row-cols-md-2 row-cols-1">
+          <div className="p-4 my-10">
+            {/* Swiper Component for Courses */}
+            <Swiper
+              spaceBetween={20} // Space between slides
+              slidesPerView={1} // Default number of visible slides
+              breakpoints={{
+                320: {
+                  slidesPerView: 1, // On small screens, show 1 course at a time
+                },
+                768: {
+                  slidesPerView: 2, // On medium screens, show 2 courses at a time
+                },
+                1024: {
+                  slidesPerView: 3, // On large screens, show 3 courses at a time
+                },
+              }}
+              loop={true} // Enable looping of courses
+              pagination={{
+                clickable: true, // Enable clickable pagination (dots)
+                el: ".swiper-pagination", // Link pagination to a custom element
+              }}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }} // Enable navigation arrows
+              className="mx-10" // Optional: Add custom class for further styling
+            >
               {studentViewCoursesList.map((val, i) => (
-                <div
-                  onClick={() => handleCourseView(val)}
-                  className="col"
-                  key={i}
-                >
-                  <div className="course-item">
-                    <div className="course-inner">
-                      <div className="course-thumb">
-                        <img src={`${val.image}`} alt={`${val.category}`} />
-                      </div>
-                      <div className="course-content">
-                        <div
-                          style={{
-                            backgroundColor: "#26C976",
-                            color: "#FFFFFF",
-                          }}
-                          className="course-price"
-                        ></div>
-                        <div className="course-category">
-                          <div
-                            style={{
-                              backgroundColor: "#26C976",
-                              color: "#FFFFFF",
-                            }}
-                            className=" text-white rounded-md p-1 mr-3"
-                          >
-                            <a className="text-white" href="/">
-                              {val.category}
-                            </a>
-                          </div>
-                          <div className="course-reiew">
-                            <Rating />
-                            <span className="ratting-count">
-                              {val.reviewCount}
-                            </span>
-                          </div>
-                        </div>
-                        <Link to="/course-single">
-                          <h4>{val.title}</h4>
-                        </Link>
-                        <div className="course-details">
-                          <div className="couse-count">
-                            <i className="icofont-video-alt"></i>{" "}
-                            {val.totalLeson}
-                          </div>
-                          <div className="couse-topic">
-                            <i
-                              style={{ color: "#26C976" }}
-                              className="icofont-signal"
-                            ></i>{" "}
-                            {val.schdule}
-                          </div>
-                        </div>
-                        <div className="course-footer">
-                          <div className="course-author">
-                            <Link to="/team-single" className="ca-name">
-                              <h3> Free</h3>
-                            </Link>
-                          </div>
-                          <div className="course-btn">
-                            <Link
-                              to=""
-                              onClick={() => handleCourseView(val)}
-                              className="lab-btn-text"
-                            >
-                              {val.btnText}{" "}
-                              <i
-                                style={{ color: "#26C976" }}
-                                className="icofont-external-link"
-                              ></i>
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <SwiperSlide className="py-3" key={i}>
+                  <CourseCard
+                    val={val}
+                    handleCourseView={handleCourseView}
+                    i={i}
+                  />
+                </SwiperSlide>
               ))}
+            </Swiper>
+
+            {/* Custom Pagination and Navigation Controls */}
+            <div className="swiper-pagination mt-4">
+              <style jsx>{`
+                /* Custom Tailwind styles for pagination bullets */
+                .swiper-pagination-bullet {
+                  @apply bg-red-500 w-3 h-3 rounded-full mx-1;
+                }
+                .swiper-pagination-bullet-active {
+                  @apply bg-green-700; /* Active bullet color */
+                }
+              `}</style>
             </div>
+
+            {/* Optional navigation buttons */}
+            {/* <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div> */}
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 const subTitle = "Popular Category";
 const title = "Popular Category For Learn";
+
 const btnText = "Browse All Categories";
 
 const categoryList = [
@@ -47,18 +48,30 @@ const Category = () => {
   return (
     <div className="category-section padding-tb">
       <div className="container">
-        <div className="section-header text-center">
-          <span style={{ color: "#26C976" }} className="subtitle">
+        <div className="section-header text-center mb-10">
+          <span
+            style={{ color: "#26C976" }}
+            className="subtitle text-lg font-semibold"
+          >
             {subTitle}
           </span>
-          <h2 className="title">{title}</h2>
+          <h2 className="title text-3xl font-bold mt-2">{title}</h2>
         </div>
+
         <div className="section-wrapper">
-          <div className="row g-2 justify-content-center row-cols-xl-6 row-cols-md-3 row-cols-sm-2 row-cols-1">
+          <div className="grid grid-cols-3 gap-3">
             {categoryList.map((val, i) => (
               <div className="col" key={i}>
                 <div className="category-item text-center">
-                  <div className="category-inner">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    className="category-inner"
+                  >
                     <div className="category-thumb">
                       <img src={`${val.imgUrl}`} alt={val.imgAlt} />
                     </div>
@@ -73,7 +86,7 @@ const Category = () => {
               </div>
             ))}
           </div>
-          <div className="text-center mt-5">
+          <div className="text-center mt-5 mb-">
             <Link
               style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
               to="/course"

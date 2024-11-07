@@ -1,3 +1,4 @@
+import React from "react";
 import CountUp from "react-countup";
 import instructorImg1 from "../../../src/assets/images/instructor1.png";
 import instructorImg2 from "../../../src/assets/images/instructor2.jpg";
@@ -45,57 +46,72 @@ const achieveList = [
 
 const Achievement = () => {
   return (
-    <div className="achievement-section padding-tb">
-      <div className="container">
-        <div className="section-header text-center">
-          <span style={{ color: "#26C976" }} className="subtitle">
+    <div className="achievement-section py-16 bg-gray-50">
+      <div className="container mx-auto px-6">
+        <div className="section-header text-center mb-12">
+          <span className="text-lg font-semibold text-green-500">
             {subTitle}
           </span>
-          <h2 className="title">{title}</h2>
+          <h2 className="text-3xl font-extrabold text-gray-800 mt-2">
+            {title}
+          </h2>
         </div>
-        <div className="section-wrapper">
-          <div className="counter-part mb-4">
-            <div className="row g-4 row-cols-lg-4 row-cols-sm-2 row-cols-1 justify-content-center">
-              {achievementList.map((val, i) => (
-                <div className="col" key={i}>
-                  <div className="count-item">
-                    <div className="count-inner">
-                      <div className="count-content">
-                        <h2>
-                          <span className="count">
-                            <CountUp end={val.count} />
-                          </span>
-                          <span>+</span>
-                        </h2>
-                        <p>{val.desc}</p>
-                      </div>
-                    </div>
+
+        {/* Achievement Counter Section */}
+        <div className="counter-part mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+            {achievementList.map((val, i) => (
+              <div
+                className="count-item bg-white p-6 rounded-xl shadow-lg text-center"
+                key={i}
+              >
+                <div className="count-inner">
+                  <div className="count-content">
+                    <h2 className="text-4xl font-extrabold text-green-500">
+                      <CountUp end={parseInt(val.count)} duration={2} />
+                      <span className="text-xl">+</span>
+                    </h2>
+                    <p className="text-lg text-gray-600 mt-2">{val.desc}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-          <div className="achieve-part">
-            <div className="row g-4 row-cols-1 row-cols-lg-2">
-              {achieveList.map((val, i) => (
-                <div className="col" key={i}>
-                  <div className="achieve-item">
-                    <div className="achieve-inner">
-                      <div className="w-40 h-40 rounded-full">
-                        <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
-                      </div>
-                      <div className="achieve-content">
-                        <h4>{val.title}</h4>
-                        <p>{val.desc}</p>
-                        <a href={val.siteLink} className="lab-btn">
-                          <span>{val.btnText}</span>
-                        </a>
-                      </div>
-                    </div>
+        </div>
+
+        {/* Achieve List Section */}
+        <div className="achieve-part">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {achieveList.map((val, i) => (
+              <div
+                className="achieve-item bg-white rounded-xl shadow-lg overflow-hidden"
+                key={i}
+              >
+                <div className="achieve-inner flex items-center p-6">
+                  {/* Image */}
+                  <div className="w-24 h-24 rounded-full overflow-hidden mr-6">
+                    <img
+                      src={val.imgUrl}
+                      alt={val.imgAlt}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  {/* Content */}
+                  <div>
+                    <h4 className="text-xl font-semibold text-gray-800">
+                      {val.title}
+                    </h4>
+                    <p className="text-sm text-gray-600 mt-2">{val.desc}</p>
+                    <a
+                      href={val.siteLink}
+                      className="mt-4 inline-block bg-green-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-green-600 transition duration-300"
+                    >
+                      {val.btnText}
+                    </a>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

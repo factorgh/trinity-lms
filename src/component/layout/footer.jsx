@@ -19,14 +19,6 @@ const siteList = [
     text: "Plugins",
     link: "#",
   },
-  {
-    text: "Support Forums",
-    link: "#",
-  },
-  {
-    text: "Themes",
-    link: "#",
-  },
 ];
 
 const useList = [
@@ -35,19 +27,11 @@ const useList = [
     link: "#",
   },
   {
-    text: "Help Link",
-    link: "#",
-  },
-  {
     text: "Terms & Conditions",
     link: "#",
   },
   {
     text: "Contact Us",
-    link: "#",
-  },
-  {
-    text: "Privacy Policy",
     link: "#",
   },
 ];
@@ -65,31 +49,11 @@ const socialList = [
     text: "Instagram",
     link: "#",
   },
-  {
-    text: "YouTube",
-    link: "#",
-  },
-  {
-    text: "Github",
-    link: "#",
-  },
 ];
 
 const supportList = [
   {
     text: "Help Center",
-    link: "#",
-  },
-  {
-    text: "Paid with Mollie",
-    link: "#",
-  },
-  {
-    text: "Status",
-    link: "#",
-  },
-  {
-    text: "Changelog",
     link: "#",
   },
   {
@@ -100,134 +64,140 @@ const supportList = [
 
 const Footer = () => {
   return (
-    <div className="news-footer-wrap">
-      <div className="fs-shape">
-        <img src="assets/images/shape-img/03.png" alt="fst" className="fst-1" />
-        <img src="assets/images/shape-img/04.png" alt="fst" className="fst-2" />
-      </div>
-
-      <div className="news-letter">
-        <div className="container">
-          <div className="section-wrapper">
-            <div className="news-title">
-              <h3>{newsTitle}</h3>
-            </div>
-            <div className="news-form">
-              <form action="/">
-                <div className="nf-list">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Enter Your Email"
-                  />
-                  <input type="submit" name="submit" value="Subscribe Now" />
-                </div>
-              </form>
-            </div>
+    <div className="bg-gray-900 text-white">
+      <div className="container mx-auto px-6 py-16">
+        {/* Newsletter Section */}
+        <div className="news-letter mb-16">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-semibold text-gray-100">
+              {newsTitle}
+            </h3>
+          </div>
+          <div className="flex justify-center">
+            <form action="/" className="flex max-w-md w-full space-x-4">
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Your Email"
+                className="w-full p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+              >
+                Subscribe Now
+              </button>
+            </form>
           </div>
         </div>
-      </div>
 
-      <footer>
-        <div className="footer-top padding-tb pt-0">
-          <div className="container">
-            <div className="row g-4 row-cols-xl-4 row-cols-md-2 row-cols-1 justify-content-center">
-              <div className="col">
-                <div className="footer-item">
-                  <div className="footer-inner">
-                    <div className="footer-content">
-                      <div className="title">
-                        <h4>{siteTitle}</h4>
-                      </div>
-                      <div className="content">
-                        <ul className="lab-ul">
-                          {siteList.map((val, i) => (
-                            <li key={i}>
-                              <a href={val.link}>{val.text}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        {/* Footer Sections */}
+        <footer>
+          <div className="footer-top mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+              {/* Site Map */}
+              <div className="footer-item">
+                <h4 className="text-lg font-semibold mb-4 text-gray-200">
+                  {siteTitle}
+                </h4>
+                <ul>
+                  {siteList.map((val, i) => (
+                    <li key={i} className="mb-2">
+                      <a
+                        href={val.link}
+                        className="text-gray-400 hover:text-green-500 transition duration-200"
+                      >
+                        {val.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="col">
-                <div className="footer-item">
-                  <div className="footer-inner">
-                    <div className="footer-content">
-                      <div className="title">
-                        <h4>{useTitle}</h4>
-                      </div>
-                      <div className="content">
-                        <ul className="lab-ul">
-                          {useList.map((val, i) => (
-                            <li key={i}>
-                              <a href={val.link}>{val.text}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+              {/* Useful Links */}
+              <div className="footer-item">
+                <h4 className="text-lg font-semibold mb-4 text-gray-200">
+                  {useTitle}
+                </h4>
+                <ul>
+                  {useList.map((val, i) => (
+                    <li key={i} className="mb-2">
+                      <a
+                        href={val.link}
+                        className="text-gray-400 hover:text-green-500 transition duration-200"
+                      >
+                        {val.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="col">
-                <div className="footer-item">
-                  <div className="footer-inner">
-                    <div className="footer-content">
-                      <div className="title">
-                        <h4>{socialTitle}</h4>
-                      </div>
-                      <div className="content">
-                        <ul className="lab-ul">
-                          {socialList.map((val, i) => (
-                            <li key={i}>
-                              <a href={val.link}>{val.text}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+              {/* Social Links */}
+              <div className="footer-item">
+                <h4 className="text-lg font-semibold mb-4 text-gray-200">
+                  {socialTitle}
+                </h4>
+                <ul>
+                  {socialList.map((val, i) => (
+                    <li key={i} className="mb-2">
+                      <a
+                        href={val.link}
+                        className="text-gray-200 hover:text-green-500 transition duration-200"
+                      >
+                        {val.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="col">
-                <div className="footer-item">
-                  <div className="footer-inner">
-                    <div className="footer-content">
-                      <div className="title">
-                        <h4>{supportTitle}</h4>
-                      </div>
-                      <div className="content">
-                        <ul className="lab-ul">
-                          {supportList.map((val, i) => (
-                            <li key={i}>
-                              <a href={val.link}>{val.text}</a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+              {/* Support */}
+              <div className="footer-item">
+                <h4 className="text-lg font-semibold mb-4 text-gray-200">
+                  {supportTitle}
+                </h4>
+                <ul>
+                  {supportList.map((val, i) => (
+                    <li key={i} className="mb-2">
+                      <a
+                        href={val.link}
+                        className="text-gray-400 hover:text-green-500 transition duration-200"
+                      >
+                        {val.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
-        </div>
-        <div className="footer-bottom style-2">
-          <div className="container">
-            <div className="section-wrapper">
-              <p>
-                &copy; 2022 <Link to="/">Edukon</Link> Designed by{" "}
-                <a href="/" target="_blank" rel="noreferrer">
+
+          {/* Footer Bottom */}
+          <div className="footer-bottom border-t border-gray-700 pt-6">
+            <div className="container mx-auto text-center">
+              <p className="text-sm text-gray-400">
+                &copy; 2022{" "}
+                <Link
+                  to="/"
+                  className="text-green-500 hover:text-green-600 transition duration-300"
+                >
+                  Edukon
+                </Link>{" "}
+                Designed by{" "}
+                <a
+                  href="/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-green-500 hover:text-green-600 transition duration-300"
+                >
                   Factor GH
-                </a>{" "}
+                </a>
               </p>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   );
 };

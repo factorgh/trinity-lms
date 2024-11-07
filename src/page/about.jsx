@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
-import PageHeader from "../component/layout/pageheader";
 import AchievementTwo from "../component/section/achievement-2";
 import Instructor from "../component/section/instructor";
 import Skill from "../component/section/skill";
@@ -43,7 +42,7 @@ const AboutPage = () => {
   return (
     <Fragment>
       <Header />
-      <PageHeader title={"About Our Edukon"} curPage={"About"} />
+      <div className="pageheader-section"></div>
       <div className="about-section style-3 padding-tb section-bg">
         <div className="container">
           <div className="row justify-content-center row-cols-xl-2 row-cols-1 align-items-center">
@@ -51,7 +50,7 @@ const AboutPage = () => {
               <div className="about-left">
                 <div className="about-thumb">
                   <img
-                    style={{ width: "100%", height: "100%" }}
+                    style={{ width: "80", height: "80%" }}
                     src={intstructorImg}
                     alt="about"
                   />

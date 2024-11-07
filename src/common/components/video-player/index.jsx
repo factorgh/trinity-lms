@@ -17,8 +17,9 @@ function VideoPlayer({
   width = "100%",
   height = "100%",
   url,
-  onProgressUpdate,
-  progressData,
+
+  autoPlay = true,
+  onVideoEnd,
 }) {
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.5);
@@ -33,16 +34,20 @@ function VideoPlayer({
   const playerContainerRef = useRef(null);
   const controlsTimeoutRef = useRef(null);
 
+  // Play/Pause toggle
   const handlePlayAndPause = () => {
     setPlaying(!playing);
+    autoPlay = !autoPlay;
   };
 
+  // Progress tracking (for slider)
   const handleProgress = (state) => {
     if (!seeking) {
       setPlayed(state.played);
     }
   };
 
+  // Rewind and forward buttons
   const handleRewind = () => {
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() - 5);
   };
@@ -51,10 +56,12 @@ function VideoPlayer({
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() + 5);
   };
 
+  // Toggle mute
   const handleToggleMute = () => {
     setMuted(!muted);
   };
 
+  // Seeking controls
   const handleSeekChange = (newValue) => {
     setPlayed(newValue[0]);
     setSeeking(true);
@@ -65,10 +72,12 @@ function VideoPlayer({
     playerRef.current?.seekTo(played);
   };
 
+  // Volume control
   const handleVolumeChange = (newValue) => {
     setVolume(newValue[0]);
   };
 
+  // Formatting time
   const pad = (string) => {
     return ("0" + string).slice(-2);
   };
@@ -86,6 +95,7 @@ function VideoPlayer({
     return `${mm}:${ss}`;
   };
 
+  // Fullscreen toggle
   const handleFullScreen = useCallback(() => {
     if (!isFullScreen) {
       if (playerContainerRef?.current.requestFullscreen) {
@@ -98,6 +108,7 @@ function VideoPlayer({
     }
   }, [isFullScreen]);
 
+  // Controls visibility based on mouse movement
   const handleMouseMove = () => {
     setShowControls(true);
     clearTimeout(controlsTimeoutRef.current);
@@ -116,14 +127,12 @@ function VideoPlayer({
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (played === 1) {
-  //     onProgressUpdate({
-  //       ...progressData,
-  //       progressValue: played,
-  //     });
-  //   }
-  // }, [played]);
+  // Trigger next video automatically on end
+  const handleVideoEnd = () => {
+    if (onVideoEnd) {
+      onVideoEnd();
+    }
+  };
 
   return (
     <div
@@ -146,13 +155,14 @@ function VideoPlayer({
         width="100%"
         height="100%"
         url={url}
-        playing={playing}
+        playing={playing || autoPlay} // Use autoplay prop
         volume={volume}
         muted={muted}
         onProgress={handleProgress}
         onReady={() => setLoading(false)} // Hide loading when player is ready
         onBuffer={() => setLoading(true)} // Show loading during buffering
         onBufferEnd={() => setLoading(false)} // Hide loading when buffering ends
+        onEnded={handleVideoEnd} // Trigger next video when this one ends
       />
       {showControls && (
         <div

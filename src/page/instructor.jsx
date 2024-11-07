@@ -47,9 +47,20 @@ const InstructorPage = () => {
           <div className="section-wrapper">
             <div className="row g-4 justify-content-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
               {categoryItemList.map((val, i) => (
-                <div className="col" key={i}>
+                <div
+                  className="flex flex-col items-center justify-center"
+                  key={i}
+                >
                   <div className="category-item text-center">
-                    <div className="category-inner">
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                      className="category-inner"
+                    >
                       <div className="category-thumb">
                         <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
                       </div>

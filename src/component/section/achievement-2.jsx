@@ -32,27 +32,24 @@ const AchievementTwo = () => {
           </span>
           <h2 className="title">{title}</h2>
         </div>
-        <div className="section-wrapper">
-          <div className="counter-part mb-4">
-            <div className="row g-4 row-cols-lg-4 row-cols-sm-2 row-cols-1 justify-content-center">
-              {achievementList.map((val, i) => (
-                <div className="col" key={i}>
-                  <div className="count-item">
-                    <div className="count-inner">
-                      <div className="count-content">
-                        <h2>
-                          <span className="count">
-                            <CountUp end={val.count} />
-                          </span>
-                          <span>+</span>
-                        </h2>
-                        <p>{val.desc}</p>
-                      </div>
-                    </div>
+        <div className="counter-part mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+            {achievementList.map((val, i) => (
+              <div
+                className="count-item bg-white p-6 rounded-xl shadow-lg text-center"
+                key={i}
+              >
+                <div className="count-inner">
+                  <div className="count-content">
+                    <h2 className="text-4xl font-extrabold text-green-500">
+                      <CountUp end={parseInt(val.count)} duration={2} />
+                      <span className="text-xl">+</span>
+                    </h2>
+                    <p className="text-lg text-gray-600 mt-2">{val.desc}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,11 +1,12 @@
+import { Card, Rate } from "antd"; // Using Ant Design's Card and Rate components
+import React from "react";
 import { Link } from "react-router-dom";
 import instructorImg1 from "../../../src/assets/images/instructor1.png";
 import instructorImg2 from "../../../src/assets/images/instructor2.jpg";
 import instructorImg3 from "../../../src/assets/images/instructor3.png";
 import instructorImg4 from "../../../src/assets/images/instructor4.jpg";
-import Rating from "../sidebar/rating";
 
-const subTitle = "World-class Instructors";
+const subTitle = "WORLD-CLASS INSTRUCTORS";
 const title = "Classes Taught By Real Creators";
 
 const instructorList = [
@@ -43,70 +44,81 @@ const instructorList = [
     degi: "Master of Education Degree",
     courseCount: "08 courses",
     studentAnroll: "30 students",
-    skills: ["Java", "Spring Boot", "Microservices"], // Technical info
+    skills: ["Java", "Spring Boot", "Microservices"],
   },
 ];
 
 const Instructor = () => {
   return (
-    <div
-      style={{ marginTop: "20px" }}
-      className="instructor-section padding-tb section-bg"
-    >
-      <div className="container">
-        <div className="section-header text-center">
-          <span style={{ color: "#26C976" }} className="subtitle">
+    <div className="instructor-section py-16 bg-gray-50 mt-5">
+      <div className="container mx-auto px-6 mt-5">
+        <div className="section-header text-center mb-10">
+          <span
+            style={{ color: "#26C976" }}
+            className="subtitle text-lg font-semibold"
+          >
             {subTitle}
           </span>
-          <h2 className="title">{title}</h2>
+          <h2 className="title text-3xl font-bold mt-2">{title}</h2>
         </div>
-        <div className="section-wrapper">
-          <div className="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4">
-            {instructorList.map((val, i) => (
-              <div className="col" key={i}>
-                <div className="instructor-item">
-                  <div className="instructor-inner">
-                    <div className="instructor-thumb">
-                      <img src={val.imgUrl} alt={val.imgAlt} />
-                    </div>
-                    <div className="instructor-content">
-                      <Link to="/team-single">
-                        <h4>{val.name}</h4>
-                      </Link>
-                      <p>{val.degi}</p>
-                      <Rating />
 
-                      {/* Render the technical skills */}
-                      <ul className="skills-list">
-                        {val.skills.map((skill, index) => (
-                          <li key={index}>{skill}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="instructor-footer">
-                    <ul className="lab-ul d-flex flex-wrap justify-content-between align-items-center">
-                      <li>
-                        <i className="icofont-book-alt"></i> {val.courseCount}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {instructorList.map((val, i) => (
+            <div key={i}>
+              <Card
+                hoverable
+                cover={<img alt={val.imgAlt} src={val.imgUrl} />}
+                className="shadow-lg rounded-lg border border-gray-200"
+              >
+                <div className="text-center mb-4">
+                  <Link to="/team-single">
+                    <h4 className="text-xl font-semibold text-gray-800">
+                      {val.name}
+                    </h4>
+                  </Link>
+                  <p className="text-gray-500 text-sm">{val.degi}</p>
+                  <Rate
+                    disabled
+                    defaultValue={4}
+                    className="mt-2 text-yellow-400"
+                  />
+                </div>
+
+                <div>
+                  {/* Skills */}
+                  <ul className="flex flex-wrap justify-center gap-2 mb-4">
+                    {val.skills.map((skill, index) => (
+                      <li
+                        key={index}
+                        className="text-xs font-semibold text-gray-600 bg-gray-200 py-1 px-3 rounded-full"
+                      >
+                        {skill}
                       </li>
-                      <li>
-                        <i className="icofont-users-alt-3"></i>{" "}
-                        {val.studentAnroll}
-                      </li>
-                    </ul>
+                    ))}
+                  </ul>
+                  <div className="flex justify-between text-sm text-gray-500">
+                    <span>
+                      <i className="icofont-book-alt mr-1"></i>{" "}
+                      {val.courseCount}
+                    </span>
+                    <span>
+                      <i className="icofont-users-alt-3 mr-1"></i>{" "}
+                      {val.studentAnroll}
+                    </span>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center footer-btn">
-            <p>
-              Want to help people learn, grow and achieve more in life?
-              <Link style={{ color: "#26C976" }} to="/team">
-                Become an instructor
-              </Link>
-            </p>
-          </div>
+              </Card>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <p className="text-gray-700">
+            Want to help people learn, grow, and achieve more in life?{" "}
+            <Link to="/team" className="text-green-500 font-semibold">
+              Become an instructor
+            </Link>
+          </p>
         </div>
       </div>
     </div>

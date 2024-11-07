@@ -1,13 +1,11 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
 import instructorImg1 from "../../src/assets/images/instructor1.png";
 import instructorImg2 from "../../src/assets/images/instructor2.jpg";
 import instructorImg3 from "../../src/assets/images/instructor3.png";
 import instructorImg4 from "../../src/assets/images/instructor4.jpg";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
-import PageHeader from "../component/layout/pageheader";
-import Rating from "../component/sidebar/rating";
+import Instructor from "../component/section/instructor";
 
 const instructorList = [
   {
@@ -71,11 +69,11 @@ const TeamPage = () => {
   return (
     <Fragment>
       <Header />
-      <PageHeader title={"All Team Members"} curPage={"Team"} />
+
       <div className="instructor-section padding-tb section-bg">
         <div className="container">
           <div className="section-wrapper">
-            <div className="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+            {/* <div className="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
               {instructorList.map((instructor) => (
                 <div className="col" key={instructor.id}>
                   <div className="instructor-item">
@@ -110,8 +108,9 @@ const TeamPage = () => {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
 
+            <Instructor />
             <div className="achieve-part mt-5">
               <div className="row g-4 row-cols-1 row-cols-lg-2">
                 {achieveList.map((achievement, index) => (

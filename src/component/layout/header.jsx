@@ -212,29 +212,41 @@ const Header = () => {
               </div>
               {auth?.authenticate === true ? (
                 <Link
-                  style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                  style={{
+                    backgroundColor: "#26C976",
+                    color: "#FFFFFF",
+                    borderRadius: "10px",
+                  }}
                   onClick={handleLogout}
                   to="/login"
                   className="signup"
                 >
                   <i className="icofont-user"></i>{" "}
-                  <span style={{ color: "white" }}>LOG OUT</span>
+                  <span className="text-sm" style={{ color: "white" }}>
+                    Logout
+                  </span>
                 </Link>
               ) : (
                 <>
-                  <Link to="/login" className="login">
+                  <Link to="/login">
                     <i
                       style={{ color: "#26C976" }}
                       className="icofont-user"
                     ></i>{" "}
-                    <span style={{ color: "#26C976" }}>LOG IN</span>
+                    <span style={{ color: "#26C976" }}>Login</span>
                   </Link>
+                  <div className="h-8 w-[0.5px] border border-black mx-2"></div>
                   <Link
-                    style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                    style={{
+                      backgroundColor: "#26C976",
+                      color: "#FFFFFF",
+                      borderRadius: "10px",
+                    }}
                     to="/signup"
-                    className="signup"
+                    className="text-md p-2"
                   >
-                    <i className="icofont-users"></i> <span>SIGN UP</span>
+                    <i className="icofont-users"></i>{" "}
+                    <span className="text-sm">Register</span>
                   </Link>
                 </>
               )}
