@@ -37,44 +37,52 @@ function VideoPlayer({
   // Play/Pause toggle
   const handlePlayAndPause = () => {
     setPlaying(!playing);
-    autoPlay = !autoPlay;
+    autoPlay = false;
   };
 
   // Progress tracking (for slider)
   const handleProgress = (state) => {
     if (!seeking) {
       setPlayed(state.played);
+      autoPlay = false;
     }
   };
 
   // Rewind and forward buttons
   const handleRewind = () => {
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() - 5);
+    autoPlay = false;
   };
 
   const handleForward = () => {
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() + 5);
+    autoPlay = false;
   };
 
   // Toggle mute
   const handleToggleMute = () => {
     setMuted(!muted);
+    autoPlay = false;
   };
 
   // Seeking controls
   const handleSeekChange = (newValue) => {
     setPlayed(newValue[0]);
     setSeeking(true);
+    autoPlay = false;
   };
 
   const handleSeekMouseUp = () => {
     setSeeking(false);
     playerRef.current?.seekTo(played);
+    autoPlay = false;
   };
 
   // Volume control
   const handleVolumeChange = (newValue) => {
     setVolume(newValue[0]);
+    playerRef.current?.setVolume(volume);
+    autoPlay = false;
   };
 
   // Formatting time
