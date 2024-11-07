@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import Footer from "../component/layout/footer";
+import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
 import PageHeader from "../component/layout/pageheader";
 import Achievement from "../component/section/achievement";
@@ -89,7 +89,7 @@ const InstructorPage = () => {
       </div>
       <Student />
       <Achievement />
-      <Footer />
+      <Footer2 />
     </Fragment>
   );
 };

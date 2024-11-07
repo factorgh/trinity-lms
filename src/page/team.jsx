@@ -1,50 +1,10 @@
 import { Fragment } from "react";
 import instructorImg1 from "../../src/assets/images/instructor1.png";
 import instructorImg2 from "../../src/assets/images/instructor2.jpg";
-import instructorImg3 from "../../src/assets/images/instructor3.png";
-import instructorImg4 from "../../src/assets/images/instructor4.jpg";
-import Footer from "../component/layout/footer";
+
+import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
 import Instructor from "../component/section/instructor";
-
-const instructorList = [
-  {
-    imgUrl: instructorImg1,
-    imgAlt: "instructor Emilee Logan",
-    name: "Emilee Logan",
-    degi: "Master of Computer Science",
-    courseCount: "08 courses",
-    studentAnroll: "30 students",
-    skills: ["JavaScript", "React", "Node.js"], // Technical info
-  },
-  {
-    imgUrl: instructorImg2,
-    imgAlt: "instructor Donald Logan",
-    name: "Donald Logan",
-    degi: "Master of Data Systems",
-    courseCount: "08 courses",
-    studentAnroll: "30 students",
-    skills: ["Python", "Django", "Machine Learning"], // Technical info
-  },
-  {
-    imgUrl: instructorImg3,
-    imgAlt: "instructor Oliver Porter",
-    name: "Oliver Porter",
-    degi: "Master of Info Systems",
-    courseCount: "08 courses",
-    studentAnroll: "30 students",
-    skills: ["UI/UX Design", "Photoshop", "Figma"], // Technical info
-  },
-  {
-    imgUrl: instructorImg4,
-    imgAlt: "instructor Nahla Jones",
-    name: "Nahla Jones",
-    degi: "Master of MicroServices",
-    courseCount: "08 courses",
-    studentAnroll: "30 students",
-    skills: ["Java", "Spring Boot", "Microservices"], // Technical info
-  },
-];
 
 const achieveList = [
   {
@@ -139,7 +99,7 @@ const TeamPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer2 />
     </Fragment>
   );
 };

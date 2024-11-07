@@ -34,7 +34,7 @@ const Course = () => {
   };
 
   return (
-    <div className="course-section  section-bg py-20 mb-5">
+    <div className="course-section section-bg py-20 mb-5">
       <div className="w-full px-4 mx-auto">
         <div className="section-header text-center mb-10">
           <span
@@ -55,8 +55,8 @@ const Course = () => {
           <div className="p-4 my-10">
             {/* Swiper Component for Courses */}
             <Swiper
-              spaceBetween={20} // Space between slides
-              slidesPerView={1} // Default number of visible slides
+              spaceBetween={20}
+              slidesPerView={1}
               breakpoints={{
                 320: {
                   slidesPerView: 1, // On small screens, show 1 course at a time
@@ -91,21 +91,10 @@ const Course = () => {
             </Swiper>
 
             {/* Custom Pagination and Navigation Controls */}
-            <div className="swiper-pagination mt-4">
-              <style jsx>{`
-                /* Custom Tailwind styles for pagination bullets */
-                .swiper-pagination-bullet {
-                  @apply bg-red-500 w-3 h-3 rounded-full mx-1;
-                }
-                .swiper-pagination-bullet-active {
-                  @apply bg-green-700; /* Active bullet color */
-                }
-              `}</style>
-            </div>
-
-            {/* Optional navigation buttons */}
-            {/* <div className="swiper-button-next"></div>
-            <div className="swiper-button-prev"></div> */}
+            <div className="swiper-pagination mt-4"></div>
+            {/* Add navigation buttons */}
+            <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div>
           </div>
         )}
       </div>

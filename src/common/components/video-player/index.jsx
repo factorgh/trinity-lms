@@ -1,7 +1,4 @@
 import { Button, Slider, Spin } from "antd"; // Import Ant Design's Spin component
-import { useCallback, useEffect, useRef, useState } from "react";
-import ReactPlayer from "react-player";
-
 import {
   Maximize,
   Minimize,
@@ -12,23 +9,25 @@ import {
   Volume2,
   VolumeX,
 } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import ReactPlayer from "react-player";
 
 function VideoPlayer({
   width = "100%",
   height = "100%",
   url,
-
-  autoPlay = true,
+  autoPlay = true, // autoPlay prop defaults to true
   onVideoEnd,
 }) {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(autoPlay); // Set initial playing state based on autoPlay
   const [volume, setVolume] = useState(0.5);
   const [muted, setMuted] = useState(false);
   const [played, setPlayed] = useState(0);
   const [seeking, setSeeking] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [loading, setLoading] = useState(true); // New loading state
+  const [loading, setLoading] = useState(true); // Loading state
+  const [userInteracted, setUserInteracted] = useState(false); // Track user interaction
 
   const playerRef = useRef(null);
   const playerContainerRef = useRef(null);
@@ -36,53 +35,53 @@ function VideoPlayer({
 
   // Play/Pause toggle
   const handlePlayAndPause = () => {
-    setPlaying(!playing);
-    autoPlay = false;
+    setPlaying(!playing); // Toggle playing state
+    setUserInteracted(true); // Mark as interacted
   };
 
   // Progress tracking (for slider)
   const handleProgress = (state) => {
     if (!seeking) {
       setPlayed(state.played);
-      autoPlay = false;
+      setUserInteracted(true); // Mark as interacted
     }
   };
 
   // Rewind and forward buttons
   const handleRewind = () => {
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() - 5);
-    autoPlay = false;
+    setUserInteracted(true); // Mark as interacted
   };
 
   const handleForward = () => {
     playerRef?.current?.seekTo(playerRef?.current?.getCurrentTime() + 5);
-    autoPlay = false;
+    setUserInteracted(true); // Mark as interacted
   };
 
   // Toggle mute
   const handleToggleMute = () => {
     setMuted(!muted);
-    autoPlay = false;
+    setUserInteracted(true); // Mark as interacted
   };
 
   // Seeking controls
   const handleSeekChange = (newValue) => {
     setPlayed(newValue[0]);
     setSeeking(true);
-    autoPlay = false;
+    setUserInteracted(true); // Mark as interacted
   };
 
   const handleSeekMouseUp = () => {
     setSeeking(false);
     playerRef.current?.seekTo(played);
-    autoPlay = false;
+    setUserInteracted(true); // Mark as interacted
   };
 
   // Volume control
   const handleVolumeChange = (newValue) => {
     setVolume(newValue[0]);
     playerRef.current?.setVolume(volume);
-    autoPlay = false;
+    setUserInteracted(true); // Mark as interacted
   };
 
   // Formatting time
@@ -163,7 +162,7 @@ function VideoPlayer({
         width="100%"
         height="100%"
         url={url}
-        playing={playing || autoPlay} // Use autoplay prop
+        playing={playing} // Use state-based playing (controlled by user interaction)
         volume={volume}
         muted={muted}
         onProgress={handleProgress}

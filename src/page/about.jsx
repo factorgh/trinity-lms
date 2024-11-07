@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import Footer from "../component/layout/footer";
+import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
 import AchievementTwo from "../component/section/achievement-2";
 import Instructor from "../component/section/instructor";
@@ -99,7 +99,7 @@ const AboutPage = () => {
       <Skill />
       <AchievementTwo />
       {/* <Blog /> */}
-      <Footer />
+      <Footer2 />
     </Fragment>
   );
 };

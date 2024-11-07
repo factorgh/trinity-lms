@@ -12,12 +12,12 @@ const HeroSection = ({ course }) => {
         </h1>
         <p className="text-sm text-gray-600 mb-8">{course?.description}</p>
         {/* CTA Button */}
-        <a
+        {/* <a
           href="#courses"
-          className="bg-emerald-400 text-white py-3 px-6 rounded-lg text-lg font-semibold shadow-lg hover:bg-green-700 transition duration-300"
+          className="bg-emerald-400 text-white py-3 px-6 rounded-lg text-lg font-semibold shadow-lg hover:bg-green-700 transition duration-300 hidden md:block"
         >
           Start Learning Today
-        </a>
+        </a> */}
       </div>
 
       {/* Right Image Section */}

@@ -3,63 +3,24 @@ import { Link } from "react-router-dom";
 const newsTitle = "Want Us To Email You About Special Offers And Updates?";
 const siteTitle = "Site Map";
 const useTitle = "Useful Links";
-const socialTitle = "Social Contact";
+
 const supportTitle = "Our Support";
 
 const siteList = [
-  {
-    text: "Documentation",
-    link: "#",
-  },
-  {
-    text: "Feedback",
-    link: "#",
-  },
-  {
-    text: "Plugins",
-    link: "#",
-  },
+  { text: "Documentation", link: "#" },
+  { text: "Feedback", link: "#" },
+  { text: "Plugins", link: "#" },
 ];
 
 const useList = [
-  {
-    text: "About Us",
-    link: "#",
-  },
-  {
-    text: "Terms & Conditions",
-    link: "#",
-  },
-  {
-    text: "Contact Us",
-    link: "#",
-  },
-];
-
-const socialList = [
-  {
-    text: "Facebook",
-    link: "#",
-  },
-  {
-    text: "Twitter",
-    link: "#",
-  },
-  {
-    text: "Instagram",
-    link: "#",
-  },
+  { text: "About Us", link: "#" },
+  { text: "Terms & Conditions", link: "#" },
+  { text: "Contact Us", link: "#" },
 ];
 
 const supportList = [
-  {
-    text: "Help Center",
-    link: "#",
-  },
-  {
-    text: "Contact Support",
-    link: "#",
-  },
+  { text: "Help Center", link: "#" },
+  { text: "Contact Support", link: "#" },
 ];
 
 const Footer = () => {
@@ -83,7 +44,7 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+                className="px-6 py-3 text-green-700 bg-green-600  rounded-lg hover:bg-green-700 transition duration-300"
               >
                 Subscribe Now
               </button>
@@ -125,25 +86,6 @@ const Footer = () => {
                       <a
                         href={val.link}
                         className="text-gray-400 hover:text-green-500 transition duration-200"
-                      >
-                        {val.text}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Social Links */}
-              <div className="footer-item">
-                <h4 className="text-lg font-semibold mb-4 text-gray-200">
-                  {socialTitle}
-                </h4>
-                <ul>
-                  {socialList.map((val, i) => (
-                    <li key={i} className="mb-2">
-                      <a
-                        href={val.link}
-                        className="text-gray-200 hover:text-green-500 transition duration-200"
                       >
                         {val.text}
                       </a>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CourseCard from "../common/components/ui/course-card";
 import { StudentContext } from "../common/context/student-context";
 import { fetchStudentViewCourseListService } from "../common/services";
-import Footer from "../component/layout/footer";
+import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
 import BannerFour from "../component/section/banner-4";
 import SkillSelect from "../component/sidebar/skill-select";
@@ -139,7 +139,7 @@ const CoursePage = () => {
       </div>
 
       {/* Footer Section */}
-      <Footer />
+      <Footer2 />
     </Fragment>
   );
 };

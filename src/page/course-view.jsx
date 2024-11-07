@@ -15,7 +15,6 @@ const CourseView = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const { state } = useLocation();
   const course = state?.courseDetails;
-  console.log(course, "course");
 
   const [currentLecture, setCurrentLecture] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -24,62 +23,41 @@ const CourseView = () => {
   useEffect(() => {
     if (course?.curriculum && course?.curriculum.length > 0) {
       setCurrentLecture(course.curriculum[0]);
-      // Show confetti when the first video is ready to play
       setShowConfetti(true);
-
-      // Hide confetti after 3 seconds
-      setTimeout(() => {
-        setShowConfetti(false);
-      }, 5000);
+      setTimeout(() => setShowConfetti(false), 5000);
     }
   }, [course?.curriculum]);
-
-  useEffect(() => {
-    if (showConfetti) setTimeout(() => setShowConfetti(false), 15000);
-  }, [showConfetti]);
 
   // Handle lecture change when clicking on a new video from the list
   const handleLectureChange = (item) => {
     setLoading(true);
     setCurrentLecture(item);
-
-    // Show confetti before the new video starts playing
     setShowConfetti(true);
-
     setTimeout(() => {
       setLoading(false);
-      setShowConfetti(false); // Hide confetti after some time
+      setShowConfetti(false);
     }, 1000);
   };
 
   // Function to handle the next video when current video ends
   const handleNextVideo = () => {
-    // Find the index of the current video in the curriculum
     const currentIndex = course?.curriculum.findIndex(
       (lecture) => lecture._id === currentLecture?._id
     );
-
-    // Get the next lecture (if it exists)
     const nextLecture = course?.curriculum[currentIndex + 1];
 
     if (nextLecture) {
-      // If there's a next lecture, update the currentLecture state
       setCurrentLecture(nextLecture);
     } else {
-      // If no more lectures, you can either reset to the first or stop
-      // setCurrentLecture(course?.curriculum[0]); // Uncomment to loop to the first video
       console.log("No more lectures");
     }
   };
 
   return (
     <Fragment>
-      {/* Confetti will show if showConfetti is true */}
       {showConfetti && <Confetti />}
 
       <Header />
-
-      {/* Hero Section */}
       <HeroSection course={course} />
 
       {/* Course Info Section */}
@@ -91,28 +69,33 @@ const CourseView = () => {
             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
             borderRadius: "8px",
           }}
-          className="p-3 bg-white shadow-lg hidden md:block"
+          className="p-3 bg-white shadow-lg"
         >
-          <div className="flex gap-3 justify-around items-center">
-            <div className="course-info-item">
+          <div className="flex flex-wrap gap-3 justify-between items-center">
+            <div className="course-info-item w-full sm:w-auto">
               <h4 className="font-semibold text-lg">Level</h4>
               <p className="text-gray-600 text-sm text-mono">{course?.level}</p>
             </div>
 
             <Divider className="h-12" type="vertical" />
-            <div className="course-info-item">
+
+            <div className="course-info-item w-full sm:w-auto">
               <h4 className="font-semibold text-lg">Duration</h4>
               <p className="text-gray-600 text-sm text-mono">6 Weeks</p>
             </div>
+
             <Divider className="h-12" type="vertical" />
-            <div className="course-info-item">
+
+            <div className="course-info-item w-full sm:w-auto">
               <h4 className="font-semibold text-lg">Language</h4>
               <p className="text-gray-600 text-sm text-mono">
                 {course?.primaryLanguage}
               </p>
             </div>
-            <Divider className="h-12 text-slate-900" type="vertical" />
-            <div className="course-info-item">
+
+            <Divider className="h-12" type="vertical" />
+
+            <div className="course-info-item w-full sm:w-auto">
               <h4 className="font-semibold text-lg">Price</h4>
               <p className="text-gray-600 text-sm text-mono">Free</p>
             </div>
@@ -127,7 +110,7 @@ const CourseView = () => {
             <div className="col-12">
               <div className="course-view">
                 <div className="row justify-content-center">
-                  <div className="col-lg-8 col-12">
+                  <div className="col-12 col-lg-8">
                     <div className="video-part mb-4 mb-lg-0">
                       <div className="vp-title mb-4">
                         <h3>{course?.subtitle}</h3>
@@ -140,8 +123,8 @@ const CourseView = () => {
                             width="100%"
                             height="500px"
                             url={currentLecture?.videoUrl}
-                            autoplay={true}
-                            onVideoEnd={handleNextVideo} // Handle next video when this ends
+                            autoplay
+                            onVideoEnd={handleNextVideo}
                           />
                         )}
                       </div>
@@ -161,7 +144,7 @@ const CourseView = () => {
                   </div>
 
                   {/* Course Outline Section */}
-                  <div className="col-lg-4 col-sm-8 col-12">
+                  <div className="col-12 col-lg-4">
                     <div className="video-list-area">
                       <div className="course-select-area border-radius-12">
                         <div className="csa-title mb-4 ml-5">
@@ -177,8 +160,7 @@ const CourseView = () => {
                                   currentLecture?._id === item._id
                                     ? "bg-green-500 text-white"
                                     : "bg-gray-200 text-black"
-                                }
-                              `}
+                                }`}
                             >
                               {currentLecture?._id === item._id ? (
                                 <CheckCircle className="h-4 w-4" />
@@ -194,7 +176,6 @@ const CourseView = () => {
                   </div>
                 </div>
 
-                {/* Add a divider */}
                 <Divider className="my-12" />
 
                 {/* FAQ Section */}
@@ -227,35 +208,12 @@ const CourseView = () => {
                   </Collapse>
                 </div>
 
-                {/* Call-to-Action Section */}
-
-                {/* Related Courses Section */}
                 <div className="related-courses">
                   <h3 className="text-2xl font-mono mb-6 ">
                     Related courses coming soon ...
                   </h3>
                   <div className="flex gap-6">
                     {/* Add cards for related courses */}
-                    {/* <Card
-                      title="Advanced React"
-                      bordered={false}
-                      className="w-1/3 shadow-lg"
-                    >
-                      <p>
-                        Learn advanced React concepts and enhance your front-end
-                         skills.
-                      </p>
-                    </Card>
-                    <Card
-                      title="JavaScript for Beginners"
-                      bordered={false}
-                      className="w-1/3 shadow-lg"
-                    >
-                      <p>
-                        Start with the fundamentals of JavaScript and become a
-                        full-stack developer.
-                      </p>
-                    </Card> */}
                   </div>
                 </div>
               </div>
