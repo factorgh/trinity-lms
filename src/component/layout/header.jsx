@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/logofinal.jpeg";
@@ -35,8 +34,6 @@ const Header = () => {
   const [socialToggle, setSocialToggle] = useState(false);
   const [headerFixed, setHeaderFixed] = useState(false);
   const { auth, setAuth } = useContext(AuthContext);
-  console.log("----------------------header--------------------");
-  console.log(auth);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,8 +62,8 @@ const Header = () => {
     >
       <div className={`header-top ${socialToggle ? "open" : ""}`}>
         <div className="container">
-          <div className="header-top-area">
-            <ul className="lab-ul left">
+          <div className="header-top-area flex justify-between items-center">
+            <ul className="lab-ul left flex space-x-4">
               <li>
                 <i className="icofont-ui-call"></i> <span>{phoneNumber}</span>
               </li>
@@ -74,15 +71,13 @@ const Header = () => {
                 <i className="icofont-location-pin"></i> {address}
               </li>
             </ul>
-            <ul className="lab-ul social-icons d-flex align-items-center">
+            <ul className="lab-ul social-icons flex space-x-4 items-center">
               <li>
                 <p>Find us on:</p>
               </li>
               {socialList.map((val, i) => (
                 <li key={i}>
                   <a className="text-emerald-500" href={val.siteLink}>
-                    {" "}
-                    {/* Use an appropriate Tailwind color */}
                     <i
                       style={{ color: "#26C976" }}
                       className={val.iconName}
@@ -94,14 +89,17 @@ const Header = () => {
           </div>
         </div>
       </div>
+
       <div className="header-bottom">
         <div className="container">
-          <div className="header-wrapper">
-            <div className="logo">
+          <div className="header-wrapper flex justify-between items-center">
+            {/* Logo */}
+            <div className="hidden lg:block">
               <Link to="/">
                 <img width={60} height={60} src={logoImg} alt="logo" />
               </Link>
             </div>
+            {/* Menu */}
             <div className="menu-area">
               <div className="menu">
                 <ul className={`lab-ul ${menuToggle ? "active" : ""}`}>
@@ -114,8 +112,6 @@ const Header = () => {
                         style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
                         className="lab-ul dropdown-menu "
                       >
-                        {/* Add NavLink items here */}
-
                         <li>
                           <NavLink
                             className="text-white"
@@ -131,37 +127,7 @@ const Header = () => {
                     <a href="/course" role="button">
                       Courses
                     </a>
-                    {/* <ul className="lab-ul dropdown-menu">
-                      <li>
-                        <NavLink to="/course">Course</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/course-single">Course Details</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/course-view">Course View</NavLink>
-                      </li>
-                    </ul> */}
                   </li>
-                  {/* <li className="menu-item-has-children">
-                    <a href="#" role="button">
-                      Blog
-                    </a>
-                    <ul className="lab-ul dropdown-menu">
-                      <li>
-                        <NavLink to="/blog">Blog Grid</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/blog-2">Blog Style 2</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/blog-3">Blog Style 3</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/blog-single">Blog Single</NavLink>
-                      </li>
-                    </ul>
-                  </li> */}
                   <li className="menu-item-has-children">
                     <a href="#" role="button">
                       Who we are
@@ -185,24 +151,6 @@ const Header = () => {
                           Instructor
                         </NavLink>
                       </li>
-                      {/* <li>
-                        <NavLink to="/shop">Shop Page</NavLink>
-                      </li> */}
-                      {/* <li>
-                        <NavLink to="/shop-single">Shop Details Page</NavLink>
-                      </li> */}
-                      {/* <li>
-                        <NavLink to="/cart-page">Shop Cart Page</NavLink>
-                      </li> */}
-                      {/* <li>
-                        <NavLink to="/search-page">Search Page</NavLink>
-                      </li> */}
-                      {/* <li>
-                        <NavLink to="/search-none">Search None</NavLink>
-                      </li> */}
-                      {/* <li>
-                        <NavLink to="/404">404</NavLink>
-                      </li> */}
                     </ul>
                   </li>
                   <li>
@@ -250,20 +198,26 @@ const Header = () => {
                   </Link>
                 </>
               )}
-              <div
-                className={`header-bar d-lg-none ${menuToggle ? "active" : ""}`}
-                onClick={() => setMenuToggle(!menuToggle)}
-              >
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div
-                className="ellepsis-bar d-lg-none"
-                onClick={() => setSocialToggle(!socialToggle)}
-              >
-                <i className="icofont-info-square"></i>
-              </div>
+            </div>
+
+            {/* Hamburger Icon */}
+            <div
+              className={`header-bar lg:hidden ml-auto ${
+                menuToggle ? "active" : ""
+              }`}
+              onClick={() => setMenuToggle(!menuToggle)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            {/* Social Info Toggle */}
+            <div
+              className="ellepsis-bar lg:hidden"
+              onClick={() => setSocialToggle(!socialToggle)}
+            >
+              <i className="icofont-info-square hidden lg:block"></i>
             </div>
           </div>
         </div>

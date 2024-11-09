@@ -7,7 +7,7 @@ import { fetchStudentViewCourseListService } from "../common/services";
 import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
 import BannerFour from "../component/section/banner-4";
-import SkillSelect from "../component/sidebar/skill-select";
+import CourseSortSelect from "../component/sidebar/skill-select";
 
 // New professional course page with FAQ and course details
 const { Panel } = Collapse; // Import Collapse Panel from Ant Design
@@ -61,15 +61,15 @@ const CoursePage = () => {
                 </div>
                 <div className="d-flex flex-wrap align-items-center justify-content-between mb-6">
                   <div className="course-showing-part-left">
-                    <p className="text-sm">
+                    {/* <p className="text-sm">
                       Showing 1-{studentViewCoursesList.length} of{" "}
                       {studentViewCoursesList.length} results
-                    </p>
+                    </p> */}
                   </div>
                   <div className="course-showing-part-right d-flex flex-wrap align-items-center">
                     <span className="mr-2 text-sm">Sort by:</span>
                     <div className="select-item">
-                      <SkillSelect select={"all"} />
+                      <CourseSortSelect />
                       <div className="select-icon">
                         <i className="icofont-rounded-down"></i>
                       </div>

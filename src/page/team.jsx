@@ -71,7 +71,7 @@ const TeamPage = () => {
             </div> */}
 
             <Instructor />
-            <div className="achieve-part mt-5">
+            {/* <div className="achieve-part mt-5">
               <div className="row g-4 row-cols-1 row-cols-lg-2">
                 {achieveList.map((achievement, index) => (
                   <div className="col" key={index}>
@@ -95,7 +95,7 @@ const TeamPage = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

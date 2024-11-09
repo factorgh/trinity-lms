@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
-import PageHeader from "../component/layout/pageheader";
 import GoogleMap from "../component/sidebar/googlemap";
 
 const subTitle = "Get in touch with us";
@@ -31,98 +30,164 @@ const contactList = [
     title: "Send email",
     desc: "info@creationconsult.com",
   },
-  //   {
-  //     imgUrl: "assets/images/icon/04.png",
-  //     imgAlt: "contact icon",
-  //     title: "Our website",
-  //     desc: "www.edukon.com",
-  //   },
 ];
 
 const ContactPage = () => {
   return (
     <Fragment>
       <Header />
-      <PageHeader title={"Get In Touch With Us"} curPage={"Contact Us"} />
-      <div className="map-address-section padding-tb section-bg">
-        <div className="container">
-          <div className="section-header text-center">
-            <span style={{ color: "#26C976" }} className="subtitle">
+      <div className="banner-section style"></div>
+
+      {/* Map and Contact Info Section */}
+      <div className="map-address-section py-16 bg-gray-50">
+        <div className="container mx-auto">
+          <div className="section-header text-center mb-12">
+            <span className="text-lg font-semibold text-green-500">
               {subTitle}
             </span>
-            <h2 className="title">{title}</h2>
+            <h2 className="text-3xl font-extrabold text-gray-800 mt-2">
+              {title}
+            </h2>
           </div>
-          <div className="section-wrapper">
-            <div className="row flex-row-reverse">
-              <div className="col-xl-4 col-lg-5 col-12">
-                <div className="contact-wrapper">
-                  {contactList.map((val, i) => (
-                    <div className="contact-item" key={i}>
-                      <div className="contact-thumb">
-                        <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
-                      </div>
-                      <div className="contact-content">
-                        <h6 className="title">{val.title}</h6>
-                        <p>{val.desc}</p>
-                      </div>
+          <div className="flex flex-wrap justify-between">
+            <div className="lg:w-1/3 w-full px-4 mb-8 lg:mb-0">
+              <div className="space-y-8">
+                {contactList.map((val, i) => (
+                  <div key={i} className="flex items-center space-x-4">
+                    <img
+                      src={val.imgUrl}
+                      alt={val.imgAlt}
+                      className="w-8 h-8"
+                    />
+                    <div>
+                      <h6 className="text-lg font-semibold text-gray-800">
+                        {val.title}
+                      </h6>
+                      <p className="text-gray-600">{val.desc}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-              <div className="col-xl-8 col-lg-7 col-12">
-                <GoogleMap />
-              </div>
+            </div>
+            <div className="lg:w-2/3 w-full px-4">
+              <GoogleMap />
             </div>
           </div>
         </div>
       </div>
-      <div className="contact-section padding-tb">
-        <div className="container">
-          <div className="section-header text-center">
-            <span className="subtitle">{conSubTitle}</span>
-            <h2 className="title">{conTitle}</h2>
+
+      {/* Contact Form Section */}
+      <div className="contact-section py-16">
+        <div className="container mx-auto">
+          <div className="section-header text-center mb-12">
+            <span className="text-lg font-semibold text-green-500">
+              {conSubTitle}
+            </span>
+            <h2 className="text-3xl font-extrabold text-gray-800 mt-2">
+              {conTitle}
+            </h2>
           </div>
-          <div className="section-wrapper">
-            <form className="contact-form">
-              <div className="form-group">
-                <input type="text" name="name" placeholder="Your Name *" />
-              </div>
-              <div className="form-group">
-                <input type="text" name="email" placeholder="Your Email *" />
-              </div>
-              <div className="form-group">
+          <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <form className="space-y-8">
+              {/* Name Field */}
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-lg font-semibold text-gray-700"
+                >
+                  Your Name *
+                </label>
                 <input
                   type="text"
-                  name="number"
-                  placeholder="Mobile Number *"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your full name"
+                  className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
-              <div className="form-group">
+
+              {/* Email Field */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-lg font-semibold text-gray-700"
+                >
+                  Your Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email address"
+                  className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                />
+              </div>
+
+              {/* Phone Field */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-lg font-semibold text-gray-700"
+                >
+                  Mobile Number *
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Enter your mobile number"
+                  className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                />
+              </div>
+
+              {/* Subject Field */}
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-lg font-semibold text-gray-700"
+                >
+                  Your Subject *
+                </label>
                 <input
                   type="text"
+                  id="subject"
                   name="subject"
-                  placeholder="Your Subject *"
+                  placeholder="Subject of your message"
+                  className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
-              <div className="form-group w-100">
+
+              {/* Message Field */}
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-lg font-semibold text-gray-700"
+                >
+                  Your Message
+                </label>
                 <textarea
-                  rows="8"
-                  type="text"
-                  placeholder="Your Message"
+                  id="message"
+                  name="message"
+                  rows="6"
+                  placeholder="Enter your message here"
+                  className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                 ></textarea>
               </div>
-              <div className="form-group w-100 text-center">
+
+              {/* Submit Button */}
+              <div className="text-center">
                 <button
-                  style={{ backgroundColor: "#26C976" }}
-                  className="lab-btn"
+                  type="submit"
+                  className="bg-emerald-500 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
                 >
-                  <span style={{ color: "white" }}>{btnText}</span>
+                  {btnText}
                 </button>
               </div>
             </form>
           </div>
         </div>
       </div>
+
       <Footer2 />
     </Fragment>
   );

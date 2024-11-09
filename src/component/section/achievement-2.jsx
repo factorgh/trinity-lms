@@ -26,11 +26,13 @@ const AchievementTwo = () => {
   return (
     <div className="achievement-section padding-tb">
       <div className="container">
-        <div className="section-header text-center">
-          <span style={{ color: "#26C976" }} className="subtitle">
+        <div className="section-header text-center mb-12">
+          <span className="text-lg font-semibold text-green-500">
             {subTitle}
           </span>
-          <h2 className="title">{title}</h2>
+          <h2 className="text-3xl font-extrabold text-gray-800 mt-2">
+            {title}
+          </h2>
         </div>
         <div className="counter-part mb-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">

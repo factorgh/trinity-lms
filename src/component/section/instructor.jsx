@@ -115,7 +115,7 @@ const Instructor = () => {
         <div className="text-center mt-8">
           <p className="text-gray-700">
             Want to help people learn, grow, and achieve more in life?{" "}
-            <Link to="/team" className="text-green-500 font-semibold">
+            <Link to="/instructor" className="text-green-500 font-semibold">
               Become an instructor
             </Link>
           </p>

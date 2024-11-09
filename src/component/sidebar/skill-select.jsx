@@ -1,18 +1,18 @@
-const SkillSelect = ({ select }) => {
+const CourseSortSelect = ({ select, onChange }) => {
   return (
-    <select className="p-2" defaultValue={select}>
-      <option value="all">All Skills</option>
-      <option value="html">HTML</option>
-      <option value="css">CSS</option>
-      <option value="php">PHP</option>
-      <option value="java">JAVA</option>
-      <option value="javascript">JAVASCRIPT</option>
-      <option value="wordpress">WORDPRESS</option>
-      <option value="react">REACT</option>
-      <option value="vue">VUE</option>
-      <option value="angular">ANGULAR</option>
+    <select
+      className="p-2 border border-gray-300 rounded-md text-sm"
+      defaultValue={select}
+      onChange={onChange} // Optional: If you need to handle selection changes
+    >
+      <option value="default">Sort by Default</option>
+      <option value="price-low-high">Price: Low to High</option>
+      <option value="price-high-low">Price: High to Low</option>
+      <option value="most-enrolled">Most Enrolled</option>
+      <option value="most-recent">Most Recent</option>
+      <option value="highest-rating">Highest Rating</option>
     </select>
   );
 };
 
-export default SkillSelect;
+export default CourseSortSelect;

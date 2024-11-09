@@ -1,23 +1,26 @@
 import { Spin } from "antd";
 import { Fragment, useContext, useState } from "react";
 import toast from "react-hot-toast";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPinterestP,
+  FaTwitter,
+} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import backgroundImg from "../../src/assets/images/home.jpg"; // Import your background image
+import logoImg from "../../src/assets/images/logofinal.jpeg"; // Import your logo image
 import { AuthContext } from "../common/context/auth-context";
 import { registerService } from "../common/services";
-import Footer from "../component/layout/footer";
-import Header from "../component/layout/header";
-import PageHeader from "../component/layout/pageheader";
 
-const title = "Register Now";
-const socialTitle = "Register With Social Media";
-const btnText = "Get Started Now";
-
-let socialList = [
-  { link: "#", iconName: "icofont-facebook", className: "facebook" },
-  { link: "#", iconName: "icofont-twitter", className: "twitter" },
-  { link: "#", iconName: "icofont-linkedin", className: "linkedin" },
-  { link: "#", iconName: "icofont-instagram", className: "instagram" },
-  { link: "#", iconName: "icofont-pinterest", className: "pinterest" },
+// Define social media login options
+const socialList = [
+  { link: "#", icon: <FaFacebookF className="text-blue-600" /> },
+  { link: "#", icon: <FaTwitter className="text-blue-400" /> },
+  { link: "#", icon: <FaLinkedinIn className="text-blue-700" /> },
+  { link: "#", icon: <FaInstagram className="text-pink-600" /> },
+  { link: "#", icon: <FaPinterestP className="text-red-600" /> },
 ];
 
 const SignupPage = () => {
@@ -39,7 +42,6 @@ const SignupPage = () => {
         userEmail,
         password,
       });
-      console.log(data, "datadatadatadatadata");
 
       if (data.success) {
         sessionStorage.setItem(
@@ -57,6 +59,7 @@ const SignupPage = () => {
           authenticate: false,
           user: null,
         });
+        toast.error("Registration failed");
       }
     } catch (error) {
       console.error(error);
@@ -68,82 +71,94 @@ const SignupPage = () => {
 
   return (
     <Fragment>
-      <Header />
-      <PageHeader title={"Register Now"} curPage={"Sign Up"} />
-      <div className="login-section padding-tb section-bg">
-        <div className="container">
-          <div className="account-wrapper">
-            <h3 className="title">{title}</h3>
-            <form onSubmit={handleSubmit} className="account-form">
-              <div className="form-group">
-                <input
-                  className="p-2"
-                  type="text"
-                  name="userName"
-                  placeholder="User Name"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="p-2"
-                  type="email"
-                  name="userEmail"
-                  placeholder="Email"
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="p-2"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <div className="form-group text-center">
-                  {loading ? (
-                    <Spin />
-                  ) : (
-                    <button
-                      style={{ backgroundColor: "#26C976" }}
-                      type="submit"
-                      className="d-block lab-btn"
-                      disabled={loading}
-                    >
-                      <span className="text-white">{btnText}</span>
-                    </button>
-                  )}
-                </div>
-              </div>
-            </form>
-            <div className="account-bottom">
-              <span className="d-block cate pt-10">
-                Are you a member? <Link to="/login">Login</Link>
-              </span>
-              <span style={{ backgroundColor: "#26C976" }} className="or">
-                <span>or</span>
-              </span>
-              <h5 className="subtitle">{socialTitle}</h5>
-              <ul className="lab-ul social-icons justify-content-center">
-                {socialList.map((val, i) => (
-                  <li key={i}>
-                    <a href={val.link} className={val.className}>
-                      <i className={val.iconName}></i>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+      <div className="flex h-screen bg-gradient-to-r from-blue-500 via-green-500 to-purple-500">
+        {/* Left side: Signup Form */}
+        <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8  bg-gradient-to-t from-slate-50">
+          <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+            <div className="flex items-center justify-center mb-10">
+              <img width={80} height={80} src={logoImg} alt="logo" />
             </div>
-          </div>
+
+            <div className="mb-4">
+              <input
+                className="w-full p-3 border border-gray-300 rounded-md"
+                type="text"
+                name="Ghana Card Number"
+                placeholder="Ghana Card Number"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                className="w-full p-3 border border-gray-300 rounded-md"
+                type="email"
+                name="userEmail"
+                placeholder="Email"
+                value={userEmail}
+                onChange={(e) => setUserEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-6">
+              <input
+                className="w-full p-3 border border-gray-300 rounded-md"
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mb-6 text-center">
+              {loading ? (
+                <Spin />
+              ) : (
+                <button
+                  type="submit"
+                  className="w-full p-3 bg-green-600 text-white rounded-md"
+                  disabled={loading}
+                >
+                  Get Started Now
+                </button>
+              )}
+            </div>
+            <div className="text-center">
+              <p className="text-sm">
+                Already have an account?{" "}
+                <Link to="/login" className="text-blue-600 ml-3">
+                  Login
+                </Link>
+              </p>
+            </div>
+            {/* Social login */}
+            <div className="mt-6 text-center">
+              <span className="text-sm text-gray-600">Or</span>
+              <div className="mt-4 flex justify-center space-x-4">
+                {socialList.map((social, i) => (
+                  <a
+                    href={social.link}
+                    className="text-2xl hover:text-gray-600"
+                    key={i}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </form>
+        </div>
+
+        {/* Right side: Background Image with Gradient Overlay */}
+        <div
+          className="hidden md:block w-1/2 bg-cover bg-center relative"
+          style={{
+            backgroundImage: `url(${backgroundImg})`, // Use the imported background image here
+          }}
+        >
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black opacity-80"></div>
         </div>
       </div>
-      <Footer />
     </Fragment>
   );
 };

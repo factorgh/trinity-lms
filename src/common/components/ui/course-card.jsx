@@ -1,4 +1,3 @@
-import { Rate } from "antd";
 import "antd/dist/reset.css";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -37,22 +36,22 @@ const CourseCard = ({ val, handleCourseView, i }) => {
             </Link>
           </div>
           <div className="flex items-center text-[0.5px] text-gray-600">
-            <Rate
+            {/* <Rate
               disabled
               defaultValue={val.rating}
               className="mr-1 sm:hidden"
-            />
+            /> */}
             <span>{val.reviewCount}</span>
           </div>
         </div>
 
         {/* Title */}
-        <Link
+        {/* <Link
           to="/course-single"
           className="text-xl font-semibold text-gray-800 mt-2 hover:text-[#26C976]"
         >
           {val.title}
-        </Link>
+        </Link> */}
 
         {/* Course Details */}
         <div className="flex justify-between mt-3 text-sm text-gray-600">

@@ -42,21 +42,23 @@ const AboutPage = () => {
   return (
     <Fragment>
       <Header />
-      <div className="pageheader-section"></div>
+      <div className="banner-section style"></div>
       <div className="about-section style-3 padding-tb section-bg">
         <div className="container">
           <div className="row justify-content-center row-cols-xl-2 row-cols-1 align-items-center">
             <div className="col">
               <div className="about-left">
                 <div className="about-thumb">
+                  {/* Reduced image size and added responsive styling */}
                   <img
-                    style={{ width: "80", height: "80%" }}
+                    className="img-fluid"
+                    style={{ maxWidth: "400px", height: "auto" }}
                     src={intstructorImg}
-                    alt="about"
+                    alt="Instructor"
                   />
                 </div>
                 <div className="abs-thumb">
-                  <img src={instImg} alt="about" />
+                  <img src={instImg} alt="Student" />
                 </div>
                 <div
                   style={{ backgroundColor: "#26C976" }}
@@ -72,7 +74,9 @@ const AboutPage = () => {
                 <div className="section-header">
                   <span className="subtitle">{subTitle}</span>
                   <h2 className="title">{title}</h2>
-                  <p>{desc}</p>
+                  <p style={{ fontSize: "15px" }} className="text-sm">
+                    {desc}
+                  </p>
                 </div>
                 <div className="section-wrapper">
                   <ul className="lab-ul">
@@ -96,8 +100,9 @@ const AboutPage = () => {
       </div>
       <Student />
       <Instructor />
-      <Skill />
+
       <AchievementTwo />
+      <Skill />
       {/* <Blog /> */}
       <Footer2 />
     </Fragment>

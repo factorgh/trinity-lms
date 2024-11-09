@@ -31,6 +31,7 @@ const About = () => {
     <div className="about-section">
       <div className="container">
         <div className="row justify-content-center row-cols-xl-2 row-cols-1 align-items-end flex-row-reverse">
+          {/* Right Section */}
           <div className="col">
             <div className="about-right padding-tb">
               <div className="section-header">
@@ -57,10 +58,17 @@ const About = () => {
               </div>
             </div>
           </div>
+
+          {/* Left Section with Image */}
           <div className="col">
             <div className="about-left">
               <div className="about-thumb">
-                <img src={myImage} alt="about" />
+                {/* Hide image on small screens */}
+                <img
+                  className="img-fluid d-none d-lg-block"
+                  src={myImage}
+                  alt="about"
+                />
               </div>
             </div>
           </div>

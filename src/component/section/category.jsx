@@ -39,58 +39,52 @@ const categoryList = [
   {
     imgUrl: "assets/images/category/icon/06.jpg",
     imgAlt: "category rajibraj91 rajibraj",
-    title: "Articficial Intelligence",
+    title: "Artificial Intelligence",
     count: "38 Course",
   },
 ];
 
 const Category = () => {
   return (
-    <div className="category-section padding-tb">
+    <div className="category-section py-10">
       <div className="container">
         <div className="section-header text-center mb-10">
-          <span
-            style={{ color: "#26C976" }}
-            className="subtitle text-lg font-semibold"
-          >
+          <span className="subtitle text-lg font-semibold text-emerald-600">
             {subTitle}
           </span>
           <h2 className="title text-3xl font-bold mt-2">{title}</h2>
         </div>
 
         <div className="section-wrapper">
-          <div className="grid grid-cols-3 gap-3">
+          {/* Responsive Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
             {categoryList.map((val, i) => (
-              <div className="col" key={i}>
-                <div className="category-item text-center">
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                    className="category-inner"
-                  >
-                    <div className="category-thumb">
-                      <img src={`${val.imgUrl}`} alt={val.imgAlt} />
-                    </div>
-                    <div className="category-content">
-                      <Link to="/course">
-                        <h6>{val.title}</h6>
-                      </Link>
-                      <span>{val.count}</span>
-                    </div>
+              <div className="category-item text-center" key={i}>
+                <div className="category-inner flex flex-col items-center justify-center">
+                  <div className="category-thumb">
+                    <img
+                      src={val.imgUrl}
+                      alt={val.imgAlt}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  <div className="category-content mt-4">
+                    <Link to="/course">
+                      <h6 className="text-xl font-semibold">{val.title}</h6>
+                    </Link>
+                    <span className="text-sm text-gray-500">{val.count}</span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-5 mb-">
+
+          {/* Browse All Button */}
+          <div className="text-center mt-6">
             <Link
               style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
               to="/course"
-              className="lab-btn"
+              className="lab-btn px-6 py-3 text-lg font-semibold rounded-md"
             >
               <span>{btnText}</span>
             </Link>

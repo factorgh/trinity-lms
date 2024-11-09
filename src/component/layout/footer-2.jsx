@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-
 const desc =
-  "Eduaid  number one world class e-learning platform in the world .There are student are studing always within this platform for all time.";
+  "Eduaid is the number one world-class e-learning platform. Thousands of students are always learning within this platform.";
+
 const courseTitle = "Courses";
+const courseTitleTwo = "Courses";
 
 const addressList = [
   {
@@ -53,7 +53,7 @@ const courseList = [
     link: "#",
   },
   {
-    text: "Forms and Admision materials",
+    text: "Forms and Admission Materials",
     link: "#",
   },
   {
@@ -73,108 +73,78 @@ const courseList = [
     link: "#",
   },
   {
-    text: "Online Course",
-    link: "#",
-  },
-];
-
-const footerbottomList = [
-  {
-    text: "Faculty",
-    link: "#",
-  },
-  {
-    text: "Staff",
-    link: "#",
-  },
-  {
-    text: "Students",
-    link: "#",
-  },
-  {
-    text: "Alumni",
+    text: "Online Courses",
     link: "#",
   },
 ];
 
 const FooterTwo = () => {
   return (
-    <footer className="style-2">
-      <div className="footer-top padding-tb">
-        <div className="container">
-          <div className="row g-4 row-cols-xl-4 row-cols-sm-2 row-cols-1 justify-content-center">
-            <div className="col">
-              <div className="footer-item our-address">
-                <div className="footer-inner">
-                  <div className="footer-content">
-                    <div className="title"></div>
-                    <div className="content">
-                      <p>{desc}</p>
-                      <ul className="lab-ul office-address">
-                        {addressList.map((val, i) => (
-                          <li key={i}>
-                            <i className={val.iconName}></i>
-                            {val.text}
-                          </li>
-                        ))}
-                      </ul>
-                      <ul className="lab-ul social-icons">
-                        {socialList.map((val, i) => (
-                          <li key={i}>
-                            <a href={val.siteLink} className={val.className}>
-                              <i className={val.iconName}></i>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="footer-item">
-                <div className="footer-inner">
-                  <div className="footer-content">
-                    <div className="title">
-                      <h4>{courseTitle}</h4>
-                    </div>
-                    <div className="content">
-                      <ul className="lab-ul">
-                        {courseList.map((val, i) => (
-                          <li key={i}>
-                            <a href={val.link}>{val.text}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="footer-bottom">
-        <div className="container">
-          <div className="section-wrapper">
-            <p>
-              &copy; 2021 <Link to="/">Edukon</Link> Designed by{" "}
-              <a
-                href="https://themeforest.net/user/CodexCoder"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Factor Gh
-              </a>{" "}
-            </p>
-            <div className="footer-bottom-list">
-              {footerbottomList.map((val, i) => (
-                <a href={val.link} key={i}>
+    <footer className="bg-white text-gray-700 pt-12 pb-6">
+      <div className="container  px-6 lg:px-12 flex justify-around items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+          {/* Address Section */}
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+              About Eduaid
+            </h3>
+            <p className="text-base text-gray-600 mb-6">{desc}</p>
+            <ul className="space-y-4">
+              {addressList.map((val, i) => (
+                <li key={i} className="flex items-center text-gray-600">
+                  <i
+                    className={`icofont ${val.iconName} text-lg mr-3 text-green-500`}
+                  />
                   {val.text}
+                </li>
+              ))}
+            </ul>
+            <div className="flex space-x-4 mt-6">
+              {socialList.map((val, i) => (
+                <a
+                  key={i}
+                  href={val.siteLink}
+                  className="text-gray-600 hover:text-green-500 transition duration-300"
+                >
+                  <i className={`icofont ${val.iconName} text-2xl`} />
                 </a>
               ))}
             </div>
+          </div>
+          {/* Courses Section */}
+          <div>
+            <h4 className="text-2xl font-semibold text-gray-800 mb-4">
+              {courseTitle}
+            </h4>
+            <ul className="space-y-4">
+              {courseList.map((val, i) => (
+                <li key={i}>
+                  <a
+                    href={val.link}
+                    className="text-gray-600 hover:text-green-500 transition duration-300"
+                  >
+                    {val.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="hidden lg:block">
+            <h4 className="text-2xl font-semibold text-gray-800 mb-4">
+              {courseTitleTwo}
+            </h4>
+            <ul className="space-y-4">
+              {courseList.map((val, i) => (
+                <li key={i}>
+                  <a
+                    href={val.link}
+                    className="text-gray-600 hover:text-green-500 transition duration-300"
+                  >
+                    {val.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

@@ -2,6 +2,10 @@ import { Spin } from "antd";
 import "antd/dist/reset.css";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/navigation";
+// import { Navigation } from "swiper/modules";
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css"; // Import Swiper styles
 import CourseCard from "../../common/components/ui/course-card";
@@ -55,9 +59,12 @@ const Course = () => {
           <div className="p-4 my-10">
             {/* Swiper Component for Courses */}
             <Swiper
+              navigation={true}
+              pagination={true}
+              // modules={[Navigation]}
               spaceBetween={20}
               slidesPerView={1}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              autoplay={{ delay: 1000, disableOnInteraction: false }}
               breakpoints={{
                 320: {
                   slidesPerView: 1, // On small screens, show 1 course at a time
@@ -70,15 +77,20 @@ const Course = () => {
                 },
               }}
               loop={true} // Enable looping of courses
-              pagination={{
-                clickable: true, // Enable clickable pagination (dots)
-                el: ".swiper-pagination", // Link pagination to a custom element
-              }}
+              // pagination={{
+              //   clickable: true,
+              //   type: "bullets",
+              //   renderBullet: function (index, className) {
+              //     return (
+              //       '<span class="' + className + '">' + (index + 1) + "</span>"
+              //     );
+              //   },
+              // }}
               // navigation={{
               //   nextEl: ".swiper-button-next",
               //   prevEl: ".swiper-button-prev",
               // }} // Enable navigation arrows
-              className="mx-10" // Optional: Add custom class for further styling
+              className="md:mx-10" // Optional: Add custom class for further styling
             >
               {studentViewCoursesList.map((val, i) => (
                 <SwiperSlide className="py-3" key={i}>
@@ -92,7 +104,8 @@ const Course = () => {
             </Swiper>
 
             {/* Custom Pagination and Navigation Controls */}
-            <div className="swiper-pagination mt-4"></div>
+            <div className="swiper-pagination mt-4 flex justify-center "></div>
+
             {/* Add navigation buttons */}
             {/* <div className="swiper-button-next"></div>
             <div className="swiper-button-prev"></div> */}
