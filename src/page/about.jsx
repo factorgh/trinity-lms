@@ -14,7 +14,7 @@ const title = "Good Qualification Services And Better Skills";
 const desc =
   "Distinctively provide acces mutfuncto users whereas transparent proceses somes ncentivize eficient functionalities rather than extensible archtectur communicate leveraged services and cross-platform.";
 
-const year = "30+";
+const year = "5+";
 const expareance = "Years Of Experiences";
 
 const aboutList = [
@@ -49,16 +49,20 @@ const AboutPage = () => {
             <div className="col">
               <div className="about-left">
                 <div className="about-thumb">
-                  {/* Reduced image size and added responsive styling */}
+                  {/* Hide this image on sm and md screens */}
                   <img
-                    className="img-fluid"
+                    className="img-fluid hidden sm:block md:block lg:block"
                     style={{ maxWidth: "400px", height: "auto" }}
                     src={intstructorImg}
                     alt="Instructor"
                   />
                 </div>
                 <div className="abs-thumb">
-                  <img src={instImg} alt="Student" />
+                  <img
+                    className="sm:hidden md:hidden lg:block"
+                    src={instImg}
+                    alt="Student"
+                  />
                 </div>
                 <div
                   style={{ backgroundColor: "#26C976" }}
@@ -100,10 +104,8 @@ const AboutPage = () => {
       </div>
       <Student />
       <Instructor />
-
       <AchievementTwo />
       <Skill />
-      {/* <Blog /> */}
       <Footer2 />
     </Fragment>
   );
