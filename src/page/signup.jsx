@@ -1,13 +1,6 @@
 import { Spin } from "antd";
 import { Fragment, useContext, useState } from "react";
 import toast from "react-hot-toast";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaPinterestP,
-  FaTwitter,
-} from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import backgroundImg from "../../src/assets/images/home.jpg"; // Import your background image
 import logoImg from "../../src/assets/images/logofinal.jpeg"; // Import your logo image
@@ -15,13 +8,6 @@ import { AuthContext } from "../common/context/auth-context";
 import { registerService } from "../common/services";
 
 // Define social media login options
-const socialList = [
-  { link: "#", icon: <FaFacebookF className="text-blue-600" /> },
-  { link: "#", icon: <FaTwitter className="text-blue-400" /> },
-  { link: "#", icon: <FaLinkedinIn className="text-blue-700" /> },
-  { link: "#", icon: <FaInstagram className="text-pink-600" /> },
-  { link: "#", icon: <FaPinterestP className="text-red-600" /> },
-];
 
 const SignupPage = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -73,21 +59,30 @@ const SignupPage = () => {
     <Fragment>
       <div className="flex h-screen bg-gradient-to-r from-blue-500 via-green-500 to-purple-500">
         {/* Left side: Signup Form */}
-        <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8  bg-gradient-to-t from-slate-50">
+        <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8  bg-gradient-to-t from-slate-60">
           <form className="w-full max-w-sm" onSubmit={handleSubmit}>
             <div className="flex items-center justify-center mb-10">
               <img width={80} height={80} src={logoImg} alt="logo" />
             </div>
 
             <div className="mb-4">
-              <input
-                className="w-full p-3 border border-gray-300 rounded-md"
-                type="text"
-                name="Ghana Card Number"
-                placeholder="Ghana Card Number"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
+              {/* Wrapper to position the prefix and input together */}
+              <div className="flex items-center border border-gray-300 rounded-md">
+                {/* Prefix container */}
+                <span className="bg-gray-100 text-gray-600 p-3 rounded-l-md font-medium">
+                  GH-
+                </span>
+
+                {/* Input field */}
+                <input
+                  className="w-full p-3 pl-6 rounded-r-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  type="text"
+                  name="ghanaCardNumber"
+                  placeholder="Enter your Ghana Card Number *"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </div>
             </div>
             <div className="mb-4">
               <input
@@ -131,7 +126,7 @@ const SignupPage = () => {
               </p>
             </div>
             {/* Social login */}
-            <div className="mt-6 text-center">
+            {/* <div className="mt-6 text-center">
               <span className="text-sm text-gray-600">Or</span>
               <div className="mt-4 flex justify-center space-x-4">
                 {socialList.map((social, i) => (
@@ -144,7 +139,7 @@ const SignupPage = () => {
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
           </form>
         </div>
 

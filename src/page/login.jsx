@@ -60,21 +60,31 @@ const LoginPage = () => {
     <Fragment>
       <div className="flex h-screen bg-gradient-to-r from-blue-500 via-green-500 to-purple-500">
         {/* Left side: Login Form */}
-        <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8 bg-gradient-to-t from-slate-50">
+        <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8 bg-gradient-to-t from-slate-60">
           <form className="w-full max-w-sm" onSubmit={handleSubmit}>
             <div className="flex items-center justify-center mb-10">
               <img width={80} height={80} src={logoImg} alt="logo" />
             </div>
             <div className="mb-4">
-              <input
-                className="w-full p-3 border border-gray-300 rounded-md"
-                type="text"
-                name="email"
-                placeholder="User Email *"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-              />
+              {/* Wrapper to position the prefix and input together */}
+              <div className="flex items-center border border-gray-300 rounded-md">
+                {/* Prefix container */}
+                <span className="bg-gray-100 text-gray-600 p-3 rounded-l-md font-medium">
+                  GH-
+                </span>
+
+                {/* Input field */}
+                <input
+                  className="w-full p-3 pl-6 rounded-r-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                  type="text"
+                  name="ghanaCardNumber"
+                  placeholder="Enter your Ghana Card Number *"
+                  value={userEmail}
+                  onChange={(e) => setUserEmail(e.target.value)}
+                />
+              </div>
             </div>
+
             <div className="mb-6">
               <input
                 className="w-full p-3 border border-gray-300 rounded-md"
@@ -118,7 +128,7 @@ const LoginPage = () => {
               </p>
             </div>
             {/* Social login */}
-            <div className="mt-6 text-center">
+            {/* <div className="mt-6 text-center">
               <span className="text-sm text-gray-600">Or</span>
               <div className="mt-4 flex justify-center space-x-4">
                 {socialList.map((social, i) => (
@@ -131,7 +141,7 @@ const LoginPage = () => {
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
           </form>
         </div>
 

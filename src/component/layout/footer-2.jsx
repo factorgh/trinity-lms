@@ -2,7 +2,7 @@ const desc =
   "Eduaid is the number one world-class e-learning platform. Thousands of students are always learning within this platform.";
 
 const courseTitle = "Courses";
-const courseTitleTwo = "Courses";
+const courseTitleTwo = "Quick Links";
 
 const addressList = [
   {
