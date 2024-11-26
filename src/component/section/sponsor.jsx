@@ -1,8 +1,10 @@
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import sponsor4 from "../../assets/images/educare.png";
 import sponsor2 from "../../assets/images/glovo.png";
 import sponsor3 from "../../assets/images/mtn.png";
 import sponsor1 from "../../assets/images/telecel.png";
+import sponsor5 from "../../assets/images/tigo-final.png";
 
 const sponsorList = [
   {
@@ -18,11 +20,11 @@ const sponsorList = [
     imgAlt: "sponsor rajibraj91 rajibraj",
   },
   {
-    imgUrl: sponsor2,
+    imgUrl: sponsor4,
     imgAlt: "sponsor rajibraj91 rajibraj",
   },
   {
-    imgUrl: sponsor1,
+    imgUrl: sponsor5,
     imgAlt: "sponsor rajibraj91 rajibraj",
   },
   {
