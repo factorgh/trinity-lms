@@ -1,7 +1,7 @@
 import { Collapse, Divider, Spin } from "antd"; // Import Spin from Ant Design
 import { Fragment, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CourseCard from "../common/components/ui/course-card";
+import CourseItem from "../common/components/ui/course-item";
 import { StudentContext } from "../common/context/student-context";
 import { fetchStudentViewCourseListService } from "../common/services";
 import Footer2 from "../component/layout/footer-2";
@@ -85,11 +85,12 @@ const CoursePage = () => {
                 </div>
               ) : (
                 // Grid of Courses: Show once data is loaded
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {studentViewCoursesList.map((val, i) => (
-                    <CourseCard
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {studentViewCoursesList.map((i, val) => (
+                    <CourseItem
                       key={i}
                       val={val}
+                      i={i}
                       handleCourseView={handleCourseView}
                     />
                   ))}

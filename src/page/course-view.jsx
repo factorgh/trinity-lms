@@ -15,6 +15,7 @@ const CourseView = () => {
 
   const { state } = useLocation();
   const course = state?.courseDetails;
+  console.log(course);
 
   const [currentLecture, setCurrentLecture] = useState(null);
   const [loading, setLoading] = useState(false);

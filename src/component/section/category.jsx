@@ -1,3 +1,14 @@
+import {
+  MdBarChart,
+  MdCloud,
+  MdCode,
+  MdEngineering,
+  MdLibraryBooks,
+  MdOutlineBrush,
+  MdOutlinePalette,
+  MdPhoneAndroid,
+  MdSecurity,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const subTitle = "Popular Category";
@@ -44,6 +55,18 @@ const categoryList = [
   },
 ];
 
+const categories = [
+  { icon: <MdLibraryBooks />, title: "Web Development" },
+  { icon: <MdPhoneAndroid />, title: "Mobile Development" },
+  { icon: <MdBarChart />, title: "Data Science" },
+  { icon: <MdCode />, title: "Programming Languages" },
+  { icon: <MdOutlinePalette />, title: "Graphic Design" },
+  { icon: <MdSecurity />, title: "Cybersecurity" },
+  { icon: <MdCloud />, title: "Cloud Computing" },
+  { icon: <MdEngineering />, title: "DevOps" },
+  { icon: <MdOutlineBrush />, title: "UI/UX" },
+];
+
 const Category = () => {
   return (
     <div className="category-section py-10">
@@ -57,22 +80,16 @@ const Category = () => {
 
         <div className="section-wrapper">
           {/* Responsive Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
-            {categoryList.map((val, i) => (
-              <div className="category-item text-center" key={i}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {categories.map((val, i) => (
+              <div className="category-item text-center cursor-pointer" key={i}>
                 <div className="category-inner flex flex-col items-center justify-center">
-                  <div className="category-thumb">
-                    <img
-                      src={val.imgUrl}
-                      alt={val.imgAlt}
-                      className="w-full h-auto"
-                    />
-                  </div>
+                  <div className="text-3xl">{val.icon}</div>
                   <div className="category-content mt-4">
                     <Link to="/course">
                       <h6 className="text-xl font-semibold">{val.title}</h6>
                     </Link>
-                    <span className="text-sm text-gray-500">{val.count}</span>
+                    {/* <span className="text-sm text-gray-500">{val.count}</span> */}
                   </div>
                 </div>
               </div>
