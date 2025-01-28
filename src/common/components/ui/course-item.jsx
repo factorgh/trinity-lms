@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Card } from "antd";
-import { MdArrowForward } from "react-icons/md";
+import { Card, Tag } from "antd";
 
 const CourseItem = ({ val, i, handleCourseView }) => {
   console.log(i);
@@ -9,7 +8,7 @@ const CourseItem = ({ val, i, handleCourseView }) => {
     <Card
       onClick={() => handleCourseView(i)}
       hoverable
-      className="flex flex-col border-slate-300 rounded-lg   text-slate-300  shadow-3xl"
+      className="flex flex-col border-slate-300 rounded-lg   text-slate-300  shadow-lg  transition duration-300 cursor-pointer"
       cover={
         <img
           src={image}
@@ -23,8 +22,11 @@ const CourseItem = ({ val, i, handleCourseView }) => {
         {description.slice(0, 100)} ...
       </p>
       <div className="flex justify-between items-center mt-4">
-        <p className="text-gray-500 font-bold flex items-center gap-3">
-          {level} <MdArrowForward />
+        <p className="text-gray-800 font-bold flex items-center gap-3">
+          <Tag> {level.charAt(0).toUpperCase() + level.slice(1)}</Tag>
+        </p>
+        <p className="text-gray-800 font-bold flex items-center gap-3">
+          <Tag> Year 1</Tag>
         </p>
         {/* <Button type="primary" className="bg-blue-500">
           Learn More

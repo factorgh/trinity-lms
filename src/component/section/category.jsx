@@ -3,7 +3,6 @@ import {
   MdCloud,
   MdCode,
   MdEngineering,
-  MdLibraryBooks,
   MdOutlineBrush,
   MdOutlinePalette,
   MdPhoneAndroid,
@@ -56,10 +55,9 @@ const categoryList = [
 ];
 
 const categories = [
-  { icon: <MdLibraryBooks />, title: "Web Development" },
+  { icon: <MdCode />, title: "Web Development" },
   { icon: <MdPhoneAndroid />, title: "Mobile Development" },
   { icon: <MdBarChart />, title: "Data Science" },
-  { icon: <MdCode />, title: "Programming Languages" },
   { icon: <MdOutlinePalette />, title: "Graphic Design" },
   { icon: <MdSecurity />, title: "Cybersecurity" },
   { icon: <MdCloud />, title: "Cloud Computing" },
@@ -69,7 +67,7 @@ const categories = [
 
 const Category = () => {
   return (
-    <div className="category-section py-10">
+    <div className="category-section py-10 mt-10">
       <div className="container">
         <div className="section-header text-center mb-10">
           <span className="subtitle text-lg font-semibold text-emerald-600">
@@ -82,7 +80,10 @@ const Category = () => {
           {/* Responsive Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {categories.map((val, i) => (
-              <div className="category-item text-center cursor-pointer" key={i}>
+              <div
+                className="category-item text-center cursor-pointer "
+                key={i}
+              >
                 <div className="category-inner flex flex-col items-center justify-center">
                   <div className="text-3xl">{val.icon}</div>
                   <div className="category-content mt-4">
@@ -97,7 +98,7 @@ const Category = () => {
           </div>
 
           {/* Browse All Button */}
-          <div className="text-center mt-6">
+          <div className="text-center my-10">
             <Link
               style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
               to="/course"

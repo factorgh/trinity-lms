@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import "antd/dist/reset.css";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 // import { Navigation } from "swiper/modules";
@@ -57,7 +57,7 @@ const Course = () => {
         ) : (
           <div className="p-4 my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Swiper Component for Courses */}
-            {studentViewCoursesList?.map((i, val) => (
+            {studentViewCoursesList?.slice(0, 4).map((i, val) => (
               <CourseItem
                 key={i}
                 val={val}
@@ -74,6 +74,17 @@ const Course = () => {
           </div>
         )}
       </div>
+      {/*  */}
+      <div className="text-center mt-6">
+        <Link
+          style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+          to="/course"
+          className="lab-btn px-6 py-3 text-lg font-semibold rounded-md"
+        >
+          <span>Show All Courses</span>
+        </Link>
+      </div>
+      {/*  */}
     </div>
   );
 };

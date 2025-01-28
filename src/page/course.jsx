@@ -1,152 +1,150 @@
-import { Collapse, Divider, Spin } from "antd"; // Import Spin from Ant Design
+import { Divider, Spin } from "antd";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CourseItem from "../common/components/ui/course-item";
 import { StudentContext } from "../common/context/student-context";
 import { fetchStudentViewCourseListService } from "../common/services";
 import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
-import BannerFour from "../component/section/banner-4";
-import CourseSortSelect from "../component/sidebar/skill-select";
-
-// New professional course page with FAQ and course details
-const { Panel } = Collapse; // Import Collapse Panel from Ant Design
+import ScrollToTop from "../component/layout/ScrollToTop";
 
 const CoursePage = () => {
   const { studentViewCoursesList, setStudentViewCoursesList } =
     useContext(StudentContext);
-  const [loading, setLoading] = useState(true); // Step 1: Loading state for async operations
+  const [loading, setLoading] = useState(true);
+  const [input, setInput] = useState("");
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  const [showSearch, setShowSearch] = useState(false); // New state to control search form visibility
+  const location = useLocation();
+  const { searchTerm } = location.state || {};
+  console.log(searchTerm);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchAllStudentViewCourses() {
+      setLoading(true);
+      const response = await fetchStudentViewCourseListService();
+      if (response?.success) {
+        setStudentViewCoursesList(response?.data);
+      }
+      setLoading(false);
+    }
+    fetchAllStudentViewCourses();
+  }, [setStudentViewCoursesList]);
+
+  useEffect(() => {
+    setInput(searchTerm || "");
+  }, [searchTerm]);
+
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setInput(value);
+
+    if (studentViewCoursesList && studentViewCoursesList.length > 0) {
+      const filtered = studentViewCoursesList.filter((course) =>
+        course.title.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredCourses(filtered);
+    }
+  };
 
   const handleCourseView = (courseDetails) => {
     navigate("/course-view", { state: { courseDetails } });
+    ScrollToTop(0, 0);
   };
 
-  async function fetchAllStudentViewCourses() {
-    setLoading(true); // Step 2: Set loading state to true before fetching data
-    const response = await fetchStudentViewCourseListService();
-    if (response?.success) {
-      setStudentViewCoursesList(response?.data);
+  useEffect(() => {
+    if (studentViewCoursesList && studentViewCoursesList.length > 0) {
+      setFilteredCourses(studentViewCoursesList);
     }
-    setLoading(false); // Step 2: Set loading state to false after fetching
-  }
+  }, [studentViewCoursesList]);
 
   useEffect(() => {
-    fetchAllStudentViewCourses();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const subTitle = "All Courses";
-  const title = "Browse All Courses";
+    if (studentViewCoursesList && studentViewCoursesList.length > 0) {
+      const filtered = studentViewCoursesList.filter((course) =>
+        course.title.toLowerCase().includes(input.toLowerCase())
+      );
+      setFilteredCourses(filtered);
+    }
+  }, [input, studentViewCoursesList]);
 
   return (
     <Fragment>
       <Header />
-      {/* Hero Banner Section */}
-      <BannerFour />
+      <div className="banner-section style-1"></div>
 
-      <div className="course-section padding-tb section-bg">
+      <div className="course-section section-bg">
         <div className="container mx-auto px-4">
           <div className="section-wrapper">
-            <>
-              <div className="course-showing-part mb-10">
-                <div className="section-header text-center mb-10">
-                  <span
-                    style={{ color: "#26C976" }}
-                    className="subtitle text-lg font-semibold"
-                  >
-                    {subTitle}
-                  </span>
-                  <h2 className="title text-3xl font-bold mt-2">{title}</h2>
-                </div>
-                <div className="d-flex flex-wrap align-items-center justify-content-between mb-6">
-                  <div className="course-showing-part-left">
-                    {/* <p className="text-sm">
-                      Showing 1-{studentViewCoursesList.length} of{" "}
-                      {studentViewCoursesList.length} results
-                    </p> */}
-                  </div>
-                  <div className="course-showing-part-right d-flex flex-wrap align-items-center">
-                    <span className="mr-2 text-sm">Sort by:</span>
-                    <div className="select-item">
-                      <CourseSortSelect />
-                      <div className="select-icon">
-                        <i className="icofont-rounded-down"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="flex items-center justify-between py-5 mb-3 md:py-3">
+              <h2 className="text-3xl text-gray-800 hidden md:block">
+                Course List /
+              </h2>
 
-              {/* Show the loading spinner while data is being fetched */}
-              {loading ? (
-                <div className="flex justify-center items-center h-40">
-                  <Spin size="large" /> {/* Ant Design Spinner */}
-                </div>
-              ) : (
-                // Grid of Courses: Show once data is loaded
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {studentViewCoursesList.map((i, val) => (
-                    <CourseItem
-                      key={i}
-                      val={val}
-                      i={i}
-                      handleCourseView={handleCourseView}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* Divider after Courses */}
-              <Divider className="my-12" />
-
-              {/* FAQ Section */}
-              <div className="faq-section my-16 px-4 md:px-10">
-                <h3 className="text-2xl font-semibold mb-6">
-                  Frequently Asked Questions
-                </h3>
-                <Collapse
-                  defaultActiveKey={["1"]}
-                  expandIconPosition="right"
-                  className="shadow-lg rounded-lg"
+              {/* Responsive Search Icon */}
+              <div className="relative flex md:hidden">
+                <button
+                  className="p-2 rounded-full bg-gray-200"
+                  onClick={() => setShowSearch((prev) => !prev)}
                 >
-                  <Panel header="What is the course duration?" key="1">
-                    <p className="text-gray-600">
-                      The course duration varies depending on the course. Most
-                      courses range between 4-8 weeks.
-                    </p>
-                  </Panel>
-                  <Panel
-                    header="Do I need any prior knowledge to take the course?"
-                    key="2"
+                  <i className="icofont-search"></i>
+                </button>
+                {showSearch && (
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    className="absolute -top-3 left-10 w-64 bg-white border border-gray-300 rounded-lg mt-2 z-50 p-2"
                   >
-                    <p className="text-gray-600 text-sm">
-                      Some courses require a basic understanding of the subject,
-                      but most are suitable for beginners.
-                    </p>
-                  </Panel>
-                  <Panel header="Will I get a certificate?" key="3">
-                    <p className="text-gray-600 text-sm">
-                      Yes! Upon completing the course, you'll receive a
-                      certificate that you can share with others.
-                    </p>
-                  </Panel>
-                  <Panel header="How can I enroll?" key="4">
-                    <p className="text-gray-600 text-sm">
-                      Simply select a course and click "Enroll Now." Follow the
-                      prompts to complete your enrollment.
-                    </p>
-                  </Panel>
-                </Collapse>
+                    <input
+                      className="w-full p-2 border rounded"
+                      type="text"
+                      value={input}
+                      onChange={handleSearch}
+                      placeholder="Keywords of your course"
+                    />
+                  </form>
+                )}
               </div>
 
-              {/* Course Details Section */}
-            </>
+              {/* Search form visible on larger screens */}
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="max-w-sm w-full hidden md:flex items-center border border-gray-300 rounded-lg bg-white h-12"
+              >
+                <div className="banner-icon ml-2">
+                  <i className="icofont-search"></i>
+                </div>
+                <input
+                  className="p-2 border-none w-full"
+                  type="text"
+                  value={input}
+                  onChange={handleSearch}
+                  placeholder="Keywords of your course"
+                />
+              </form>
+            </div>
+
+            {loading ? (
+              <div className="flex justify-center items-center h-40">
+                <Spin size="large" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {filteredCourses?.map((i, val) => (
+                  <CourseItem
+                    key={i.id}
+                    val={val}
+                    i={i}
+                    handleCourseView={handleCourseView}
+                  />
+                ))}
+              </div>
+            )}
+            {filteredCourses.length === 0 && <p>No course found</p>}
+            <Divider className="mb-12 mt-20" />
           </div>
         </div>
       </div>
 
-      {/* Footer Section */}
       <Footer2 />
     </Fragment>
   );

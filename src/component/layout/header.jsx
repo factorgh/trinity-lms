@@ -183,7 +183,7 @@ const Header = () => {
                     ></i>{" "}
                     <span style={{ color: "#26C976" }}>Login</span>
                   </Link>
-                  <div className="h-8 w-[0.5px] border border-black mx-2"></div>
+                  <div className="h-8 w-[0.5px] border border-green-500 mx-2"></div>
                   <Link
                     style={{
                       backgroundColor: "#26C976",

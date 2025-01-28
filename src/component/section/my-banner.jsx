@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import myImage from "../../assets/images/final.png";
 
 const subTitle = "Online education";
@@ -62,6 +64,19 @@ const shapeList = [
 ];
 
 const MyBanner = () => {
+  const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const trimmedValue = inputValue.trim();
+
+    if (trimmedValue) {
+      navigate("/course", {
+        state: { searchTerm: trimmedValue },
+      });
+    }
+  };
   return (
     <section className="banner-section">
       <div className="container">
@@ -74,11 +89,16 @@ const MyBanner = () => {
                 </h6>
                 {title}
                 <p className="desc">{desc}</p>
-                <form action="/">
+                <form onSubmit={handleSearch}>
                   <div className="banner-icon">
                     <i className="icofont-search"></i>
                   </div>
-                  <input type="text" placeholder="Keywords of your course" />
+                  <input
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    type="text"
+                    placeholder="Keywords of your course"
+                  />
                   <button
                     className="text-white p-2"
                     style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
