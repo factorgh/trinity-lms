@@ -1,28 +1,28 @@
 import myImage from "../../assets/images/final.png";
 
 const subTitle = "About Our Edukon";
-const title = "Good Qualification Services And Better Skills";
+//
 const desc =
-  "Distinctively provide acces mutfuncto users whereas transparent proceses somes ncentivize eficient functionalities rather than extensible archtectur communicate leveraged services and cross-platform.";
+  "We provide high-quality learning experiences and professional training to help individuals and organizations grow. Our platform offers seamless access to expert-led courses, ensuring an efficient and engaging learning process";
 
 const aboutList = [
   {
     imgUrl: "assets/images/about/icon/01.jpg",
     imgAlt: "about icon rajibraj91 rajibraj",
     title: "Skilled Instructors",
-    desc: "Distinctively provide acces mutfuncto users whereas communicate leveraged services",
+    desc: "Learn from experienced educators and industry professionals dedicated to your success.",
   },
   {
     imgUrl: "assets/images/about/icon/02.jpg",
     imgAlt: "about icon rajibraj91 rajibraj",
-    title: "Get Certificate",
-    desc: "Distinctively provide acces mutfuncto users whereas communicate leveraged services",
+    title: "Certified Courses",
+    desc: "Earn recognized certificates that enhance your career opportunities and professional growth.",
   },
   {
     imgUrl: "assets/images/about/icon/03.jpg",
     imgAlt: "about icon rajibraj91 rajibraj",
-    title: "Online Classes",
-    desc: "Distinctively provide acces mutfuncto users whereas communicate leveraged services",
+    title: "Flexible Online Learning",
+    desc: "Access courses anytime, anywhere, with interactive and user-friendly digital resources.",
   },
 ];
 
@@ -38,7 +38,7 @@ const About = () => {
                 <span style={{ color: "#26C976" }} className="subtitle">
                   {subTitle}
                 </span>
-                <h2 className="title">{title}</h2>
+
                 <p>{desc}</p>
               </div>
               <div className="section-wrapper">

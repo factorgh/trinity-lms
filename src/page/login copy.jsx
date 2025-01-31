@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 // import { Spin } from "antd";
 // import { Fragment, useContext, useState } from "react";
 // import toast from "react-hot-toast";
@@ -8,8 +7,22 @@
 // import { AuthContext } from "../common/context/auth-context";
 // import { loginService } from "../common/services";
 // // Importing React Icons
+// import {
+//   FaFacebookF,
+//   FaInstagram,
+//   FaLinkedinIn,
+//   FaPinterestP,
+//   FaTwitter,
+// } from "react-icons/fa";
 
 // // Define social media login options
+// const socialList = [
+//   { link: "#", icon: <FaFacebookF className="text-blue-600" /> },
+//   { link: "#", icon: <FaTwitter className="text-blue-400" /> },
+//   { link: "#", icon: <FaLinkedinIn className="text-blue-700" /> },
+//   { link: "#", icon: <FaInstagram className="text-pink-600" /> },
+//   { link: "#", icon: <FaPinterestP className="text-red-600" /> },
+// ];
 
 // const LoginPage = () => {
 //   const [userEmail, setUserEmail] = useState("");
@@ -148,90 +161,3 @@
 // };
 
 // export default LoginPage;
-
-import { Button, Checkbox, Form, Input } from "antd";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
-import logoImg from "../../src/assets/images/logofinal.jpeg";
-
-export default function LoginPage() {
-  const navigate = useNavigate();
-  const onFinish = (values) => {
-    navigate("/");
-    console.log("Form Submitted: ", values);
-  };
-
-  return (
-    <div className="flex flex-col md:grid md:grid-cols-8 min-h-screen">
-      {/* Sidebar (Hidden on Small Screens) */}
-      <div className="hidden md:flex flex-col justify-between items-center p-5 bg-slate-800 col-span-1">
-        <div className="flex flex-col items-center">
-          <Link to="/">
-            <img
-              src={logoImg}
-              alt="Logo"
-              width={60}
-              height={60}
-              className=" mt-5 cursor-pointer"
-            />
-          </Link>
-        </div>
-        <div className="flex flex-col items-center gap-10">
-          <FaFacebook className="text-3xl text-white" />
-          <FaInstagram className="text-3xl text-white" />
-          <FaTwitter className="text-3xl text-white" />
-        </div>
-      </div>
-
-      {/* Login Form */}
-      <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 p-4 md:col-span-7  bg-center bg-cover ">
-        <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-          <h1 className="text-xl font-thin text-center mb-4 p-3">
-            Welcome back
-          </h1>
-
-          <Form layout="vertical" onFinish={onFinish} autoComplete="off">
-            {/* Email/Username Field */}
-            <Form.Item label="Email or Username" name="username">
-              <Input placeholder="Enter your email or username" />
-            </Form.Item>
-
-            {/* Password Field */}
-            <Form.Item label="Password" name="password">
-              <Input.Password placeholder="Enter your password" />
-            </Form.Item>
-
-            {/* Remember Me & Forgot Password */}
-            <div className="flex justify-between items-center mb-4">
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-              <a href="#" className="text-blue-500 hover:underline">
-                Forgot password?
-              </a>
-            </div>
-
-            {/* Login Button */}
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="w-full bg-slate-400"
-              >
-                Login
-              </Button>
-            </Form.Item>
-          </Form>
-
-          {/* Register Prompt */}
-          <div className="text-center mt-4">
-            <span>Don&apos;t have an account?</span>
-            <a href="/signup" className="text-blue-500 hover:underline ml-1">
-              Register
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}

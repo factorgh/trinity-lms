@@ -7,28 +7,27 @@ import student1 from "../../../src/assets/images/student4.jpeg";
 
 const subTitle = "Loved by 200,000+ students";
 const title = "Students Community Feedback";
-
 const studentList = [
   {
     imgUrl: student1,
-    imgAlt: "student rajibraj91 rajibraj",
+    imgAlt: "Student Oliver Beddows",
     name: "Oliver Beddows",
-    degi: "UX designer",
-    desc: "Rapidiously build collaboration and ideas sharing via cutting-edge interfaces. Teams collaborate and create innovative paradigms for growth.",
+    degi: "UX Designer",
+    desc: "Edukon has transformed my learning experience! The courses are well-structured, the instructors are highly knowledgeable, and the interactive content keeps me engaged. Highly recommended!",
   },
   {
     imgUrl: student2,
-    imgAlt: "student rajibraj91 rajibraj",
+    imgAlt: "Student Madley Pondor",
     name: "Madley Pondor",
-    degi: "UX designer",
-    desc: "Rapidiously build collaboration and ideas sharing via cutting-edge interfaces. Teams collaborate and create innovative paradigms for growth.",
+    degi: "UX Designer",
+    desc: "An excellent platform for upskilling! The flexibility of online learning, combined with expert-led courses, has helped me advance my career. The certification programs are a great bonus!",
   },
   {
     imgUrl: student2,
-    imgAlt: "student rajibraj91 rajibraj",
-    name: "Madley Pondor",
-    degi: "UX designer",
-    desc: "Rapidiously build collaboration and ideas sharing via cutting-edge interfaces. Teams collaborate and create innovative paradigms for growth.",
+    imgAlt: "Student Alex Carter",
+    name: "Alex Carter",
+    degi: "Web Developer",
+    desc: "I love how Edukon provides real-world learning experiences. The projects and practical exercises make it easy to apply what I learn. This platform has been a game-changer for me!",
   },
 ];
 
