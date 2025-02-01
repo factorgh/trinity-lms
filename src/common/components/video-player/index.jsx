@@ -144,7 +144,7 @@ function VideoPlayer({
   return (
     <div
       ref={playerContainerRef}
-      className={`relative bg-gray-900 rounded-lg overflow-hidden shadow-2xl transition-all duration-300 ease-in-out 
+      className={`relative bg-gray-900 rounded-lg overflow-hidden shadow-3xl transition-all duration-300 ease-in-out 
       ${isFullScreen ? "w-screen h-screen" : ""}
       `}
       style={{ width, height }}

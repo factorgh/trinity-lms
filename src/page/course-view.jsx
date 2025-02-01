@@ -1,12 +1,13 @@
-import { Card, Collapse, Divider, Spin } from "antd"; // Ant Design components for styling
+import { Collapse, Divider } from "antd"; // Ant Design components for styling
 import { CheckCircle, Play } from "lucide-react"; // Icons from lucide-react
 import React, { Fragment, useEffect, useState } from "react";
 
+import { MdArrowDropDown } from "react-icons/md";
 import { useLocation } from "react-router-dom";
-import HeroSection from "../common/components/ui/hero-section";
 import VideoPlayer from "../common/components/video-player";
 import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
+import Loading from "../component/loading";
 
 const { Panel } = Collapse;
 
@@ -14,7 +15,7 @@ const CourseView = () => {
   const [icon, setIcon] = useState(false);
 
   const { state } = useLocation();
-  const course = state?.courseDetails;
+  const course = state?.course;
   console.log(course);
 
   const [currentLecture, setCurrentLecture] = useState(null);
@@ -54,55 +55,11 @@ const CourseView = () => {
   return (
     <Fragment>
       {/* {showConfetti && <Confetti />} */}
-
       <Header />
-      <HeroSection course={course} />
-
-      {/* Course Info Section */}
-      <div className="course-info-section my-16 px-4 md:px-10">
-        <Card
-          bordered={false}
-          style={{
-            width: "100%",
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
-            borderRadius: "8px",
-          }}
-          className="p-3 bg-white shadow-lg"
-        >
-          <div className="flex flex-wrap gap-3 justify-between items-center">
-            <div className="course-info-item w-full sm:w-auto">
-              <h4 className="font-semibold text-lg">Level</h4>
-              <p className="text-gray-600 text-sm text-mono">{course?.level}</p>
-            </div>
-
-            <Divider className="h-12" type="vertical" />
-
-            <div className="course-info-item w-full sm:w-auto">
-              <h4 className="font-semibold text-lg">Duration</h4>
-              <p className="text-gray-600 text-sm text-mono">6 Weeks</p>
-            </div>
-
-            <Divider className="h-12" type="vertical" />
-
-            <div className="course-info-item w-full sm:w-auto">
-              <h4 className="font-semibold text-lg">Language</h4>
-              <p className="text-gray-600 text-sm text-mono">
-                {course?.primaryLanguage}
-              </p>
-            </div>
-
-            <Divider className="h-12" type="vertical" />
-
-            <div className="course-info-item w-full sm:w-auto">
-              <h4 className="font-semibold text-lg">Price</h4>
-              <p className="text-gray-600 text-sm text-mono">Free</p>
-            </div>
-          </div>
-        </Card>
-      </div>
-
+      {/* <HeroSection course={course} /> */}
+      <div className="banner-section style-1"></div>{" "}
       {/* Course Details Section */}
-      <div className="course-view-section padding-tb section-bg">
+      <div className="course-view-section  section-bg">
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -110,12 +67,10 @@ const CourseView = () => {
                 <div className="row justify-content-center">
                   <div className="col-12 col-lg-8">
                     <div className="video-part mb-4 mb-lg-0">
-                      <div className="vp-title mb-4">
-                        <h3>{course?.subtitle}</h3>
-                      </div>
+                      <div className="vp-title mb-4"></div>
                       <div className="vp-video mb-4">
                         {loading ? (
-                          <Spin size="large" />
+                          <Loading />
                         ) : (
                           <VideoPlayer
                             width="100%"
@@ -135,7 +90,7 @@ const CourseView = () => {
                         </div>
                         <div className="text-2xl font-bold mb-10">
                           <h4>Description</h4>
-                          <p>{course?.description}</p>
+                          <p className="text-[15px]">{course?.description}</p>
                         </div>
                       </div>
                     </div>
@@ -145,30 +100,49 @@ const CourseView = () => {
                   <div className="col-12 col-lg-4">
                     <div className="video-list-area">
                       <div className="course-select-area border-radius-12">
-                        <div className="csa-title mb-4 ml-5">
-                          <h5>Course Outline</h5>
+                        {/* Course Structure Section */}
+                        <h3 className="text-2xl font-bold mb-3">
+                          Course Structure
+                        </h3>
+
+                        {/* Course Curriculum */}
+                        <div className="border border-gray-300 rounded">
+                          <h4 className="text-lg font-semibold p-2 border border-gray-300 flex items-center gap-3">
+                            <MdArrowDropDown />
+                            <span>{course?.title}</span>
+                          </h4>
+
+                          <div className="p-2">
+                            {course?.curriculum?.map((item) => (
+                              <div
+                                key={item?.id}
+                                onClick={() => handleLectureChange(item)}
+                                className={`flex items-center gap-3 p-2 rounded cursor-pointer transition-all 
+            ${
+              currentLecture?._id === item._id
+                ? "bg-green-500 text-white"
+                : "bg-gray-200 text-black"
+            }
+          `}
+                              >
+                                {currentLecture?._id === item._id ? (
+                                  <CheckCircle className="h-4 w-4" />
+                                ) : (
+                                  <Play className="h-4 w-4" />
+                                )}
+                                <span>{item?.title}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                        <div className="h-96 w-full px-3 overflow-auto">
-                          {course?.curriculum.map((item) => (
-                            <div
-                              key={item._id}
-                              onClick={() => handleLectureChange(item)}
-                              className={`flex items-center space-x-2 text-sm font-bold cursor-pointer p-2 m-1 w-full gap-5
-                                ${
-                                  currentLecture?._id === item._id
-                                    ? "bg-green-500 text-white"
-                                    : "bg-gray-200 text-black"
-                                }`}
-                            >
-                              {currentLecture?._id === item._id ? (
-                                <CheckCircle className="h-4 w-4" />
-                              ) : (
-                                <Play className="h-4 w-4" />
-                              )}
-                              <h3>{item?.title}</h3>
-                            </div>
-                          ))}
-                        </div>
+
+                        {/* Course Description */}
+                        {/* <div className="mt-6 p-2">
+                          <h4 className="text-xl font-semibold flex items-center gap-3">
+                            Course Description
+                          </h4>
+                          <p className="text-[15px]">{course?.description}</p>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -219,7 +193,6 @@ const CourseView = () => {
           </div>
         </div>
       </div>
-
       <Footer2 />
     </Fragment>
   );

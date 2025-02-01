@@ -2,6 +2,7 @@ import { Card, Rate } from "antd"; // Ant Design's Card and Rate components
 import React from "react";
 import { Link } from "react-router-dom";
 import specialImg from "../../../src/assets/images/special.jpg";
+import student3 from "../../../src/assets/images/student1.jpeg";
 import student2 from "../../../src/assets/images/student2.jpeg";
 import student1 from "../../../src/assets/images/student4.jpeg";
 
@@ -23,7 +24,7 @@ const studentList = [
     desc: "An excellent platform for upskilling! The flexibility of online learning, combined with expert-led courses, has helped me advance my career. The certification programs are a great bonus!",
   },
   {
-    imgUrl: student2,
+    imgUrl: student3,
     imgAlt: "Student Alex Carter",
     name: "Alex Carter",
     degi: "Web Developer",

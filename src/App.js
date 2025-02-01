@@ -25,6 +25,7 @@ import AddNewCoursePage from "./common/common-pages/add-new-course-page";
 import InstructorDashboardpage from "./common/common-pages/instructor-dashboard-page";
 import RouteGuard from "./common/components/route-guard";
 import { AuthContext } from "./common/context/auth-context";
+import CourseDetailPage from "./page/course-detail-page";
 import InstructorPage from "./page/instructor";
 import LoginPage from "./page/login";
 import SearchNone from "./page/search-none";
@@ -55,6 +56,7 @@ function App() {
         <Route path="course" element={<CoursePage />} />
         {/* <Route path="course-single" element={<CourseSingle />} /> */}
         <Route path="course-view" element={<CourseView />} />
+        <Route path="course-detail" element={<CourseDetailPage />} />
         <Route path="blog" element={<BlogPage />} />
         <Route path="blog-2" element={<BlogPageTwo />} />
         <Route path="blog-3" element={<BlogPageThree />} />

@@ -6,26 +6,25 @@ import Student from "../component/section/student";
 
 const subTitle = "Teach on Edukon";
 const title = "Discover Your Potential. Make A Global Impact.";
-const btnText = "Browse All Categories";
 
 let categoryItemList = [
   {
     imgUrl: "assets/images/category/icon/15.jpg",
-    imgAlt: "category",
+    imgAlt: "Build Your Brand",
     title: "Build Your Brand",
-    desc: "Like graphic design, business analytics, coding, and much more.",
+    desc: "Establish yourself as an expert and grow your influence in your field.",
   },
   {
     imgUrl: "assets/images/category/icon/16.jpg",
-    imgAlt: "category",
+    imgAlt: "Plan Your Course",
     title: "Plan Your Course",
-    desc: "Like graphic design, business analytics, coding, and much more.",
+    desc: "Design engaging lessons that inspire and educate students effectively.",
   },
   {
     imgUrl: "assets/images/category/icon/17.jpg",
-    imgAlt: "category",
-    title: "Help Shape Future",
-    desc: "Like graphic design, business analytics, coding, and much more.",
+    imgAlt: "Shape the Future",
+    title: "Shape the Future",
+    desc: "Empower the next generation by sharing your knowledge and expertise.",
   },
 ];
 
@@ -81,11 +80,11 @@ const InstructorPage = () => {
                       <div className="category-thumb">
                         <img src={`${val.imgUrl}`} alt={`${val.imgAlt}`} />
                       </div>
-                      <div className="category-content">
+                      <div className="category-content cursor-pointer">
                         <Link to="/signup">
-                          <h4>{val.title}</h4>
+                          <h4 className="text-[20px]">{val.title}</h4>
                         </Link>
-                        <p>{val.desc}</p>
+                        <p className="text-[15px]">{val.desc}</p>
                       </div>
                     </div>
                   </div>

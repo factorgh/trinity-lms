@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logoImg from "../../assets/images/logofinal.jpeg";
@@ -122,6 +123,36 @@ const Header = () => {
                         </li>
                       </ul>
                     )}
+                    {auth.user?.role === "teacher" && (
+                      <ul
+                        style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                        className="lab-ul dropdown-menu "
+                      >
+                        <li>
+                          <NavLink
+                            className="text-white"
+                            to="/teacher-dashbaord"
+                          >
+                            Dashboard
+                          </NavLink>
+                        </li>
+                      </ul>
+                    )}
+                    {auth.user?.role === "student" && (
+                      <ul
+                        style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
+                        className="lab-ul dropdown-menu "
+                      >
+                        <li>
+                          <NavLink
+                            className="text-white"
+                            to="/student-dashbaord"
+                          >
+                            Dashboard
+                          </NavLink>
+                        </li>
+                      </ul>
+                    )}
                   </li>
                   <li className="menu-item-has-children">
                     <a href="/course" role="button">
@@ -136,11 +167,11 @@ const Header = () => {
                       style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
                       className="lab-ul dropdown-menu"
                     >
-                      <li>
+                      {/* <li>
                         <NavLink className="text-white" to="/about">
                           About
                         </NavLink>
-                      </li>
+                      </li> */}
                       <li>
                         <NavLink className="text-white" to="/team">
                           Team

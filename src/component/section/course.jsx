@@ -1,4 +1,3 @@
-import { Spin } from "antd";
 import "antd/dist/reset.css";
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import "swiper/swiper-bundle.css"; // Import Swiper styles
 import CourseItem from "../../common/components/ui/course-item";
 import { StudentContext } from "../../common/context/student-context";
 import { fetchStudentViewCourseListService } from "../../common/services";
+import Loading from "../loading";
 
 const subTitle = "Featured Courses";
 const title = "Pick A Course To Get Started";
@@ -33,7 +33,7 @@ const Course = () => {
   }, []);
 
   const handleCourseView = (courseDetails) => {
-    navigate("/course-view", { state: { courseDetails } });
+    navigate("/course-detail", { state: { courseDetails } });
   };
 
   return (
@@ -52,7 +52,7 @@ const Course = () => {
         {/* Centered Loading Spinner */}
         {loading ? (
           <div className="flex justify-center items-center h-20">
-            <Spin size="large" />
+            {/* <Spin size="large" /> */ <Loading />}
           </div>
         ) : (
           <div className="p-4 my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -1,5 +1,6 @@
-import { Divider, Spin } from "antd";
+import { Divider } from "antd";
 import { Fragment, useContext, useEffect, useState } from "react";
+import { MdClose } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import CourseItem from "../common/components/ui/course-item";
 import { StudentContext } from "../common/context/student-context";
@@ -7,6 +8,7 @@ import { fetchStudentViewCourseListService } from "../common/services";
 import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";
 import ScrollToTop from "../component/layout/ScrollToTop";
+import Loading from "../component/loading";
 
 const CoursePage = () => {
   const { studentViewCoursesList, setStudentViewCoursesList } =
@@ -49,7 +51,7 @@ const CoursePage = () => {
   };
 
   const handleCourseView = (courseDetails) => {
-    navigate("/course-view", { state: { courseDetails } });
+    navigate("/course-detail", { state: { courseDetails } });
     ScrollToTop(0, 0);
   };
 
@@ -122,10 +124,18 @@ const CoursePage = () => {
                 />
               </form>
             </div>
-
+            {input && (
+              <button
+                onClick={() => setInput("")}
+                className="text-sm text-gray-800 hidden  border border-slate-800 p-2 mb-3 rounded-full md:flex items-center gap-2 justify-center "
+              >
+                <span>{input} </span>
+                <MdClose />
+              </button>
+            )}
             {loading ? (
               <div className="flex justify-center items-center h-40">
-                <Spin size="large" />
+                <Loading />
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
