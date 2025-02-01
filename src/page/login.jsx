@@ -5,7 +5,9 @@ import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
-import logoImg from "../../src/assets/images/logofinal.jpeg";
+import { default as logoImg } from "../../src/assets/images/logofinal.jpeg";
+
+import bgImg from "../../src/assets/images/main.jpg";
 import { AuthContext } from "../common/context/auth-context";
 import { loginService } from "../common/services";
 
@@ -63,7 +65,10 @@ export default function LoginPage() {
       </div>
 
       {/* Login Form */}
-      <div className="flex justify-center items-center w-full min-h-screen bg-gray-100 p-4 md:col-span-7  bg-center bg-cover ">
+      <div
+        className="flex justify-center items-center w-full min-h-screen bg-gray-100 p-4 md:col-span-7 bg-center bg-cover"
+        style={{ backgroundImage: `url(${bgImg})` }}
+      >
         <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
           <h1 className="text-xl font-thin text-center mb-4 p-3">
             Welcome back

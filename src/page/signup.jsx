@@ -160,19 +160,58 @@
 
 // export default SignupPage;
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Select } from "antd";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../src/assets/images/logofinal.jpeg";
-
+import bgImg from "../../src/assets/images/main.jpg";
+import { AuthContext } from "../common/context/auth-context";
+import { registerService } from "../common/services";
 const { Option } = Select;
 
 export default function SignUpPage() {
   const [role, setRole] = useState("Student");
-
+  const [loading, setLoading] = useState(false);
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
   const handleRoleChange = (e) => setRole(e.target.value);
 
-  const onFinish = (values) => console.log("Form Submitted: ", values);
+  const onFinish = async (values) => {
+    setLoading(true); // Set loading to true
+    console.log(values, role);
+
+    try {
+      const data = await registerService({
+        ...values,
+        role: role.toLowerCase(),
+      });
+
+      if (data.success) {
+        sessionStorage.setItem(
+          "accessToken",
+          JSON.stringify(data.data.accessToken)
+        );
+        setAuth({
+          authenticate: true,
+          user: data.data.user,
+        });
+        toast.success("Registration successful");
+        navigate("/login");
+      } else {
+        setAuth({
+          authenticate: false,
+          user: null,
+        });
+        toast.error("Registration failed");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Registration Failed");
+    } finally {
+      setLoading(false); // Set loading back to false
+    }
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-9 min-h-screen">
@@ -195,17 +234,20 @@ export default function SignUpPage() {
       </div>
 
       {/* Form Section */}
-      <div className="col-span-8 flex justify-center items-center p-4 bg-gray-100 ">
+      <div
+        style={{ backgroundImage: `url(${bgImg})` }}
+        className="col-span-8 flex justify-center items-center p-4 bg-gray-100 "
+      >
         <div className="w-full max-w-[90%] sm:max-w-[80%] md:max-w-4xl bg-slate-50 rounded-lg shadow-lg p-6">
           <Radio.Group
             className="mb-6 flex justify-center"
             value={role}
             onChange={handleRoleChange}
           >
-            <Radio.Button value="Student" className="mx-2">
+            <Radio.Button value="student" className="mx-2">
               Student
             </Radio.Button>
-            <Radio.Button value="Teacher" className="mx-2">
+            <Radio.Button value="teacher" className="mx-2">
               Teacher
             </Radio.Button>
           </Radio.Group>
@@ -258,7 +300,7 @@ export default function SignUpPage() {
               <Col xs={24} sm={12}>
                 <Form.Item
                   label="Email"
-                  name="email"
+                  name="userEmail"
                   rules={[
                     { required: true, message: "Please enter your email!" },
                     { type: "email", message: "Please enter a valid email!" },
@@ -273,7 +315,7 @@ export default function SignUpPage() {
               <Col xs={24} sm={12}>
                 <Form.Item
                   label="Username"
-                  name="username"
+                  name="userName"
                   rules={[
                     { required: true, message: "Please enter a username!" },
                   ]}
@@ -385,6 +427,7 @@ export default function SignUpPage() {
 
             <Form.Item className="text-center">
               <Button
+                loading={loading}
                 type="primary"
                 htmlType="submit"
                 className="w-full bg-slate-400"
