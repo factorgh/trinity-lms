@@ -33,6 +33,8 @@ import SearchPage from "./page/search-page";
 import ShopPage from "./page/shop";
 import ShopDetails from "./page/shop-single";
 import SignupPage from "./page/signup";
+import StudentDashboard from "./page/student-dashbaord";
+import TeacherDashboard from "./page/teacher-dashboard";
 import TeamPage from "./page/team";
 import TeamSingle from "./page/team-single";
 
@@ -81,6 +83,26 @@ function App() {
           element={
             <RouteGuard
               element={<InstructorDashboardpage />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            />
+          }
+        />
+        <Route
+          path="/teacher-dashboard"
+          element={
+            <RouteGuard
+              element={<TeacherDashboard />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            />
+          }
+        />
+        <Route
+          path="/student-dashboard"
+          element={
+            <RouteGuard
+              element={<StudentDashboard />}
               authenticated={auth?.authenticate}
               user={auth?.user}
             />

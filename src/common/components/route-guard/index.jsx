@@ -18,6 +18,23 @@ function RouteGuard({ authenticated, user, element }) {
   ) {
     return <Navigate to="/" />;
   }
+  if (
+    authenticated &&
+    user?.role !== "instructor" &&
+    authenticated.role === "teacher" &&
+    location.pathname.includes("teacher-dashboard")
+  ) {
+    return <Navigate to="/teacher-dashboard" />;
+  }
+  if (
+    authenticated &&
+    user?.role !== "instructor" &&
+    authenticated.role !== "teacher" &&
+    authenticated.role === "school" &&
+    location.pathname.includes("student-dashboard")
+  ) {
+    return <Navigate to="/teacher-dashboard" />;
+  }
 
   if (
     authenticated &&

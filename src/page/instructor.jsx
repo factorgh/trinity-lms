@@ -52,7 +52,7 @@ const InstructorPage = () => {
     <Fragment>
       <Header />
       <div className="banner-section style"></div>
-      <div className="category-section padding-tb section-bg style-3">
+      <div className="category-section  section-bg style-3">
         <div className="container">
           <div className="section-header text-center">
             <span style={{ color: "#26C976" }} className="subtitle">

@@ -160,12 +160,13 @@
 
 // export default SignupPage;
 import { Button, Col, DatePicker, Form, Input, Radio, Row, Select } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../../src/assets/images/logofinal.jpeg";
 import bgImg from "../../src/assets/images/main.jpg";
+import axiosInstance from "../common/api/axiosInstance";
 import { AuthContext } from "../common/context/auth-context";
 import { registerService } from "../common/services";
 const { Option } = Select;
@@ -173,6 +174,7 @@ const { Option } = Select;
 export default function SignUpPage() {
   const [role, setRole] = useState("Student");
   const [loading, setLoading] = useState(false);
+  const [schools, setSchools] = useState([]);
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleRoleChange = (e) => setRole(e.target.value);
@@ -184,7 +186,7 @@ export default function SignUpPage() {
     try {
       const data = await registerService({
         ...values,
-        role: role.toLowerCase(),
+        role: role,
       });
 
       if (data.success) {
@@ -213,6 +215,18 @@ export default function SignUpPage() {
     }
   };
 
+  const getAllSchools = async () => {
+    try {
+      const { data } = await axiosInstance.get("/schools");
+      setSchools(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllSchools();
+  }, []);
   return (
     <div className="grid grid-cols-1 md:grid-cols-9 min-h-screen">
       {/* Sidebar */}
@@ -336,17 +350,23 @@ export default function SignUpPage() {
               </Col>
             </Row>
 
-            {role === "Student" && (
+            {role === "student" && (
               <Row gutter={[16, 16]}>
                 <Col xs={24} sm={12}>
                   <Form.Item
                     label="School"
                     name="school"
                     rules={[
-                      { required: true, message: "Please enter your school!" },
+                      { required: true, message: "Please select your school!" },
                     ]}
                   >
-                    <Input placeholder="School Name" />
+                    <Select placeholder="Select School">
+                      {schools.map((school) => (
+                        <Option key={school._id} value={school._id}>
+                          {school.name}
+                        </Option>
+                      ))}
+                    </Select>
                   </Form.Item>
                 </Col>
                 <Col xs={24} sm={12}>
@@ -370,7 +390,7 @@ export default function SignUpPage() {
               </Row>
             )}
 
-            {role === "Teacher" && (
+            {role === "teacher" && (
               <>
                 <Row gutter={[16, 16]}>
                   <Col xs={24} sm={12}>
@@ -407,18 +427,18 @@ export default function SignUpPage() {
                 </Row>
 
                 <Row>
-                  <Col xs={24}>
+                  <Col xs={24} sm={12}>
                     <Form.Item
-                      label="Subjects"
-                      name="subjects"
+                      label="School"
+                      name="school"
                       rules={[
                         {
                           required: true,
-                          message: "Please enter subjects you teach!",
+                          message: "Please enter your school!",
                         },
                       ]}
                     >
-                      <Input placeholder="e.g., Math, Physics" />
+                      <Input placeholder="School Name" />
                     </Form.Item>
                   </Col>
                 </Row>
