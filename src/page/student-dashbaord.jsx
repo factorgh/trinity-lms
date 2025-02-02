@@ -87,7 +87,7 @@ const StudentDashboard = () => {
   ];
 
   return (
-    <div className="container mx-auto my-10 gap-6 min-h-screen">
+    <div className="container mx-auto my-10 gap-6 min-h-screen bg-white shadow-lg p-5">
       <div className="flex items-center justify-between ">
         <h1 className="text-2xl font-bold mb-4">Student Dashboard</h1>
         <button

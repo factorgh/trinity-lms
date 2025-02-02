@@ -111,7 +111,7 @@ const Header = () => {
                     {auth.user?.role === "instructor" && (
                       <ul
                         style={{ backgroundColor: "#26C976", color: "#FFFFFF" }}
-                        className="lab-ul dropdown-menu "
+                        className="lab-ul dropdown-menu sm:block"
                       >
                         <li>
                           <NavLink
