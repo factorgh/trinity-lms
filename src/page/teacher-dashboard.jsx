@@ -6,12 +6,30 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Card, Select, Statistic, Table, Tabs } from "antd";
 import React, { useState } from "react";
+import { MdLogout } from "react-icons/md";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
 
 const TeacherDashboard = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
+
+  function handleLogout() {
+    sessionStorage.clear();
+    window.location.href = "/";
+  }
 
   // Dummy statistics data
   const statistics = [
@@ -43,9 +61,34 @@ const TeacherDashboard = () => {
     { name: "Bob Smith", course: "Physics 202", year: "2023", grade: "B+" },
   ];
 
+  // Dummy Bar Chart Data (Students per Course)
+  const studentsPerCourse = [
+    { course: "Math 101", students: 40 },
+    { course: "Physics 202", students: 35 },
+    { course: "Chemistry 303", students: 30 },
+    { course: "Biology 404", students: 25 },
+  ];
+
+  // Dummy Line Chart Data (Performance Trend)
+  const performanceTrend = [
+    { year: "2020", averageGrade: 75 },
+    { year: "2021", averageGrade: 80 },
+    { year: "2022", averageGrade: 85 },
+    { year: "2023", averageGrade: 90 },
+  ];
+
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Teacher Dashboard</h1>
+    <div className="container mx-auto my-10 gap-6 min-h-screen">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold mb-4">Teacher Dashboard</h1>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 w-[130px] px-3 py-2 bg-red-600 text-white rounded-md"
+        >
+          <span>Logout</span>
+          <MdLogout className="text-white text-sm" />
+        </button>
+      </div>
 
       <Tabs defaultActiveKey="1" type="card">
         {/* Statistics Tab */}
@@ -57,7 +100,8 @@ const TeacherDashboard = () => {
           }
           key="1"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* Statistics Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             {statistics.map((stat, index) => (
               <Card key={index} className="shadow-md">
                 <Statistic
@@ -67,6 +111,42 @@ const TeacherDashboard = () => {
                 />
               </Card>
             ))}
+          </div>
+
+          {/* Charts Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Bar Chart - Students per Course */}
+            <Card className="shadow-md p-4">
+              <h2 className="text-xl font-bold mb-3">Students Per Course</h2>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={studentsPerCourse}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="course" />
+                  <YAxis />
+                  <Tooltip />
+                  <Bar dataKey="students" fill="#4CAF50" />
+                </BarChart>
+              </ResponsiveContainer>
+            </Card>
+
+            {/* Line Chart - Performance Trend */}
+            <Card className="shadow-md p-4">
+              <h2 className="text-xl font-bold mb-3">Performance Trend</h2>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={performanceTrend}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="year" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="averageGrade"
+                    stroke="#8884d8"
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </Card>
           </div>
         </TabPane>
 

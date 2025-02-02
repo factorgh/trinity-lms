@@ -131,7 +131,7 @@ const Header = () => {
                         <li>
                           <NavLink
                             className="text-white"
-                            to="/teacher-dashbaord"
+                            to="/teacher-dashboard"
                           >
                             Dashboard
                           </NavLink>
@@ -146,7 +146,7 @@ const Header = () => {
                         <li>
                           <NavLink
                             className="text-white"
-                            to="/student-dashbaord"
+                            to="/student-dashboard"
                           >
                             Dashboard
                           </NavLink>

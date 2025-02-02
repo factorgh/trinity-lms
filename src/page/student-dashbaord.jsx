@@ -2,16 +2,21 @@ import {
   BookOutlined,
   FileTextOutlined,
   ProfileOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Badge, Card, Select, Table, Tabs } from "antd";
+import { Badge, Button, Select, Table, Tabs } from "antd";
 import React, { useState } from "react";
+import { FaCertificate } from "react-icons/fa6";
+import { MdLogout } from "react-icons/md";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
 
 const StudentDashboard = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
+  function handleLogout() {
+    sessionStorage.clear();
+    window.location.href = "/";
+  }
 
   // Dummy enrolled courses
   const enrolledCoursesColumns = [
@@ -31,8 +36,8 @@ const StudentDashboard = () => {
     { title: "Grade", dataIndex: "grade", key: "grade" },
   ];
   const gradesData = [
-    { course: "Mathematics", year: "2024", grade: "A" },
-    { course: "Physics", year: "2023", grade: "B+" },
+    { course: "web development", year: "2024", grade: "40/100" },
+    { course: "web development", year: "2023", grade: "30/70" },
   ];
 
   // Dummy quizzes data
@@ -52,24 +57,47 @@ const StudentDashboard = () => {
       ),
     },
   ];
+  const certificates = [
+    { title: "Course", dataIndex: "course", key: "course" },
+    {
+      title: "Completed Date",
+      dataIndex: "completedDate",
+      key: "completedDate",
+    },
+    {
+      title: "Action",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => <Button type="primary">Generate</Button>,
+    },
+  ];
   const quizzesData = [
     {
-      quiz: "Algebra Quiz",
-      course: "Mathematics",
+      quiz: "hmtl Quiz",
+      course: "Webe development",
       dueDate: "2024-02-10",
       status: "Pending",
     },
     {
       quiz: "Newton's Laws Quiz",
-      course: "Physics",
+      course: "Data Science",
       dueDate: "2024-02-15",
       status: "Completed",
     },
   ];
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Student Dashboard</h1>
+    <div className="container mx-auto my-10 gap-6 min-h-screen">
+      <div className="flex items-center justify-between ">
+        <h1 className="text-2xl font-bold mb-4">Student Dashboard</h1>
+        <button
+          onClick={handleLogout}
+          className=" flex items-center gap-2 w-[130px] px-3 py-2 bg-red-600 text-white rounded-md"
+        >
+          <span>Logout</span>
+          <MdLogout className="text-white text-sm" />
+        </button>
+      </div>
 
       <Tabs defaultActiveKey="1" type="card">
         {/* Enrolled Courses Tab */}
@@ -129,9 +157,19 @@ const StudentDashboard = () => {
             rowKey="quiz"
           />
         </TabPane>
+        <TabPane
+          tab={
+            <span className="flex items-center gap-2">
+              <FaCertificate /> Certificates
+            </span>
+          }
+          key="4"
+        >
+          <Table columns={certificates} dataSource={[]} rowKey="quiz" />
+        </TabPane>
 
         {/* Profile Tab */}
-        <TabPane
+        {/* <TabPane
           tab={
             <span>
               <UserOutlined /> Profile
@@ -146,7 +184,7 @@ const StudentDashboard = () => {
             <p>Email: alexjohnson@example.com</p>
             <p>Phone: +123 456 7890</p>
           </Card>
-        </TabPane>
+        </TabPane> */}
       </Tabs>
     </div>
   );
