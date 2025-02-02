@@ -166,6 +166,9 @@ export async function resetCourseProgressService(userId, courseId) {
 }
 
 export async function enrollStudentToCourseService(studentId, courseId) {
-  const { data } = await axiosInstance.post(`enroll/${courseId}/${studentId}`);
+  const { data } = await axiosInstance.post(`/student/courses-bought/enroll`, {
+    studentId,
+    courseId,
+  });
   return data;
 }

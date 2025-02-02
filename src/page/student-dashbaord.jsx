@@ -4,30 +4,40 @@ import {
   ProfileOutlined,
 } from "@ant-design/icons";
 import { Badge, Button, Select, Table, Tabs } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaCertificate } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import StudentEnrolledCourse from "../common/components/student-view/studentCourses";
+import { AuthContext } from "../common/context/auth-context";
+import { fetchStudentBoughtCoursesService } from "../common/services";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
 
 const StudentDashboard = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
+
+  const { auth } = useContext(AuthContext);
+  const { studentBoughtCoursesList, setStudentBoughtCoursesList } = useState(
+    []
+  );
+  const navigate = useNavigate();
+
+  async function fetchStudentBoughtCourses() {
+    const response = await fetchStudentBoughtCoursesService(auth?.user?._id);
+    if (response?.success) {
+      setStudentBoughtCoursesList(response?.data);
+    }
+    console.log(response);
+  }
+  useEffect(() => {
+    fetchStudentBoughtCourses();
+  }, []);
   function handleLogout() {
     sessionStorage.clear();
     window.location.href = "/";
   }
-
-  // Dummy enrolled courses
-  const enrolledCoursesColumns = [
-    { title: "Course ID", dataIndex: "id", key: "id" },
-    { title: "Course Name", dataIndex: "name", key: "name" },
-    { title: "Instructor", dataIndex: "instructor", key: "instructor" },
-  ];
-  const enrolledCoursesData = [
-    { id: "C101", name: "Mathematics", instructor: "Dr. James" },
-    { id: "C102", name: "Physics", instructor: "Prof. Adams" },
-  ];
 
   // Dummy grades data
   const gradesColumns = [
@@ -109,11 +119,14 @@ const StudentDashboard = () => {
           }
           key="1"
         >
-          <Table
-            columns={enrolledCoursesColumns}
-            dataSource={enrolledCoursesData}
-            rowKey="id"
-          />
+          <div className="flex items-center justify-center">
+            <p className="text-2xl ">No enrolled courses</p>
+          </div>
+          <div>
+            {studentBoughtCoursesList?.map((index, vale) => (
+              <StudentEnrolledCourse key={index} val={vale} />
+            ))}
+          </div>
         </TabPane>
 
         {/* Grades Tab */}

@@ -1,12 +1,28 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+import { Card } from "antd";
 
-const studentCourses = ({ image }) => {
+const StudentEnrolledCourse = ({ val }) => {
+  const { image, title, description } = val;
   return (
-    <div className="bg-white shadow-lg w-[100px]">
-      <img src="" alt="" />
-      <button className="w-full bg-green-600 text-white">Start Watching</button>
-    </div>
+    <Card
+      onClick={() => {}}
+      hoverable
+      className="flex flex-col border-slate-300 rounded-lg   text-slate-300  shadow-lg  transition duration-300 cursor-pointer"
+      cover={
+        <img
+          src={image}
+          alt={title}
+          className="object-cover h-40 w-full rounded-lg shadow-lg border-gray-50"
+        />
+      }
+    >
+      <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+      <p className="text-sm text-slate-500 mt-2">
+        {description.slice(0, 100)} ...
+      </p>
+      <button className="mx-5">Start watching</button>
+    </Card>
   );
 };
 
-export default studentCourses;
+export default StudentEnrolledCourse;
