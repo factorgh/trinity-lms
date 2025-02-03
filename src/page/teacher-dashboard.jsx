@@ -63,10 +63,10 @@ const TeacherDashboard = () => {
 
   // Dummy Bar Chart Data (Students per Course)
   const studentsPerCourse = [
-    { course: "Math 101", students: 40 },
-    { course: "Physics 202", students: 35 },
-    { course: "Chemistry 303", students: 30 },
-    { course: "Biology 404", students: 25 },
+    { course: "Web Development", students: 40 },
+    { course: "Data Science", students: 35 },
+    { course: "UI Design", students: 30 },
+    { course: "Machine Learning", students: 25 },
   ];
 
   // Dummy Line Chart Data (Performance Trend)

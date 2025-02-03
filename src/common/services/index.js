@@ -172,3 +172,10 @@ export async function enrollStudentToCourseService(studentId, courseId) {
   });
   return data;
 }
+
+export async function checkCourseEnrollment() {
+  const { data } = await axiosInstance.get(
+    `/student/courses-bought/course-enrollment-check`
+  );
+  return data;
+}

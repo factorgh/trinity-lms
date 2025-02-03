@@ -7,7 +7,6 @@ import { Badge, Button, Select, Table, Tabs } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { FaCertificate } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 import StudentEnrolledCourse from "../common/components/student-view/studentCourses";
 import { AuthContext } from "../common/context/auth-context";
 import { fetchStudentBoughtCoursesService } from "../common/services";
@@ -22,11 +21,11 @@ const StudentDashboard = () => {
   const { studentBoughtCoursesList, setStudentBoughtCoursesList } = useState(
     []
   );
-  const navigate = useNavigate();
 
   async function fetchStudentBoughtCourses() {
     const response = await fetchStudentBoughtCoursesService(auth?.user?._id);
-    if (response?.success) {
+    console.log(response);
+    if (response?.data) {
       setStudentBoughtCoursesList(response?.data);
     }
     console.log(response);
