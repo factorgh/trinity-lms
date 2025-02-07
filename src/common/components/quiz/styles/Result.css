@@ -1,4 +1,4 @@
-
+/* 
 
 .flex-center{
     display: flex;
@@ -42,10 +42,10 @@ table {
     font-size: 1.1em;
     text-align: center;
     /* color: #cecece; */
-    background: #d8d8d8;
-    padding: 18px 0;
-}
+/* background: #d8d8d8;
+    padding: 18px 0; */
+/* } */
 
-.table-header > tr > td{
+/* .table-header > tr > td{
     border: 1px solid #faff5a;   
-}
+} */
