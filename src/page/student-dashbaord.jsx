@@ -3,7 +3,7 @@ import {
   FileTextOutlined,
   ProfileOutlined,
 } from "@ant-design/icons";
-import { Badge, Button, Drawer, Select, Table, Tabs } from "antd";
+import { Badge, Button, Modal, Select, Table, Tabs } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { FaCertificate } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
@@ -17,6 +17,8 @@ const { Option } = Select;
 
 const StudentDashboard = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
+  const [showQuiz, setShowQuiz] = useState(false); // State for controlling quiz visibility
+  const [selectedQuiz, setSelectedQuiz] = useState(null); // State for selected quiz data
 
   const { auth } = useContext(AuthContext);
   const { studentBoughtCoursesList, setStudentBoughtCoursesList } = useState(
@@ -25,15 +27,15 @@ const StudentDashboard = () => {
 
   async function fetchStudentBoughtCourses() {
     const response = await fetchStudentBoughtCoursesService(auth?.user?._id);
-    console.log(response);
     if (response?.data) {
       setStudentBoughtCoursesList(response?.data);
     }
-    console.log(response);
   }
+
   useEffect(() => {
     fetchStudentBoughtCourses();
   }, []);
+
   function handleLogout() {
     sessionStorage.clear();
     window.location.href = "/";
@@ -66,7 +68,24 @@ const StudentDashboard = () => {
         />
       ),
     },
+    {
+      title: "Actions",
+      dataIndex: "actions",
+      key: "actions",
+      render: (status, record) => (
+        <Button
+          type="primary"
+          onClick={() => {
+            setSelectedQuiz(record); // Set selected quiz data
+            setShowQuiz(true); // Show quiz drawer
+          }}
+        >
+          Start Quiz
+        </Button>
+      ),
+    },
   ];
+
   const certificates = [
     { title: "Course", dataIndex: "course", key: "course" },
     {
@@ -81,10 +100,11 @@ const StudentDashboard = () => {
       render: (status) => <Button type="primary">Generate</Button>,
     },
   ];
+
   const quizzesData = [
     {
-      quiz: "hmtl Quiz",
-      course: "Webe development",
+      quiz: "HTML Quiz",
+      course: "Web Development",
       dueDate: "2024-02-10",
       status: "Pending",
     },
@@ -169,12 +189,22 @@ const StudentDashboard = () => {
             dataSource={quizzesData}
             rowKey="quiz"
           />
-          <Drawer title="Quizzes" open={false} placement="right" width={800}>
-            <div className="flex flex-col gap-4">
-              <Quiz />
-            </div>
-          </Drawer>
+          {showQuiz && (
+            <Modal
+              title="Start Quiz"
+              open={showQuiz} // Correct property for visibility
+              onCancel={() => setShowQuiz(false)} // Use onCancel to close the modal
+              footer={null} // Optional: remove footer if not needed
+              width={800}
+            >
+              <div className="flex flex-col gap-4">
+                <Quiz />
+              </div>
+            </Modal>
+          )}
         </TabPane>
+
+        {/* Certificates Tab */}
         <TabPane
           tab={
             <span className="flex items-center gap-2">
@@ -185,24 +215,6 @@ const StudentDashboard = () => {
         >
           <Table columns={certificates} dataSource={[]} rowKey="quiz" />
         </TabPane>
-
-        {/* Profile Tab */}
-        {/* <TabPane
-          tab={
-            <span>
-              <UserOutlined /> Profile
-            </span>
-          }
-          key="4"
-        >
-          <Card className="shadow-md p-6 text-center">
-            <Avatar size={100} icon={<UserOutlined />} />
-            <h2 className="text-xl font-bold mt-4">Alex Johnson</h2>
-            <p className="text-gray-600">Computer Science Student</p>
-            <p>Email: alexjohnson@example.com</p>
-            <p>Phone: +123 456 7890</p>
-          </Card>
-        </TabPane> */}
       </Tabs>
     </div>
   );

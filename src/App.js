@@ -41,6 +41,7 @@ import TeamPage from "./page/team";
 import TeamSingle from "./page/team-single";
 
 // Quiz Components
+import QuestionManager from "./common/common-pages/instructor-quizzes-page";
 import Main from "./common/components/quiz/components/Main";
 import Quiz from "./common/components/quiz/components/Quiz";
 import Result from "./common/components/quiz/components/Result";
@@ -127,6 +128,16 @@ function App() {
           element={
             <RouteGuard
               element={<TeacherDashboard />}
+              authenticated={auth?.authenticate}
+              user={auth?.user}
+            />
+          }
+        />
+        <Route
+          path="instructor=quizzes"
+          element={
+            <RouteGuard
+              element={<QuestionManager />}
               authenticated={auth?.authenticate}
               user={auth?.user}
             />

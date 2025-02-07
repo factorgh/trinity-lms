@@ -5,6 +5,7 @@ import InstructorCourses from "../components/instructor-view/courses";
 import InstructorDashboard from "../components/instructor-view/dashboard";
 import { InstructorContext } from "../context/instructor-context";
 import { fetchInstructorCourseListService } from "../services";
+import QuestionManager from "./instructor-quizzes-page";
 
 const { TabPane } = Tabs;
 
@@ -35,6 +36,12 @@ function InstructorDashboardpage() {
       label: "Courses",
       value: "courses",
       component: <InstructorCourses listOfCourses={instructorCoursesList} />,
+    },
+    {
+      icon: Book,
+      label: "Quizzes",
+      value: "quizzes",
+      component: <QuestionManager />,
     },
     {
       icon: LogOut,

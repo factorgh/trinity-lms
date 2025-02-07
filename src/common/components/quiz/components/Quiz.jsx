@@ -8,7 +8,9 @@ import { PushAnswer } from "../hooks/setResult";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-export default function Quiz() {
+/******  d775d60c-8d61-4ab9-96b4-0fa9fe6b3390  *******/ export default function Quiz({
+  selectedQuiz,
+}) {
   const [check, setChecked] = useState(undefined);
 
   const result = useSelector((state) => state.result.result);
