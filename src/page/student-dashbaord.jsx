@@ -3,10 +3,11 @@ import {
   FileTextOutlined,
   ProfileOutlined,
 } from "@ant-design/icons";
-import { Badge, Button, Select, Table, Tabs } from "antd";
+import { Badge, Button, Drawer, Select, Table, Tabs } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { FaCertificate } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
+import Quiz from "../common/components/quiz/components/Quiz";
 import StudentEnrolledCourse from "../common/components/student-view/studentCourses";
 import { AuthContext } from "../common/context/auth-context";
 import { fetchStudentBoughtCoursesService } from "../common/services";
@@ -168,6 +169,11 @@ const StudentDashboard = () => {
             dataSource={quizzesData}
             rowKey="quiz"
           />
+          <Drawer title="Quizzes" open={false} placement="right" width={800}>
+            <div className="flex flex-col gap-4">
+              <Quiz />
+            </div>
+          </Drawer>
         </TabPane>
         <TabPane
           tab={
