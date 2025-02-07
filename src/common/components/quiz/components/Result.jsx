@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/Result.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -42,103 +41,56 @@ export default function Result() {
   }
 
   return (
-    <div className="container">
-      <h1 className="title text-light">Quiz Application</h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl text-center text-white font-bold mb-8">
+        Quiz Application
+      </h1>
 
-      <div className="result flex-center">
-        <div className="flex">
+      <div className="flex flex-col items-center border p-8 gap-4">
+        <div className="flex justify-between w-full text-lg text-gray-300">
           <span>Username</span>
-          <span className="bold">{userId || ""}</span>
+          <span className="font-bold">{userId || ""}</span>
         </div>
-        <div className="flex">
+        <div className="flex justify-between w-full text-lg text-gray-300">
           <span>Total Quiz Points : </span>
-          <span className="bold">{totalPoints || 0}</span>
+          <span className="font-bold">{totalPoints || 0}</span>
         </div>
-        <div className="flex">
+        <div className="flex justify-between w-full text-lg text-gray-300">
           <span>Total Questions : </span>
-          <span className="bold">{queue.length || 0}</span>
+          <span className="font-bold">{queue.length || 0}</span>
         </div>
-        <div className="flex">
+        <div className="flex justify-between w-full text-lg text-gray-300">
           <span>Total Attempts : </span>
-          <span className="bold">{attempts || 0}</span>
+          <span className="font-bold">{attempts || 0}</span>
         </div>
-        <div className="flex">
+        <div className="flex justify-between w-full text-lg text-gray-300">
           <span>Total Earn Points : </span>
-          <span className="bold">{earnPoints || 0}</span>
+          <span className="font-bold">{earnPoints || 0}</span>
         </div>
-        <div className="flex">
+        <div className="flex justify-between w-full text-lg text-gray-300">
           <span>Quiz Result</span>
           <span
-            style={{ color: `${flag ? "#2aff95" : "#ff2a66"}` }}
-            className="bold"
+            className={`font-bold ${flag ? "text-green-400" : "text-red-600"}`}
           >
             {flag ? "Passed" : "Failed"}
           </span>
         </div>
       </div>
 
-      <div className="start">
-        <Link className="btn" to={"/"} onClick={onRestart}>
+      <div className="mt-6 text-center">
+        <Link
+          className="bg-blue-500 text-white py-2 px-6 rounded-lg shadow-lg hover:bg-blue-600"
+          to={"/"}
+          onClick={onRestart}
+        >
           Restart
         </Link>
       </div>
 
-      <div className="container">
+      <div className="mt-8">
         {/* result table */}
-        <ResultTable></ResultTable>
+        <ResultTable />
       </div>
     </div>
   );
 }
-
-/* 
-
-.flex-center{
-    display: flex;
-    justify-content: center;    
-    flex-direction: column;
-    border: 1px solid #cecece;
-    padding: 3em 4em;
-    gap: 1em;
-}
-
-.container .flex{
-    display: flex;
-    justify-content: space-between;
-    
-}
-
-.container .flex span {
-    font-size: 1.4em;
-    color: #cecece;
-}
-
-.container .flex span.achive {
-    font-weight: bold;
-    color: #ff2a66;
-    color: #2aff95;
-}
-
-table {
-    width: 100%;
-}
-
-.table-header {
-    color: #cecece;
-    font-size: 1.1em;
-    text-align: center;
-    background: #212121;
-    padding: 18px 0;
-}
-
-.table-body {
-    font-size: 1.1em;
-    text-align: center;
-    /* color: #cecece; */
-/* background: #d8d8d8;
-    padding: 18px 0; */
-/* } */
-
-/* .table-header > tr > td{
-    border: 1px solid #faff5a;   
-} */
