@@ -42,32 +42,32 @@ export default function Result() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl text-center text-white font-bold mb-8">
-        Quiz Application
+      <h1 className="text-3xl text-center text-slate-800 font-bold mb-8 border p-3">
+        My Quiz Results
       </h1>
 
-      <div className="flex flex-col items-center border p-8 gap-4">
-        <div className="flex justify-between w-full text-lg text-gray-300">
+      <div className="flex flex-col items-center  p-8 gap-4 border border-blue-500 rounded-md ">
+        <div className="flex justify-between w-full text-lg text-slate-800">
           <span>Username</span>
           <span className="font-bold">{userId || ""}</span>
         </div>
-        <div className="flex justify-between w-full text-lg text-gray-300">
+        <div className="flex justify-between w-full text-lg text-slate-800">
           <span>Total Quiz Points : </span>
           <span className="font-bold">{totalPoints || 0}</span>
         </div>
-        <div className="flex justify-between w-full text-lg text-gray-300">
+        <div className="flex justify-between w-full text-lg text-slate-800">
           <span>Total Questions : </span>
           <span className="font-bold">{queue.length || 0}</span>
         </div>
-        <div className="flex justify-between w-full text-lg text-gray-300">
+        <div className="flex justify-between w-full text-lg text-slate-800">
           <span>Total Attempts : </span>
           <span className="font-bold">{attempts || 0}</span>
         </div>
-        <div className="flex justify-between w-full text-lg text-gray-300">
+        <div className="flex justify-between w-full text-lg text-slate-800">
           <span>Total Earn Points : </span>
           <span className="font-bold">{earnPoints || 0}</span>
         </div>
-        <div className="flex justify-between w-full text-lg text-gray-300">
+        <div className="flex justify-between w-full text-lg text-slate-800">
           <span>Quiz Result</span>
           <span
             className={`font-bold ${flag ? "text-green-400" : "text-red-600"}`}
@@ -83,7 +83,7 @@ export default function Result() {
           to={"/"}
           onClick={onRestart}
         >
-          Restart
+          Continue
         </Link>
       </div>
 

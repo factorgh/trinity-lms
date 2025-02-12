@@ -3,12 +3,11 @@ import {
   FileTextOutlined,
   ProfileOutlined,
 } from "@ant-design/icons";
-import { Badge, Button, Modal, Select, Table, Tabs } from "antd";
+import { Badge, Button, Select, Table, Tabs } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { FaCertificate } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import Quiz from "../common/components/quiz/components/Quiz";
 import StudentEnrolledCourse from "../common/components/student-view/studentCourses";
 import { AuthContext } from "../common/context/auth-context";
 import { fetchStudentBoughtCoursesService } from "../common/services";
@@ -18,8 +17,7 @@ const { Option } = Select;
 
 const StudentDashboard = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
-  const [showQuiz, setShowQuiz] = useState(false); // State for controlling quiz visibility
-  const [selectedQuiz, setSelectedQuiz] = useState(null);
+
   const navigate = useNavigate();
 
   const { auth } = useContext(AuthContext);
@@ -78,8 +76,6 @@ const StudentDashboard = () => {
           type="primary"
           onClick={() => {
             navigate("/quiz");
-            // setSelectedQuiz(record); // Set selected quiz data
-            // setShowQuiz(true); // Show quiz drawer
           }}
         >
           Start Quiz
@@ -191,19 +187,6 @@ const StudentDashboard = () => {
             dataSource={quizzesData}
             rowKey="quiz"
           />
-          {showQuiz && (
-            <Modal
-              title="Start Quiz"
-              open={showQuiz} // Correct property for visibility
-              onCancel={() => setShowQuiz(false)} // Use onCancel to close the modal
-              footer={null} // Optional: remove footer if not needed
-              width={800}
-            >
-              <div className="flex flex-col gap-4">
-                <Quiz />
-              </div>
-            </Modal>
-          )}
         </TabPane>
 
         {/* Certificates Tab */}
