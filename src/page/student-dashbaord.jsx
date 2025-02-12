@@ -7,6 +7,7 @@ import { Badge, Button, Modal, Select, Table, Tabs } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { FaCertificate } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import Quiz from "../common/components/quiz/components/Quiz";
 import StudentEnrolledCourse from "../common/components/student-view/studentCourses";
 import { AuthContext } from "../common/context/auth-context";
@@ -18,23 +19,23 @@ const { Option } = Select;
 const StudentDashboard = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
   const [showQuiz, setShowQuiz] = useState(false); // State for controlling quiz visibility
-  const [selectedQuiz, setSelectedQuiz] = useState(null); // State for selected quiz data
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+  const navigate = useNavigate();
 
   const { auth } = useContext(AuthContext);
   const { studentBoughtCoursesList, setStudentBoughtCoursesList } = useState(
     []
   );
 
-  async function fetchStudentBoughtCourses() {
-    const response = await fetchStudentBoughtCoursesService(auth?.user?._id);
-    if (response?.data) {
-      setStudentBoughtCoursesList(response?.data);
-    }
-  }
-
   useEffect(() => {
+    async function fetchStudentBoughtCourses() {
+      const response = await fetchStudentBoughtCoursesService(auth?.user?._id);
+      if (response?.data) {
+        setStudentBoughtCoursesList(response?.data);
+      }
+    }
     fetchStudentBoughtCourses();
-  }, []);
+  }, [auth?.user?._id, setStudentBoughtCoursesList]);
 
   function handleLogout() {
     sessionStorage.clear();
@@ -76,8 +77,9 @@ const StudentDashboard = () => {
         <Button
           type="primary"
           onClick={() => {
-            setSelectedQuiz(record); // Set selected quiz data
-            setShowQuiz(true); // Show quiz drawer
+            navigate("/quiz");
+            // setSelectedQuiz(record); // Set selected quiz data
+            // setShowQuiz(true); // Show quiz drawer
           }}
         >
           Start Quiz

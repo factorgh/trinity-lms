@@ -19,15 +19,15 @@ import "./index.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <InstructorProvider>
-        <StudentProvider>
-          <Provider store={store}>
+    <Provider store={store}>
+      <AuthProvider>
+        <InstructorProvider>
+          <StudentProvider>
             <App />
-          </Provider>
-        </StudentProvider>
-      </InstructorProvider>
-    </AuthProvider>
+          </StudentProvider>
+        </InstructorProvider>
+      </AuthProvider>
+    </Provider>
   </React.StrictMode>
 );
 

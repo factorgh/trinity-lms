@@ -1,42 +1,30 @@
 import React, { useState } from "react";
-import Questions from "./Questions";
-
-import { MoveNextQuestion, MovePrevQuestion } from "../hooks/FetchQuestion";
-import { PushAnswer } from "../hooks/setResult";
-
-/** redux store import */
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { MoveNextQuestion, MovePrevQuestion } from "../hooks/FetchQuestion";
+import { PushAnswer } from "../hooks/setResult";
+import Questions from "./Questions";
 
-/******  d775d60c-8d61-4ab9-96b4-0fa9fe6b3390  *******/ export default function Quiz({
-  selectedQuiz,
-}) {
+export default function Quiz({ selectedQuiz }) {
   const [check, setChecked] = useState(undefined);
-
   const result = useSelector((state) => state.result.result);
   const { queue, trace } = useSelector((state) => state.questions);
   const dispatch = useDispatch();
 
-  /** next button event handler */
+  const progress = ((trace + 1) / queue?.length) * 100; // Progress bar percentage
+
   function onNext() {
     if (trace < queue.length) {
-      /** increase the trace value by one using MoveNextAction */
       dispatch(MoveNextQuestion());
-
-      /** insert a new result in the array.  */
       if (result.length <= trace) {
         dispatch(PushAnswer(check));
       }
     }
-
-    /** reset the value of the checked variable */
     setChecked(undefined);
   }
 
-  /** Prev button event handler */
   function onPrev() {
     if (trace > 0) {
-      /** decrease the trace value by one using MovePrevQuestion */
       dispatch(MovePrevQuestion());
     }
   }
@@ -45,37 +33,53 @@ import { Navigate } from "react-router-dom";
     setChecked(check);
   }
 
-  /** finished exam after the last question */
   if (result.length && result.length >= queue.length) {
-    return <Navigate to={"/result"} replace={true}></Navigate>;
+    return <Navigate to={"/result"} replace={true} />;
   }
 
   return (
-    <div className="container mx-auto p-5">
-      <h1 className="text-3xl text-center text-light border-4 border-primary py-2 rounded-md">
-        Quiz Application
-      </h1>
+    <div className="container mx-auto p-6 flex flex-col items-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-lg w-full max-w-2xl p-6">
+        {/* Quiz Title */}
+        <h1 className="text-3xl font-semibold text-center text-blue-600 mb-4">
+          Quiz Section
+        </h1>
 
-      {/* display questions */}
-      <Questions onChecked={onChecked} />
+        {/* Progress Bar */}
+        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+          <div
+            className="bg-blue-600 h-2.5 rounded-full transition-all"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
 
-      <div className="grid grid-cols-2 gap-4 mt-12">
-        {trace > 0 ? (
+        {/* Display Questions */}
+        <Questions onChecked={onChecked} />
+
+        {/* Buttons */}
+        <div className="flex justify-between mt-8">
+          {trace > 0 ? (
+            <button
+              className="bg-yellow-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-yellow-400 transition"
+              onClick={onPrev}
+            >
+              Prev
+            </button>
+          ) : (
+            <div></div>
+          )}
           <button
-            className="bg-yellow-300 py-2 px-8 rounded-md text-lg hover:bg-yellow-200"
-            onClick={onPrev}
+            className={`px-6 py-2 rounded-lg shadow-md text-white transition ${
+              check !== undefined
+                ? "bg-blue-600 hover:bg-blue-500"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
+            onClick={onNext}
+            disabled={check === undefined}
           >
-            Prev
+            Next
           </button>
-        ) : (
-          <div></div>
-        )}
-        <button
-          className="bg-primary py-2 px-8 rounded-md text-lg text-white hover:bg-primary-dark justify-self-end"
-          onClick={onNext}
-        >
-          Next
-        </button>
+        </div>
       </div>
     </div>
   );

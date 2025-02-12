@@ -45,7 +45,6 @@ import QuestionManager from "./common/common-pages/instructor-quizzes-page";
 import Main from "./common/components/quiz/components/Main";
 import Quiz from "./common/components/quiz/components/Quiz";
 import Result from "./common/components/quiz/components/Result";
-import { CheckUserExist } from "./common/components/quiz/helper/helper";
 
 function App() {
   const { auth } = useContext(AuthContext);
@@ -97,17 +96,19 @@ function App() {
         <Route
           path="quiz"
           element={
-            <CheckUserExist>
-              <Quiz />
-            </CheckUserExist>
+            <Quiz />
+            // <CheckUserExist>
+
+            // </CheckUserExist>
           }
         />
         <Route
           path="result"
           element={
-            <CheckUserExist>
-              <Result />
-            </CheckUserExist>
+            <Result />
+            // <CheckUserExist>
+
+            // </CheckUserExist>
           }
         />
         <Route path="quiz-home" element={<Main />} />
@@ -134,7 +135,7 @@ function App() {
           }
         />
         <Route
-          path="instructor=quizzes"
+          path="instructor-quizzes"
           element={
             <RouteGuard
               element={<QuestionManager />}

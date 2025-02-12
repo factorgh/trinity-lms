@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { data } from "./data";
-
-/** Custom Hook */
 import { useFetchQestion } from "../hooks/FetchQuestion";
 import { updateResult } from "../hooks/setResult";
 
 export default function Questions({ onChecked }) {
-  const [checked, setChecked] = useState(undefined);
   const { trace } = useSelector((state) => state.questions);
   const result = useSelector((state) => state.result.result);
   const [{ isLoading, apiData, serverError }] = useFetchQestion();
-
   const questions = useSelector(
     (state) => state.questions.queue[state.questions.trace]
   );
+
+  const quest = useSelector((state) => state.questions.queue);
+  console.log(quest);
+
+  console.log(questions);
   const dispatch = useDispatch();
+  const [checked, setChecked] = useState(result[trace]); // Ensure state sync
 
   useEffect(() => {
-    dispatch(updateResult({ trace, checked }));
+    if (checked !== undefined) {
+      dispatch(updateResult({ trace, checked }));
+    }
   }, [checked, dispatch, trace]);
 
   function onSelect(i) {
-    onChecked(i);
     setChecked(i);
+    onChecked(i);
     dispatch(updateResult({ trace, checked }));
   }
 
@@ -32,26 +35,32 @@ export default function Questions({ onChecked }) {
     return <h3 className="text-light">{serverError || "Unknown Error"}</h3>;
 
   return (
-    <div className="w-full">
-      <h2 className="text-blue-300">{questions?.question}</h2>
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        {questions?.question}
+      </h2>
 
-      <ul key={questions?.id}>
-        {data?.options.map((q, i) => (
-          <li key={i}>
+      <ul className="space-y-3">
+        {questions?.options.map((q, i) => (
+          <li key={i} className="flex items-center">
             <input
               type="radio"
-              value={false}
               name="options"
               id={`q${i}-option`}
+              checked={checked === i} // ✅ Keeps track of the selected option
               onChange={() => onSelect(i)}
+              className="hidden peer"
             />
-
-            <label className="text-primary" htmlFor={`q${i}-option`}>
+            <label
+              htmlFor={`q${i}-option`}
+              className={`w-full p-3 border rounded-lg cursor-pointer transition-all ${
+                checked === i
+                  ? "bg-blue-500 text-white border-blue-500"
+                  : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-blue-100"
+              }`}
+            >
               {q}
             </label>
-            <div
-              className={`check ${result[trace] === i ? "checked" : ""}`}
-            ></div>
           </li>
         ))}
       </ul>
