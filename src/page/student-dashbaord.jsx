@@ -11,25 +11,35 @@ import { useNavigate } from "react-router-dom";
 import StudentEnrolledCourse from "../common/components/student-view/studentCourses";
 import { AuthContext } from "../common/context/auth-context";
 import { fetchStudentBoughtCoursesService } from "../common/services";
+import useFetchStudentQuizzes from "../common/hooks/useFetchStudentQuizzes";
+import axiosInstance from "../common/api/axiosInstance";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
 
 const StudentDashboard = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
+  const { auth } = useContext(AuthContext);
+  const { data: stQuiz } = useFetchStudentQuizzes(auth?.user?._id);
+  const [studentQuiz, setStudentQuiz] = useState([]);
+  console.log(stQuiz);
 
   const navigate = useNavigate();
 
-  const { auth } = useContext(AuthContext);
-  const { studentBoughtCoursesList, setStudentBoughtCoursesList } = useState(
-    []
-  );
+  const [studentBoughtCoursesList, setStudentBoughtCoursesList] = useState([]);
 
+  useEffect(() => {
+    setStudentQuiz(stQuiz);
+  }, [stQuiz]);
   useEffect(() => {
     async function fetchStudentBoughtCourses() {
       const response = await fetchStudentBoughtCoursesService(auth?.user?._id);
       if (response?.data) {
-        setStudentBoughtCoursesList(response?.data);
+        console.log(
+          "--------------------student enrolled courses---------------------"
+        );
+        console.log(response.data);
+        setStudentBoughtCoursesList(response?.data.courses);
       }
     }
     fetchStudentBoughtCourses();
@@ -39,6 +49,33 @@ const StudentDashboard = () => {
     sessionStorage.clear();
     window.location.href = "/";
   }
+
+  // Handle cerificate doqnload
+  const downloadCertificate = async (userDetails, course) => {
+    try {
+      console.log(userDetails, course);
+
+      const response = await axiosInstance.post(
+        `/certificate/generate-certificate/`,
+        { userDetails, course },
+        { responseType: "blob" } // 👈 This tells Axios to return a Blob
+      );
+
+      // Create a Blob URL
+      const url = window.URL.createObjectURL(response.data);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Certificate.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Revoke the blob URL to free memory
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading certificate:", error);
+    }
+  };
 
   // Dummy grades data
   const gradesColumns = [
@@ -53,9 +90,9 @@ const StudentDashboard = () => {
 
   // Dummy quizzes data
   const quizzesColumns = [
-    { title: "Quiz", dataIndex: "quiz", key: "quiz" },
-    { title: "Course", dataIndex: "course", key: "course" },
-    { title: "Due Date", dataIndex: "dueDate", key: "dueDate" },
+    { title: "Course Id", dataIndex: "courseId", key: "courseId" },
+    { title: "Course", dataIndex: "courseTitle", key: "courseTitle" },
+
     {
       title: "Status",
       dataIndex: "status",
@@ -85,32 +122,21 @@ const StudentDashboard = () => {
   ];
 
   const certificates = [
-    { title: "Course", dataIndex: "course", key: "course" },
-    {
-      title: "Completed Date",
-      dataIndex: "completedDate",
-      key: "completedDate",
-    },
+    { title: "Course Id", dataIndex: "courseId", key: "courseId" },
+    { title: "Course", dataIndex: "courseTitle", key: "courseTitle" },
+
     {
       title: "Action",
-      dataIndex: "status",
-      key: "status",
-      render: (status) => <Button type="primary">Generate</Button>,
-    },
-  ];
-
-  const quizzesData = [
-    {
-      quiz: "HTML Quiz",
-      course: "Web Development",
-      dueDate: "2024-02-10",
-      status: "Pending",
-    },
-    {
-      quiz: "Newton's Laws Quiz",
-      course: "Data Science",
-      dueDate: "2024-02-15",
-      status: "Completed",
+      dataIndex: "courseTitle",
+      key: "courseAction",
+      render: (record) => (
+        <Button
+          type="primary"
+          onClick={() => downloadCertificate(auth?.user.userName, record)}
+        >
+          Generate
+        </Button>
+      ),
     },
   ];
 
@@ -137,12 +163,14 @@ const StudentDashboard = () => {
           }
           key="1"
         >
-          <div className="flex items-center justify-center">
-            <p className="text-2xl ">No enrolled courses</p>
-          </div>
-          <div>
-            {studentBoughtCoursesList?.map((index, vale) => (
-              <StudentEnrolledCourse key={index} val={vale} />
+          {studentBoughtCoursesList.length === 0 && (
+            <div className="flex items-center justify-center">
+              <p className="text-2xl ">No enrolled courses</p>
+            </div>
+          )}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {studentBoughtCoursesList?.map((vale, index) => (
+              <StudentEnrolledCourse key={index} val={vale.courseId} />
             ))}
           </div>
         </TabPane>
@@ -184,7 +212,7 @@ const StudentDashboard = () => {
         >
           <Table
             columns={quizzesColumns}
-            dataSource={quizzesData}
+            dataSource={studentQuiz}
             rowKey="quiz"
           />
         </TabPane>
@@ -198,7 +226,11 @@ const StudentDashboard = () => {
           }
           key="4"
         >
-          <Table columns={certificates} dataSource={[]} rowKey="quiz" />
+          <Table
+            columns={certificates}
+            dataSource={studentQuiz}
+            rowKey="quiz"
+          />
         </TabPane>
       </Tabs>
     </div>

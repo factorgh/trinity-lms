@@ -4,7 +4,7 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Avatar, Card, Select, Statistic, Table, Tabs } from "antd";
+import { Card, Select, Statistic, Table, Tabs } from "antd";
 import React, { useState } from "react";
 import { MdLogout } from "react-icons/md";
 import {
@@ -42,11 +42,26 @@ const TeacherDashboard = () => {
   const studentColumns = [
     { title: "ID", dataIndex: "id", key: "id" },
     { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Class", dataIndex: "class", key: "class" },
+    { title: "Course", dataIndex: "course", key: "course" },
+    { title: "Year", dataIndex: "year", key: "year" },
+    { title: "Grade", dataIndex: "grade", key: "grade" },
   ];
+
   const studentData = [
-    { id: "S001", name: "Alice Johnson", class: "Math 101" },
-    { id: "S002", name: "Bob Smith", class: "Physics 202" },
+    {
+      id: "S001",
+      name: "Alice Johnson",
+      course: "Web Development",
+      year: "2024",
+      grade: "50/100",
+    },
+    {
+      id: "S002",
+      name: "Bob Smith",
+      course: "UI Design",
+      year: "2023",
+      grade: "30/100",
+    },
   ];
 
   // Dummy grades data
@@ -57,8 +72,13 @@ const TeacherDashboard = () => {
     { title: "Grade", dataIndex: "grade", key: "grade" },
   ];
   const gradesData = [
-    { name: "Alice Johnson", course: "Math 101", year: "2024", grade: "A" },
-    { name: "Bob Smith", course: "Physics 202", year: "2023", grade: "B+" },
+    {
+      name: "Alice Johnson",
+      course: "Web Development",
+      year: "2024",
+      grade: "70/100",
+    },
+    { name: "Bob Smith", course: "UI Design", year: "2023", grade: "30/100" },
   ];
 
   // Dummy Bar Chart Data (Students per Course)
@@ -193,7 +213,7 @@ const TeacherDashboard = () => {
         </TabPane>
 
         {/* Profile Tab */}
-        <TabPane
+        {/* <TabPane
           tab={
             <span>
               <UserOutlined /> Profile
@@ -208,7 +228,7 @@ const TeacherDashboard = () => {
             <p>Email: johndoe@example.com</p>
             <p>Phone: +123 456 7890</p>
           </Card>
-        </TabPane>
+        </TabPane> */}
       </Tabs>
     </div>
   );

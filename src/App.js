@@ -154,7 +154,7 @@ function App() {
             />
           }
         />
-        <Route path="instructor/create-course" element={<AddNewCoursePage />} />
+        <Route path="instructor/create-new-course" element={<AddNewCoursePage />} />
         <Route
           path="instructor/edit-course/:courseId"
           element={<AddNewCoursePage />}

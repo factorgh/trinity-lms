@@ -179,3 +179,30 @@ export async function checkCourseEnrollment() {
   );
   return data;
 }
+
+export async function createQuiz(courseId, questions, answers) {
+  const { data } = await axiosInstance.post(`/quiz/questions`, {
+    course_id: courseId,
+    questions,
+    answers,
+  });
+  return data;
+}
+export async function getAllQuizzes() {
+  const { data } = await axiosInstance.get(`/quiz/questions`);
+  return data;
+}
+
+export async function getCourseQuizzess(courseId) {
+  const { data } = await axiosInstance.get(`/quiz/course`, {
+    courseId,
+  });
+  return data;
+}
+
+export async function getStudentQuizzes(userId) {
+  const { data } = await axiosInstance.get(
+    `student/courses-bought/${userId}/quizzes/`
+  );
+  return data;
+}
