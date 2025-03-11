@@ -1,7 +1,7 @@
 import React from "react";
 import CountUp from "react-countup";
 import instructorImg1 from "../../../src/assets/images/instructor1.png";
-import instructorImg2 from "../../../src/assets/images/instructor2.jpg";
+import instructorImg2 from "../../../src/assets/images/instructor2.jpeg";
 
 const subTitle = "START TO SUCCESS";
 const title = "Achieve Your Goals With Edukon";

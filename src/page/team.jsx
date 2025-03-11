@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import instructorImg1 from "../../src/assets/images/instructor1.png";
-import instructorImg2 from "../../src/assets/images/instructor2.jpg";
+import instructorImg2 from "../../src/assets/images/instructor2.jpeg";
 
 import Footer2 from "../component/layout/footer-2";
 import Header from "../component/layout/header";

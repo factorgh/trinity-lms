@@ -2,9 +2,9 @@ import { Card, Rate } from "antd"; // Using Ant Design's Card and Rate component
 import React from "react";
 import { Link } from "react-router-dom";
 import instructorImg1 from "../../../src/assets/images/instructor1.png";
-import instructorImg2 from "../../../src/assets/images/instructor2.jpg";
+import instructorImg2 from "../../../src/assets/images/instructor2.jpeg";
 import instructorImg3 from "../../../src/assets/images/instructor3.png";
-import instructorImg4 from "../../../src/assets/images/instructor4.jpg";
+import instructorImg4 from "../../../src/assets/images/instructor4.jpeg";
 
 const subTitle = "WORLD-CLASS INSTRUCTORS";
 const title = "Classes Taught By Real Creators";
@@ -13,7 +13,7 @@ const instructorList = [
   {
     imgUrl: instructorImg1,
     imgAlt: "instructor Emilee Logan",
-    name: "Emilee Logan",
+    name: "Donald Richardson",
     degi: "Master of Education Degree",
     courseCount: "08 courses",
     studentAnroll: "30 students",
@@ -22,7 +22,8 @@ const instructorList = [
   {
     imgUrl: instructorImg2,
     imgAlt: "instructor Donald Logan",
-    name: "Donald Logan",
+    name: "Emilee Logan",
+
     degi: "Master of Education Degree",
     courseCount: "08 courses",
     studentAnroll: "30 students",
