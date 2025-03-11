@@ -86,7 +86,7 @@ const FooterTwo = () => {
           {/* Address Section */}
           <div>
             <h3 className="text-2xl font-semibold text-gray-800 mb-4">
-              About Eduaid
+              About Trinity Girls
             </h3>
             <p className="text-base text-gray-600 mb-6">{desc}</p>
             <ul className="space-y-4">
