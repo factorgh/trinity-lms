@@ -97,7 +97,7 @@ const Header = () => {
             {/* Logo */}
             <div className="hidden lg:block">
               <Link to="/">
-                <img width={60} height={60} src={logoImg} alt="logo" />
+                <img width={80} height={80} src={logoImg} alt="logo" />
               </Link>
             </div>
             {/* Menu */}

@@ -4,15 +4,19 @@ import myImage from "../../assets/images/final.png";
 
 const subTitle = "Online education";
 const title = (
-  <h2 className="title">
-    <span className="d-lg-block">Empowering </span>
-    <span className="d-lg-block"> Next Generation of Innovators</span>
+  <h2 className="mb-10 mt-3">
+    <span className="text-5xl sm:text-6xl font-semibold">
+      Empowering Girls.{" "}
+    </span>
+    <span className="text-5xl sm:text-6xl font-semibold">
+      {" "}
+      Transforming Futures.
+    </span>
   </h2>
 );
 
 const desc =
-  "Welcome to Ghana’s premier e-learning platform, dedicated to empowering one million young Ghanaians with essential digital skills. Join a growing community of innovators and start your journey in technology today.";
-
+  "Education is power—and every girl deserves access to it. Trinity Girls Online Academy is your gateway to learning, leadership, and self-discovery from anywhere in the world. Our courses are designed to bridge the education gap and equip young women with the knowledge, skills, and confidence to lead, innovate, and inspire.";
 // “Empowering Ghana’s Next Generation of Innovators”
 // “Learn Coding, AI, Robotics & More - Right Here, For Free!”
 

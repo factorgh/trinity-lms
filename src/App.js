@@ -93,24 +93,8 @@ function App() {
         <Route path="course-detail" element={<CourseDetailPage />} />
 
         {/* Quiz Routes */}
-        <Route
-          path="quiz"
-          element={
-            <Quiz />
-            // <CheckUserExist>
-
-            // </CheckUserExist>
-          }
-        />
-        <Route
-          path="result"
-          element={
-            <Result />
-            // <CheckUserExist>
-
-            // </CheckUserExist>
-          }
-        />
+        <Route path="quiz" element={<Quiz />} />
+        <Route path="result" element={<Result />} />
         <Route path="quiz-home" element={<Main />} />
 
         {/* Protected Routes */}
@@ -154,7 +138,10 @@ function App() {
             />
           }
         />
-        <Route path="instructor/create-new-course" element={<AddNewCoursePage />} />
+        <Route
+          path="instructor/create-new-course"
+          element={<AddNewCoursePage />}
+        />
         <Route
           path="instructor/edit-course/:courseId"
           element={<AddNewCoursePage />}
