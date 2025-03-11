@@ -16,7 +16,7 @@ const Home = () => {
       <Header />
       {/* <Banner /> */}
       <MyBanner />
-      {/* <Sponsor /> */}
+      <Sponsor />
       <Category />
       <Course />
       <About />

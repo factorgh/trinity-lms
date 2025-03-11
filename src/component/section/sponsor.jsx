@@ -1,10 +1,10 @@
 import { Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import sponsor4 from "../../assets/images/educare.png";
-import sponsor2 from "../../assets/images/glovo.png";
-import sponsor3 from "../../assets/images/mtn.png";
-import sponsor1 from "../../assets/images/telecel.png";
-import sponsor5 from "../../assets/images/tigo-final.png";
+import sponsor4 from "../../assets/images/new-logo-3.jpeg";
+import sponsor2 from "../../assets/images/new-logo.jpeg";
+import sponsor3 from "../../assets/images/new-logo-2.jpeg";
+import sponsor1 from "../../assets/images/new-logo-2.jpeg";
+import sponsor5 from "../../assets/images/new-logo.jpeg";
 
 const sponsorList = [
   {
