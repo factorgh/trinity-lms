@@ -17,6 +17,7 @@ import {
   FaPrayingHands,
   FaMoneyBillWave,
   FaHandsHelping,
+  FaLeaf,
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
@@ -78,7 +79,7 @@ const categoryList = [
 // 	10.	Creative Arts & Storytelling – Express yourself through writing, music, and digital media.
 
 const categories = [
-  { icon: <FaHeartbeat />, title: "Health & Wellness" }, // Health-related icon
+  { icon: <FaLeaf />, title: "Health & Wellness" }, // Health-related icon
   { icon: <FaLaptopCode />, title: "Digital Literacy & Cyber Safety" }, // Laptop coding icon
   { icon: <FaChartLine />, title: "STEM for Girls" }, // Growth/analytics chart
   { icon: <FaMicrophone />, title: "Leadership and Public Speaking" }, // Microphone for public speaking
